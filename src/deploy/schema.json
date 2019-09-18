@@ -3,6 +3,10 @@
   "title": "schema",
   "description": "Deployment/Publishment of Angular CLI applications to NPM",
   "properties": {
+    "packageVersion": {
+      "type": "string",
+      "description": "the version string of the publishing package"
+    },
     "tag": {
       "type": "string",
       "description": "Registers the published package with the given tag, such that `npm install @` will install this version. By default, `npm publish` updates and `npm install` installs the `latest` tag. See `npm-dist-tag` for details about tags."
