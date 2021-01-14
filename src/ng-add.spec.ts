@@ -4,11 +4,11 @@ import { ngAdd } from './ng-add';
 import { Workspace } from 'interfaces';
 
 describe('ng-add', () => {
-  let originalAngularJSON: Workspace;
-  let expectedAngularJSON: Workspace;
+  let originalWorkspaceDefinition: Workspace;
+  let expectedWorkspaceDefinition: Workspace;
 
   beforeEach(() => {
-    originalAngularJSON = {
+    originalWorkspaceDefinition = {
       projects: {
         testing: {
           projectType: 'application',
@@ -66,12 +66,14 @@ describe('ng-add', () => {
       defaultProject: 'testing'
     };
 
-    expectedAngularJSON = JSON.parse(JSON.stringify(originalAngularJSON));
+    expectedWorkspaceDefinition = JSON.parse(
+      JSON.stringify(originalWorkspaceDefinition)
+    );
 
     ['publishable', 'publishable2']
       .map(
         publishableProjectKey =>
-          expectedAngularJSON.projects[publishableProjectKey]
+          expectedWorkspaceDefinition.projects[publishableProjectKey]
       )
       .forEach(project => {
         if (project.architect) {
@@ -90,55 +92,72 @@ describe('ng-add', () => {
 
     beforeEach(() => {
       tree = Tree.empty();
-      tree.create('angular.json', JSON.stringify(originalAngularJSON));
     });
 
-    it('should set the deployer only on publishable libraries', () => {
+    it('should set the deployer only on publishable libraries using angular.json', () => {
+      tree.create('angular.json', JSON.stringify(originalWorkspaceDefinition));
+
       const result = ngAdd()(tree, {} as SchematicContext);
 
       const angularJsonModified = JSON.parse(
         result.read('angular.json')!.toString()
       );
 
-      expect(angularJsonModified).toEqual(expectedAngularJSON);
+      expect(angularJsonModified).toEqual(expectedWorkspaceDefinition);
+    });
+
+    it('should set the deployer only on publishable libraries using workspace.json', () => {
+      tree.create(
+        'workspace.json',
+        JSON.stringify(originalWorkspaceDefinition)
+      );
+
+      const result = ngAdd()(tree, {} as SchematicContext);
+
+      const workspaceJsonModified = JSON.parse(
+        result.read('workspace.json')!.toString()
+      );
+
+      expect(workspaceJsonModified).toEqual(expectedWorkspaceDefinition);
     });
   });
 
   describe('error handling', () => {
-    it('Should throw if angular.json not found', () => {
+    it('Should throw if workspace definition not found', () => {
       expect(() => ngAdd()(Tree.empty(), {} as SchematicContext)).toThrowError(
-        'Could not find angular.json'
+        'Could not find workspace definition'
       );
     });
 
-    it('Should throw if angular.json can not be parsed', () => {
+    it('Should throw if workspace definition can not be parsed', () => {
       const tree = Tree.empty();
       tree.create('angular.json', 'hi');
       expect(() => ngAdd()(tree, {} as SchematicContext)).toThrowError(
-        'Could not parse angular.json'
+        'Could not parse workspace definition'
       );
     });
 
-    it('Should throw if angular.json can not be parsed', () => {
+    it('Should throw if workspace definition can not be parsed', () => {
       expect(() => ngAdd()(Tree.empty(), {} as SchematicContext)).toThrowError(
-        'Could not find angular.json'
+        'Could not find workspace definition'
       );
     });
 
     it('should throw if there is no library to add the deployer', () => {
       // Delete all libraries
-      Object.keys(originalAngularJSON.projects)
+      Object.keys(originalWorkspaceDefinition.projects)
         .filter(
           projectKey =>
-            originalAngularJSON.projects[projectKey].projectType === 'library'
+            originalWorkspaceDefinition.projects[projectKey].projectType ===
+            'library'
         )
         .forEach(libraryKey => {
-          delete originalAngularJSON.projects[libraryKey];
+          delete originalWorkspaceDefinition.projects[libraryKey];
         });
       const treeWithoutLibs = Tree.empty();
       treeWithoutLibs.create(
         'angular.json',
-        JSON.stringify(originalAngularJSON)
+        JSON.stringify(originalWorkspaceDefinition)
       );
 
       expect(() =>
