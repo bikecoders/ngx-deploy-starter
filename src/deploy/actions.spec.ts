@@ -1,7 +1,7 @@
-import { BuilderContext } from '@angular-devkit/architect/src';
+import { BuilderContext } from '@angular-devkit/architect';
 import * as fs from 'fs';
-import * as path from 'path';
 
+import { createFakeContext } from '../__mocks__/utils/context';
 import deploy from './actions';
 
 const mockEngine = {
@@ -14,63 +14,47 @@ const buildTarget = {
   name: `${PROJECT}:build:production`
 };
 
-function createFakeContext({
-  project,
-  projectRoot,
-  workspaceRoot
-}: {
-  project: string;
-  projectRoot: string;
-  workspaceRoot: string;
-}): BuilderContext {
-  return {
-    scheduleTarget: jest.fn(),
-    getTargetOptions: jest.fn(),
-    getProjectMetadata: jest.fn().mockReturnValue({ root: projectRoot }),
-    logger: { error: jest.fn(), info: jest.fn() },
-    reportStatus: jest.fn(),
-    target: {
-      project
-    },
-    workspaceRoot
-    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  } as any;
-}
-
-describe('Deploy Angular apps', () => {
-  let fakeReadFile: jest.Mock;
-
-  let context = createFakeContext({
-    project: PROJECT,
-    projectRoot: `/packages/${PROJECT}`,
-    workspaceRoot: '/'
-  });
-
-  beforeEach(() => {
-    fakeReadFile = jest.fn().mockReturnValue(
-      JSON.stringify({
-        projects: {
-          [PROJECT]: {
-            root: `packages/${PROJECT}`,
-            architect: {
-              build: {
-                options: {
-                  outputPath: `dist/packages/${PROJECT}`
-                }
-              }
+const fakeReadFile = () =>
+  JSON.stringify({
+    projects: {
+      [PROJECT]: {
+        root: `packages/${PROJECT}`,
+        architect: {
+          build: {
+            options: {
+              outputPath: `dist/packages/${PROJECT}`
             }
           }
         }
-      })
-    );
+      }
+    }
+  });
+
+describe('Deploy Angular apps', () => {
+  let context: BuilderContext;
+
+  beforeEach(() => {
+    context = createFakeContext({
+      project: PROJECT,
+      projectRoot: `/packages/${PROJECT}`,
+      workspaceRoot: '/'
+    });
+
+    jest
+      .spyOn(context, 'scheduleTarget')
+      .mockResolvedValue({ result: Promise.resolve() } as any);
+
+    jest.spyOn(context, 'getTargetOptions').mockResolvedValue({
+      project: PROJECT,
+      outputPath: `dist/packages/${PROJECT}`
+    });
 
     jest
       .spyOn(fs, 'readFile')
       .mockImplementation((...args: Parameters<typeof fs.readFile>) => {
-        // eslint-disable-next-line @typescript-eslint/ban-types
         const callback = args[args.length - 1] as Function;
         try {
-          callback(null, fakeReadFile(args));
+          callback(null, fakeReadFile());
         } catch (e) {
           callback(e);
         }
@@ -82,19 +66,6 @@ describe('Deploy Angular apps', () => {
   );
 
   describe('Builder', () => {
-    beforeEach(() => {
-      jest
-        .spyOn(context, 'scheduleTarget')
-        .mockResolvedValue({ result: Promise.resolve() } as any);
-
-        jest
-        .spyOn(context, 'getTargetOptions')
-        .mockResolvedValue({
-          project: PROJECT,
-          outputPath: `dist/packages/${PROJECT}`
-        });
-    });
-
     it('should invoke the builder', async () => {
       await deploy(mockEngine, context, buildTarget, {});
 
@@ -134,6 +105,7 @@ describe('Deploy Angular apps', () => {
   describe('error handling', () => {
     it('should throw if there is no target project', async () => {
       context.target = undefined;
+
       try {
         await deploy(mockEngine, context, buildTarget, {});
         fail();
@@ -143,7 +115,10 @@ describe('Deploy Angular apps', () => {
     });
 
     it('should throw if there is not project on build options', async () => {
-      context.getTargetOptions = () => Promise.resolve({});
+      jest.spyOn(context, 'getTargetOptions').mockResolvedValue({
+        project: PROJECT,
+        outputPath: `dist/packages/${PROJECT}`
+      });
 
       try {
         await deploy(mockEngine, context, buildTarget, {});
