@@ -50,14 +50,12 @@ export default async function deploy(
   const buildOptions = await context.getTargetOptions(targetFromStr);
 
   if (!buildOptions.project || typeof buildOptions.project !== 'string') {
-    throw new Error(
-      `Cannot read the project path option of the Angular library '${buildTarget.name}' in angular.json`
-    );
+    throw new Error(`Cannot read "project" option of the build target`);
   }
 
   const outputPath = buildOptions.outputPath;
 
-  if (typeof outputPath !== 'string') {
+  if (!outputPath || typeof outputPath !== 'string') {
     throw new Error('Cannot read "outputPath" option of the build target');
   }
 

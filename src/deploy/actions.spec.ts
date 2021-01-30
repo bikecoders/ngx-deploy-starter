@@ -114,18 +114,28 @@ describe('Deploy Angular apps', () => {
       }
     });
 
-    it('should throw if there is not project on build options', async () => {
-      jest.spyOn(context, 'getTargetOptions').mockResolvedValue({
-        project: PROJECT,
-        outputPath: `dist/packages/${PROJECT}`
-      });
+    it('should throw if there is not "project" on build options', async () => {
+      jest.spyOn(context, 'getTargetOptions').mockResolvedValue({});
 
       try {
         await deploy(mockEngine, context, buildTarget, {});
         fail();
       } catch (e) {
-        expect(e.message).toMatch(
-          /Cannot read the project path option of the Angular library '.*' in angular.json/
+        expect(e.message).toBe(
+          'Cannot read "project" option of the build target'
+        );
+      }
+    });
+
+    it('should throw if there is no "outputPath" on build options', async () => {
+      jest.spyOn(context, 'getTargetOptions').mockResolvedValue({ project: PROJECT });
+
+      try {
+        await deploy(mockEngine, context, buildTarget, {});
+        fail();
+      } catch (e) {
+        expect(e.message).toBe(
+          'Cannot read "outputPath" option of the build target'
         );
       }
     });
