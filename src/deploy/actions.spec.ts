@@ -42,7 +42,7 @@ describe('Deploy Angular apps', () => {
 
     jest
       .spyOn(context, 'scheduleTarget')
-      .mockResolvedValue({ result: Promise.resolve() } as any);
+      .mockResolvedValue({ result: Promise.resolve({ success: true }) } as any);
 
     jest.spyOn(context, 'getTargetOptions').mockResolvedValue({
       project: PROJECT,
@@ -136,6 +136,23 @@ describe('Deploy Angular apps', () => {
       } catch (e) {
         expect(e.message).toBe(
           'Cannot read "outputPath" option of the build target'
+        );
+      }
+    });
+
+    it('should throw if build output not succeeded', async () => {
+       jest
+         .spyOn(context, 'scheduleTarget')
+         .mockResolvedValue({
+           result: Promise.resolve({ success: false })
+         } as any);
+
+      try {
+        await deploy(mockEngine, context, buildTarget, {});
+        fail();
+      } catch (e) {
+        expect(e.message).toBe(
+          'Failed to build target'
         );
       }
     });

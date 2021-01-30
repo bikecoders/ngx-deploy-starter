@@ -43,7 +43,11 @@ export default async function deploy(
     }
 
     const build = await context.scheduleTarget(target);
-    await build.result;
+    const result = await build.result;
+
+    if (!result.success) {
+      throw new Error('Failed to build target')
+    }
   }
 
   const targetFromStr = targetFromTargetString(buildTarget.name);
