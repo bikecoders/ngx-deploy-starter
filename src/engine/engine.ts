@@ -1,10 +1,9 @@
 import { JsonObject, logging } from '@angular-devkit/core';
 import * as path from 'path';
 
-import * as fs from '../utils/fs-async';
-import { execAsync } from '../utils/exec-async';
-
 import { Schema } from '../deploy/schema';
+import { execAsync } from '../utils/exec-async';
+import * as fs from '../utils/fs-async';
 import { defaults, NpmPublishOptions } from './defaults';
 
 export async function run(

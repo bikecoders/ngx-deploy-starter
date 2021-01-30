@@ -1,5 +1,5 @@
-import util from 'util';
 import { readFile, writeFile } from 'fs';
+import util from 'util';
 
 export const readFileAsync = util.promisify(readFile);
 

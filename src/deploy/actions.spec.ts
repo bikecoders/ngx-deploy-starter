@@ -1,58 +1,104 @@
-import { JsonObject, logging } from '@angular-devkit/core';
-import {
-  BuilderContext,
-  BuilderRun,
-  ScheduleOptions,
-  Target
-} from '@angular-devkit/architect/src/index';
-
-import deploy from './actions';
-import { BuildTarget } from 'interfaces';
+import { BuilderContext } from '@angular-devkit/architect/src';
+import * as fs from 'fs';
 import * as path from 'path';
 
-import { readFileAsync } from '../utils';
-jest.mock('../utils');
+import deploy from './actions';
 
 const mockEngine = {
   run: (_: string, __: any, __2: any) => Promise.resolve()
 };
+
 const PROJECT = 'pirojok-project';
 
-let context: BuilderContext;
-let mockedReadFileAsync: jest.Mock<ReturnType<typeof readFileAsync>>;
-let ngPackageContent: JsonObject;
+const buildTarget = {
+  name: `${PROJECT}:build:production`
+};
+
+function createFakeContext({
+  project,
+  projectRoot,
+  workspaceRoot
+}: {
+  project: string;
+  projectRoot: string;
+  workspaceRoot: string;
+}): BuilderContext {
+  return {
+    scheduleTarget: jest.fn(),
+    getTargetOptions: jest.fn(),
+    getProjectMetadata: jest.fn().mockReturnValue({ root: projectRoot }),
+    logger: { error: jest.fn(), info: jest.fn() },
+    reportStatus: jest.fn(),
+    target: {
+      project
+    },
+    workspaceRoot
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  } as any;
+}
 
 describe('Deploy Angular apps', () => {
-  beforeEach(() => {
-    ngPackageContent = {
-      dest: `../../dist/randomness/${PROJECT}`
-    };
+  let fakeReadFile: jest.Mock;
 
-    mockedReadFileAsync = readFileAsync as jest.Mock<
-      ReturnType<typeof readFileAsync>
-    >;
-    mockedReadFileAsync.mockImplementation(() =>
-      Promise.resolve(JSON.stringify(ngPackageContent, null, 2))
+  let context = createFakeContext({
+    project: PROJECT,
+    projectRoot: `/packages/${PROJECT}`,
+    workspaceRoot: '/'
+  });
+
+  beforeEach(() => {
+    fakeReadFile = jest.fn().mockReturnValue(
+      JSON.stringify({
+        projects: {
+          [PROJECT]: {
+            root: `packages/${PROJECT}`,
+            architect: {
+              build: {
+                options: {
+                  outputPath: `dist/packages/${PROJECT}`
+                }
+              }
+            }
+          }
+        }
+      })
     );
 
-    initMocks();
+    jest
+      .spyOn(fs, 'readFile')
+      .mockImplementation((...args: Parameters<typeof fs.readFile>) => {
+        // eslint-disable-next-line @typescript-eslint/ban-types
+        const callback = args[args.length - 1] as Function;
+        try {
+          callback(null, fakeReadFile(args));
+        } catch (e) {
+          callback(e);
+        }
+      });
   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+  afterEach(() =>
+    (fs.readFile as jest.MockedFunction<typeof fs.readFile>).mockRestore()
+  );
 
   describe('Builder', () => {
-    let spy: jest.SpyInstance;
-
     beforeEach(() => {
-      spy = jest.spyOn(context, 'scheduleTarget');
+      jest
+        .spyOn(context, 'scheduleTarget')
+        .mockResolvedValue({ result: Promise.resolve() } as any);
+
+        jest
+        .spyOn(context, 'getTargetOptions')
+        .mockResolvedValue({
+          project: PROJECT,
+          outputPath: `dist/packages/${PROJECT}`
+        });
     });
 
     it('should invoke the builder', async () => {
-      await deploy(mockEngine, context, getBuildTarget(), {});
+      await deploy(mockEngine, context, buildTarget, {});
 
-      expect(spy).toHaveBeenCalledWith({
+      expect(context.scheduleTarget).toHaveBeenCalledWith({
         target: 'build',
         project: PROJECT
       });
@@ -61,11 +107,11 @@ describe('Deploy Angular apps', () => {
     it('should invoke the builder with the right configuration', async () => {
       const customConf = 'my-custom-conf';
 
-      await deploy(mockEngine, context, getBuildTarget(), {
+      await deploy(mockEngine, context, buildTarget, {
         configuration: customConf
       });
 
-      expect(spy).toHaveBeenCalledWith({
+      expect(context.scheduleTarget).toHaveBeenCalledWith({
         target: 'build',
         project: PROJECT,
         configuration: customConf
@@ -74,22 +120,22 @@ describe('Deploy Angular apps', () => {
   });
 
   it('should invoke engine.run', async () => {
-    const expectedOutputDir = path.join(
-      context.workspaceRoot,
-      `dist/randomness/${PROJECT}`
-    );
     const runSpy = spyOn(mockEngine, 'run').and.callThrough();
 
-    await deploy(mockEngine, context, getBuildTarget(), {});
+    await deploy(mockEngine, context, buildTarget, {});
 
-    expect(runSpy).toHaveBeenCalledWith(expectedOutputDir, {}, context.logger);
+    expect(runSpy).toHaveBeenCalledWith(
+      `/dist/packages/${PROJECT}`,
+      {},
+      context.logger
+    );
   });
 
   describe('error handling', () => {
     it('should throw if there is no target project', async () => {
       context.target = undefined;
       try {
-        await deploy(mockEngine, context, getBuildTarget(), {});
+        await deploy(mockEngine, context, buildTarget, {});
         fail();
       } catch (e) {
         expect(e.message).toMatch(/Cannot execute the build target/);
@@ -100,7 +146,7 @@ describe('Deploy Angular apps', () => {
       context.getTargetOptions = () => Promise.resolve({});
 
       try {
-        await deploy(mockEngine, context, getBuildTarget(), {});
+        await deploy(mockEngine, context, buildTarget, {});
         fail();
       } catch (e) {
         expect(e.message).toMatch(
@@ -109,32 +155,4 @@ describe('Deploy Angular apps', () => {
       }
     });
   });
-});
-
-const initMocks = () => {
-  context = ({
-    target: {
-      configuration: 'production',
-      project: PROJECT,
-      target: 'foo'
-    },
-    builder: {
-      builderName: 'mock',
-      description: 'mock',
-      optionSchema: false
-    },
-    workspaceRoot: 'my/workspace/root',
-    logger: new logging.NullLogger() as any,
-    scheduleTarget: (_: Target, __?: JsonObject, ___?: ScheduleOptions) =>
-      Promise.resolve({} as BuilderRun),
-    getTargetOptions: (t: Target) =>
-      Promise.resolve({
-        project: `projects/${t.project}/some-file.json`,
-        target: t.target
-      })
-  } as unknown) as BuilderContext;
-};
-
-const getBuildTarget = (): BuildTarget => ({
-  name: `${PROJECT}:build:production`
 });
