@@ -19,10 +19,15 @@ const mockEngine = {
 const PROJECT = 'pirojok-project';
 
 let context: BuilderContext;
+let targetOptions: JsonObject;
 let mockedReadFileAsync: jest.Mock<ReturnType<typeof readFileAsync>>;
 let ngPackageContent: JsonObject;
 
 describe('Deploy Angular apps', () => {
+  afterEach(() => {
+    targetOptions = {};
+  });
+
   beforeEach(() => {
     ngPackageContent = {
       dest: `../../dist/randomness/${PROJECT}`
@@ -73,16 +78,48 @@ describe('Deploy Angular apps', () => {
     });
   });
 
-  it('should invoke engine.run', async () => {
-    const expectedOutputDir = path.join(
-      context.workspaceRoot,
-      `dist/randomness/${PROJECT}`
-    );
-    const runSpy = spyOn(mockEngine, 'run').and.callThrough();
+  describe('Getting Output Path', () => {
+    describe('With Output Path', () => {
+      beforeEach(() => {
+        targetOptions = {
+          outputPath: 'some/dist/path'
+        };
+      });
 
-    await deploy(mockEngine, context, getBuildTarget(), {});
+      it('should invoke engine.run with the right params', async () => {
+        const expectedOutputDir = path.join(
+          context.workspaceRoot,
+          targetOptions.outputPath as string
+        );
+        const runSpy = spyOn(mockEngine, 'run').and.callThrough();
 
-    expect(runSpy).toHaveBeenCalledWith(expectedOutputDir, {}, context.logger);
+        await deploy(mockEngine, context, getBuildTarget(), {});
+
+        expect(runSpy).toHaveBeenCalledWith(
+          expectedOutputDir,
+          {},
+          context.logger
+        );
+      });
+    });
+
+    describe('Without Output Path', () => {
+      it('should invoke engine.run with the right params', async () => {
+        const expectedOutputDir = path.join(
+          context.workspaceRoot,
+          `dist/randomness/${PROJECT}`
+        );
+        const runSpy = spyOn(mockEngine, 'run').and.callThrough();
+
+        await deploy(mockEngine, context, getBuildTarget(), {});
+
+        expect(runSpy).toHaveBeenCalledWith(
+          expectedOutputDir,
+          {},
+          context.logger
+        );
+      });
+    });
   });
 
   describe('error handling', () => {
@@ -104,7 +141,7 @@ describe('Deploy Angular apps', () => {
         fail();
       } catch (e) {
         expect(e.message).toMatch(
-          /Cannot read the project path option of the Angular library '.*' in angular.json/
+          /Cannot read the project path option of the library '.*' in the workspace/
         );
       }
     });
@@ -130,7 +167,8 @@ const initMocks = () => {
     getTargetOptions: (t: Target) =>
       Promise.resolve({
         project: `projects/${t.project}/some-file.json`,
-        target: t.target
+        target: t.target,
+        ...targetOptions
       })
   } as unknown) as BuilderContext;
 };

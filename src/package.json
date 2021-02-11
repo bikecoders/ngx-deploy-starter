@@ -11,6 +11,7 @@
     "link": "npm run build && cd dist && npm link && cd ..",
     "unlink": "cd dist && npm unlink && cd ..",
     "test": "jest",
+    "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk=0.0.0.0 node_modules/.bin/jest --runInBand",
     "release": "standard-version"
   },
