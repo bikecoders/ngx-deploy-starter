@@ -66,7 +66,12 @@ async function setPackageVersion(dir: string, packageVersion: string) {
  *
  * @param param0 All the options sent to ng deploy
  */
-function extractOnlyNPMOptions({ access, tag, otp, dryRun }: Schema): NpmPublishOptions {
+function extractOnlyNPMOptions({
+  access,
+  tag,
+  otp,
+  dryRun
+}: Schema): NpmPublishOptions {
   return {
     access,
     tag,
@@ -75,7 +80,10 @@ function extractOnlyNPMOptions({ access, tag, otp, dryRun }: Schema): NpmPublish
   };
 }
 
-function prepareOptions(origOptions: Schema, logger: logging.LoggerApi): Schema {
+function prepareOptions(
+  origOptions: Schema,
+  logger: logging.LoggerApi
+): Schema {
   const options = {
     ...defaults,
     ...origOptions

@@ -3,7 +3,7 @@ import {
   Target,
   targetFromTargetString
 } from '@angular-devkit/architect';
-import { logging } from '@angular-devkit/core';
+import { JsonObject, logging } from '@angular-devkit/core';
 
 import * as path from 'path';
 
@@ -55,15 +55,10 @@ export default async function deploy(
   const targetFromStr = targetFromTargetString(buildTarget.name);
   const buildOptions = await context.getTargetOptions(targetFromStr);
 
-  if (!buildOptions.project || typeof buildOptions.project !== 'string') {
-    throw new Error(
-      `Cannot read the project path option of the Angular library '${buildTarget.name}' in angular.json`
-    );
-  }
-
   const outputPath = await getOutPutPath(
     context.workspaceRoot,
-    buildOptions.project
+    buildOptions,
+    buildTarget.name
   );
 
   await engine.run(
@@ -75,32 +70,60 @@ export default async function deploy(
 
 async function getOutPutPath(
   projectRoot: string,
-  relativeNgPackagePath: string
+  buildOptions: JsonObject,
+  libName: string
 ): Promise<string> {
-  const ngPackagePath = path.join(projectRoot, relativeNgPackagePath);
-
-  let ngPackageContentStr: string;
-
-  try {
-    ngPackageContentStr = await readFileAsync(ngPackagePath, {
-      encoding: 'utf8'
-    });
-  } catch (error) {
-    throw new Error(`Error reading the ng-package.json`);
+  if (buildOptions.outputPath) {
+    return withOutputPath();
+  } else {
+    return withoutOutputPath();
   }
 
-  const ngPackageContent = JSON.parse(ngPackageContentStr);
+  function withOutputPath() {
+    if (
+      !buildOptions.outputPath ||
+      typeof buildOptions.outputPath !== 'string'
+    ) {
+      throw new Error(
+        `Cannot read the project output path option of the library '${libName}' in the workspace`
+      );
+    }
 
-  if (!ngPackageContent.dest || typeof ngPackageContent.dest !== 'string') {
-    throw new Error(
-      `Cannot read the project 'dest' option of the ng-package.json`
+    return path.join(projectRoot, buildOptions.outputPath);
+  }
+
+  async function withoutOutputPath() {
+    if (!buildOptions.project || typeof buildOptions.project !== 'string') {
+      throw new Error(
+        `Cannot read the project path option of the library '${libName}' in the workspace`
+      );
+    }
+
+    const ngPackagePath = path.join(projectRoot, buildOptions.project);
+
+    let ngPackageContentStr: string;
+
+    try {
+      ngPackageContentStr = await readFileAsync(ngPackagePath, {
+        encoding: 'utf8'
+      });
+    } catch (error) {
+      throw new Error(`Error reading the ng-package.json`);
+    }
+
+    const ngPackageContent = JSON.parse(ngPackageContentStr);
+
+    if (!ngPackageContent.dest || typeof ngPackageContent.dest !== 'string') {
+      throw new Error(
+        `Cannot read the project 'dest' option of the ng-package.json`
+      );
+    }
+
+    const outputPath = path.join(
+      path.dirname(ngPackagePath),
+      ngPackageContent.dest
     );
+
+    return outputPath;
   }
-
-  const outputPath = path.join(
-    path.dirname(ngPackagePath),
-    ngPackageContent.dest
-  );
-
-  return outputPath;
 }
