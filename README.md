@@ -2,24 +2,30 @@
 
 [![NPM version][npm-image]][npm-url]
 [![The MIT License][mit-licence-image]][mit-licence-url]
+[![Conventional Commits][conventional-commits-image]][conventional-commits-url]
+
 [![Discord Server][discord-image]][discord-url]
 
-[npm-url]: https://www.npmjs.com/package/ngx-deploy-npm
+<!-- Images -->
 [npm-image]: https://badge.fury.io/js/ngx-deploy-npm.svg
 [mit-licence-image]: https://img.shields.io/badge/license-MIT-orange.svg?color=blue&style=flat-square
-[mit-licence-url]: http://opensource.org/licenses/MIT
+[conventional-commits-image]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
 [discord-image]: https://img.shields.io/discord/748677963142135818?color=7289DA&label=%23ngx-deploy-npm&logo=discord&logoColor=white&style=flat-square
-[discord-url]: https://discord.gg/cPa78y6rXn
 
-### **Deploy your Angular Package to NPM directly from the Angular CLI! 🚀**
+<!-- URLs -->
+[npm-url]: https://www.npmjs.com/package/ngx-deploy-npm
+[mit-licence-url]: http://opensource.org/licenses/MIT
+[discord-url]: https://discord.gg/cPa78y6rXn
+[conventional-commits-url]: https://conventionalcommits.org
 
 ![Cover Image](docs/cover.png)
+
+## Publish any kind of library to NPM on an Angular🅰️ or Nx🐬 Workspace
 
 ---
 
 **Table of contents:**
 
-- [⚠️ Prerequisites](#prerequisites)
 - [🚀 Quick Start (local development)](#quick-start)
 - [🚀 Continuous Delivery](#continuous-delivery)
   - [CircleCI](#circleci)
@@ -40,29 +46,27 @@
 
 ---
 
-## ⚠️ Prerequisites <a name="prerequisites"></a>
-
-This command has the following prerequisites:
-
-- Angular project created via [Angular CLI](https://github.com/angular/angular-cli) v8.3.0 or greater (execute `ng update @angular/cli @angular/core` to upgrade your project if necessary)
+> Note: all the examples are focused on Angular, if you don't see an
+> explicit command for an Nx workspace just change `ng` for `nx`
 
 ## 🚀 Quick Start (local development) <a name="quick-start"></a>
 
-This quick start assumes that you already have an existing Angular project with a publishable package created and you already are logged in on npm using `npm login`
+This quick start assumes that you already have an existing Angular or a Nx workspace with a publishable
+package created and you already are logged in on npm using `npm login`
 
 1. Add `ngx-deploy-npm` to your project. It will configure all your publishable libraries present in the project
 
-   ```sh
-   ng add ngx-deploy-npm
-   ```
+   | Angular🅰️                                    | Nx🐬                                                    |
+   | :------------------------------------------- | :----------------------------------------------------- |
+   | <pre lang="sh"> ng add ngx-deploy-npm </pre> | <pre lang="sh"> nx generate ngx-deploy-npm:init </pre> |
 
-2. Deploy your library to NPM with all default settings. Your library will be automatically built in production mode.
+2. Deploy your library to NPM with all default settings.
 
    ```sh
    ng deploy your-library
    ```
 
-3. Your library should be published on npm. So go and check npm.js
+3. Your library should be published on npm. So go and check `npmjs.com/YOUR-PACKAGE`
 
 ## 🚀 Continuous Delivery <a name="continuous-delivery"></a>
 
@@ -76,17 +80,27 @@ Independently of the CI/CD that you are using you must create an NPM token. To d
 1. **Set the env variable**
    - On your project setting ser the env variable. Let's call it `NPM_TOKEN`
 2. **Indicate how to find the token**
-   - Before publishing, we must indicate to npm how to find that token, do it by creating a step with `run: echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > YOUR_REPO_DIRECTORY/.npmrc`
-   - Replace `YOUR_REPO_DIRECTORY` for the path of your project, commonly is `/home/circleci/repo`
+   - Before publishing, we must indicate to npm how to find that token,
+     do it by creating a step with `run: echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > YOUR_REPO_DIRECTORY/.npmrc`
+   - Replace `YOUR_REPO_DIRECTORY` for the path of your project,
+     commonly is `/home/circleci/repo`
 3. **(Optional) check that you are logged**
    - Creating a step with `run: npm whoami`
    - The output should be the username of your npm account
 4. **Deploy your package**
-   - Create a step with `run: npx ng deploy YOUR_LIBRARY`
-   - **NOTE:** You may want to execute a script that executes some pre-steps before publishing and inside that script execute `ng deploy YOUR_LIBRARY`. If you want to make that script on JavaScript and put it on the package.json, **execute it using `npm` not with yarn**, there is an [issue](https://github.com/yarnpkg/yarn/issues/5683) associated with that
+   - Create a step with:
+
+   | Angular🅰️                                     | Nx🐬                                           |
+   | :-------------------------------------------- | :-------------------------------------------- |
+   | <pre lang="sh"> ng deploy your-library </pre> | <pre lang="sh"> nx deploy your-library </pre> |
+
+   - **NOTE:** You may want to execute a script that executes some pre-steps
+    before publishing and inside that script execute`ng/nx deploy YOUR_LIBRARY`.
+    If you want to make that script on JavaScript and put it on the package.json,
+    **execute it using `npm` not with yarn**, there is an [issue](https://github.com/yarnpkg/yarn/issues/5683) associated with that
 5. **Enjoy your just released package 🎉📦**
 
-The job full example is
+The job full example is for an Angular project is
 
 ```yml
 # .circleci/config.yml
@@ -99,7 +113,7 @@ jobs:
       # Set NPM token to be able to publish
       - run: echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > /home/circleci/repo/.npmrc
       - run: npm whoami
-      - run: ngx ng deploy YOUR_PACKAGE
+      - run: npx ng deploy YOUR_PACKAGE
 ```
 
 ###### You can check the steps suggested in the [CircleCI's guide](https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/)
@@ -129,8 +143,6 @@ This command has no effect if the option `--no-build` option is active.
 Skip build process during deployment.
 This can be used when you are sure that you haven't changed anything and want to deploy with the latest artifact.
 This command causes the `--configuration` setting to have no effect.
-
-> **This is a proposal from [RFC #1](https://github.com/angular-schule/ngx-deploy-starter/issues/1).**
 
 #### --package-version
 
@@ -178,7 +190,11 @@ For testing: Run through without making any changes. Execute with --dry-run and 
 
 ## 📁 Configuration File <a name="configuration-file"></a>
 
-To avoid all these command-line cmd options, you can write down your configuration in the `angular.json` file in the `options` attribute of your deploy project's architect. Just change the kebab-case to lower camel case. This is the notation of all options in lower camel case:
+To avoid all these command-line cmd options, you can write down your
+configuration in the `angular.json` or `workspace.json` file in the `options` attribute
+of your deploy project's architect.
+Just change the kebab-case to lower camel case.
+This is the notation of all options in lower camel case:
 
 - access
 - configuration
@@ -208,7 +224,7 @@ becomes
 }
 ```
 
-And just run `ng deploy` 😄.
+And just run `ng deploy YOUR-LIBRARY` 😄.
 
 > ℹ️ You can always use the [--dry-run](#dry-run) option to verify if your configuration is right.
 
@@ -228,31 +244,7 @@ This deployer doesn't bump or generates a new version of the package, it just bu
 
 ### Only publishable libraries are being configured
 
-A publishable library is one that can be built. Here we detect that if the library in the `angular.json` has the architect **build**.
-
-The `angular.json` look like
-
-```json
-{
-  "publishable-library": {
-    "projectType": "library",
-    "root": "libs/publishable-library",
-    "sourceRoot": "libs/publishable-library/src",
-    "prefix": "myworkspace",
-    "architect": {
-      "build": {
-        "builder": "any-builder-of-your-preference",
-        "options": {
-          "tsConfig": "libs/publishable-library/tsconfig.lib.json",
-          "project": "libs/publishable-library/ng-package.json"
-        }
-      }
-    }
-  }
-}
-```
-
-This takes a special context on a [NX](https://nx.dev) environment.
+For Nx workspace, only publishable libraries are going to be configured
 
 ## 🏁 Next milestones <a name="next-milestones"></a>
 
