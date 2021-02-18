@@ -9,12 +9,12 @@ import { npmAccess } from './engine/defaults';
 import { Workspace, WorkspaceProject } from 'interfaces';
 
 function getWorkspace(host: Tree): { path: string; workspace: Workspace } {
-  const possibleFiles = ['/angular.json', '/.angular.json'];
+  const possibleFiles = ['/angular.json', '/.angular.json', '/workspace.json'];
   const path = possibleFiles.filter(path => host.exists(path))[0];
 
   const configBuffer = host.read(path);
   if (configBuffer === null) {
-    throw new SchematicsException(`Could not find angular.json`);
+    throw new SchematicsException(`Could not find workspace definition`);
   }
   const content = configBuffer.toString();
 
@@ -22,7 +22,7 @@ function getWorkspace(host: Tree): { path: string; workspace: Workspace } {
   try {
     workspace = (parseJson(content, JsonParseMode.Loose) as {}) as Workspace;
   } catch (e) {
-    throw new SchematicsException(`Could not parse angular.json: ` + e.message);
+    throw new SchematicsException(`Could not parse workspace definition: ` + e.message);
   }
 
   return {

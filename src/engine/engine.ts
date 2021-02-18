@@ -5,7 +5,7 @@ import * as fs from '../utils/fs-async';
 import { execAsync } from '../utils/exec-async';
 
 import { Schema } from '../deploy/schema';
-import { defaults } from './defaults';
+import { defaults, NpmPublishOptions } from './defaults';
 
 export async function run(
   dir: string,
@@ -66,7 +66,12 @@ async function setPackageVersion(dir: string, packageVersion: string) {
  *
  * @param param0 All the options sent to ng deploy
  */
-function extractOnlyNPMOptions({ access, tag, otp, dryRun }: Schema) {
+function extractOnlyNPMOptions({
+  access,
+  tag,
+  otp,
+  dryRun
+}: Schema): NpmPublishOptions {
   return {
     access,
     tag,
@@ -75,7 +80,10 @@ function extractOnlyNPMOptions({ access, tag, otp, dryRun }: Schema) {
   };
 }
 
-function prepareOptions(origOptions: Schema, logger: logging.LoggerApi) {
+function prepareOptions(
+  origOptions: Schema,
+  logger: logging.LoggerApi
+): Schema {
   const options = {
     ...defaults,
     ...origOptions
@@ -88,7 +96,7 @@ function prepareOptions(origOptions: Schema, logger: logging.LoggerApi) {
   return options;
 }
 
-function getOptionsString(options: Schema) {
+function getOptionsString(options: NpmPublishOptions) {
   return (
     Object.keys(options)
       // Get only options with value
