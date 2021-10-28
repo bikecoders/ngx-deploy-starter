@@ -57,7 +57,7 @@
           }
         },
         "deploy": {
-          "executor": "ngx-deploy-npm:deploy",
+          "executor": "./dist/packages/ngx-deploy-npm:deploy",
           "options": {
             "access": "public"
           }
