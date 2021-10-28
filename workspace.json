@@ -32,7 +32,6 @@
             "assets": [
               "README.md",
               "LICENSE",
-              "CHANGELOG.md",
               {
                 "input": "./packages/ngx-deploy-npm/src",
                 "glob": "**/!(*.ts)",
