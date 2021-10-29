@@ -227,13 +227,11 @@ Now you can just run `nx deploy YOUR-LIBRARY` without all the options in the com
 
 ## 🧐 Essential considerations <a name="essential-considerations"></a>
 
-### README, LICENCE, and CHANGELOG <!-- omit in toc -->
+### README and LICENCE files <!-- omit in toc -->
 
-Those files must be in the root of the library. They are being copied by the builder at the moment of deployment.
+Those files must be at the root of the library. The executor is copying them at the moment of building.
 
-If you have those files outside the project's root, you can create a symbolic link to solve that problem.
-
-> See [symbolic links on git](https://www.mokacoding.com/blog/symliks-in-git/) to know how to create them properly.
+If you have those files outside the project's root, use the option `assets` on the executor that compiles your application.
 
 ### Version bumping <!-- omit in toc -->
 
@@ -247,9 +245,8 @@ For Nx workspace, only publishable libraries are going to be configured
 
 We are looking forward to the following features:
 
-- Implement Continuous Everything with Github Actions:
+- Implement Continuous Everything with Github Actions
 - Specify which library configure the builder on the installment (`init`)
-- Ways to copy files into the final build, like README, LICENCE, and CHANGELOG files
 
 Your feature that's not on the list yet?
 
