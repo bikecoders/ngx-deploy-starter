@@ -115,8 +115,16 @@ We at this project have E2E tests. They are handy to test production-like scenar
 
 ## Publish to NPM
 
-```sh
-cd src
-yarn release # to create a new version
-yarn deploy
+The deployment is being made using a command.
+
+```bash
+nx version
 ```
+
+This will do the following:
+- Generate a new version based on conversiontal commits 
+  - Generate the changelog
+  - Mark the next version on the package.json
+- Execute `nx deploy``
+  - Will build the project
+  - Will put that version on NPM (using ngx-deploy-npm. Yes, itself)
