@@ -1,0 +1,71 @@
+{
+  "root": "packages/ngx-deploy-npm",
+  "sourceRoot": "packages/ngx-deploy-npm/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/ngx-deploy-npm/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/ngx-deploy-npm"],
+      "options": {
+        "jestConfig": "packages/ngx-deploy-npm/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/node:package",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/ngx-deploy-npm",
+        "tsConfig": "packages/ngx-deploy-npm/tsconfig.lib.json",
+        "packageJson": "packages/ngx-deploy-npm/package.json",
+        "main": "packages/ngx-deploy-npm/src/index.ts",
+        "assets": [
+          "README.md",
+          "LICENSE",
+          {
+            "input": "./packages/ngx-deploy-npm/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/ngx-deploy-npm/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/ngx-deploy-npm",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/ngx-deploy-npm",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "deploy": {
+      "executor": "./dist/packages/ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "postTargets": ["ngx-deploy-npm:deploy"],
+        "versionTagPrefix": "v",
+        "baseBranch": "master"
+      }
+    }
+  },
+  "tags": []
+}

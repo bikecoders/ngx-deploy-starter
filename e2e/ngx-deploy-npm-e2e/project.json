@@ -1,0 +1,16 @@
+{
+  "root": "e2e/ngx-deploy-npm-e2e",
+  "projectType": "application",
+  "sourceRoot": "e2e/ngx-deploy-npm-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/nx-plugin:e2e",
+      "options": {
+        "target": "ngx-deploy-npm:build",
+        "jestConfig": "e2e/ngx-deploy-npm-e2e/jest.config.js"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["ngx-deploy-npm"]
+}

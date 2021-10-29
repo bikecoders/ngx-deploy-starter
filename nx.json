@@ -32,5 +32,6 @@
   },
   "cli": {
     "defaultCollection": "@nrwl/node"
-  }
+  },
+  "defaultProject": "ngx-deploy-npm"
 }
