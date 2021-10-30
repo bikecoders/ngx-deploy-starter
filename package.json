@@ -13,7 +13,7 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@jscutlery/semver": "^2.10.0",
+    "@jscutlery/semver": "^2.11.4",
     "@nrwl/cli": "13.0.2",
     "@nrwl/devkit": "13.0.2",
     "@nrwl/eslint-plugin-nx": "13.0.2",
