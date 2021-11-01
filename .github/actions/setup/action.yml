@@ -1,0 +1,19 @@
+name: Setup
+description: Setup Node.js and install dependencies
+inputs:
+  node-version:
+    description: Node.js version
+    required: false
+    default: '16'
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v2
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: 'yarn'
+        registry-url: https://registry.npmjs.org
+
+    - run: yarn install --frozen-lockfile
+      shell: bash
