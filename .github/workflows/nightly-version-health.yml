@@ -4,32 +4,5 @@ on:
     branches:
       - master
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: ./.github/actions/setup
-
-      - run: npx nx build
-
-  unit-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: ./.github/actions/setup
-
-      - run: npx nx test
-
-  e2e-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: ./.github/actions/setup
-
-      - run: npx nx e2e ngx-deploy-npm-e2e
+  latest:
+    uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@master #@master
