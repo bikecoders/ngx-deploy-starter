@@ -103,6 +103,7 @@ On VsCode, create a [_JavaScript Debug Terminal_](https://code.visualstudio.com/
 2. Fork it
 3. Create your branch
 4. Create your commits using [our guidelines](https://www.conventionalcommits.org/en/v1.0.0/)
+   - If you need help use `yarn commit`
    - We use the commit history to generate the changelog automagically, do your best describing the changes that you introduce 😄. Creating the commit right is essential.
    - We encourage the use of Unit Tests for the fixes and new features. Don't you know how to write Unit Tests? Don't let that stop your contribution; we are here to help 👋.
 5. Make a PR against `master`
