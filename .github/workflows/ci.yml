@@ -1,4 +1,4 @@
-name: Continous Integration
+name: PR's
 on:
   push:
     branches-ignore:
