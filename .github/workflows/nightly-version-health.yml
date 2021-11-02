@@ -1,8 +1,0 @@
-name: Nightly version Check
-on:
-  push:
-    branches:
-      - master
-jobs:
-  latest:
-    uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@master #@master

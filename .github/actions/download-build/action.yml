@@ -1,0 +1,10 @@
+name: Download Builds
+description: Downloading the github artifact creared with the build (dist folder)
+runs:
+  using: composite
+  steps:
+    - name: Download dist folder
+      uses: actions/download-artifact@v2
+      with:
+        name: library-dist-${{ github.sha }}
+        path: dist

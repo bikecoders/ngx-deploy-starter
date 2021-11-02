@@ -114,18 +114,8 @@ On VsCode, create a [_JavaScript Debug Terminal_](https://code.visualstudio.com/
 
 We at this project have E2E tests. They are handy to test production-like scenarios and to have confidence in your changes. This only works for Nx Workspaces, Angular Workspaces need to be tested manually.
 
-## Publish to NPM
+## When my changes are going to be public?
 
-The deployment is being made using a command.
+The CI handles the publishment of a new version. We use GitHub actions as CI. 
 
-```bash
-nx version
-```
-
-This will do the following:
-- Generate a new version based on conversiontal commits 
-  - Generate the changelog
-  - Mark the next version on the package.json
-- Execute `nx deploy``
-  - Will build the project
-  - Will put that version on NPM (using ngx-deploy-npm. Yes, itself)
+When the maintainers integrate your PR to master, go to the [main branch actions](https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml) and search for the one that belongs to you. The CI will run some tests, and if they pass, the next job that publishes your introduces changes will be **on hold** waiting for an approval; once the maintainers approve the launching, your changes will be packed and posted to NPM.

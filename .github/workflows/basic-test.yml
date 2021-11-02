@@ -23,6 +23,13 @@ jobs:
 
       - run: npx nx build
 
+      - name: Archive build result
+        uses: actions/upload-artifact@v2
+        with:
+          name: library-dist-${{ github.sha }}
+          path: dist
+          retention-days: 1
+
   unit-test:
     runs-on: ubuntu-latest
     strategy:

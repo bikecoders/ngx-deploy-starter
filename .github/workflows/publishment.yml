@@ -1,0 +1,45 @@
+name: Publishment
+on:
+  push:
+    branches:
+      - master
+jobs:
+  test:
+    uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@master #@master
+
+  release:
+    environment: production
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+
+      - name: git config
+        shell: bash
+        run: |
+          git config user.name "Github Actions"
+          git config user.email "-"
+
+      - uses: ./.github/actions/download-build
+
+      - name: Check npm credentials
+        run: npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # Use npx instead of yarn because yarn automagically sets NPM_* environment variables
+          # like NPM_CONFIG_REGISTRY so npm publish ends up ignoring the .npmrc file
+          # which is set up by `setup-node` action.
+
+      - name: Version and Publishment
+        run: npx nx version
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.MANAGE_REPO_TOKEN }}
+          branch: ${{ github.ref }}
+          force: true
+          tags: true
