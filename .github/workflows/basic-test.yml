@@ -1,4 +1,4 @@
-name: Reusable workflow example
+name: Essential Test
 
 on: workflow_call
 
