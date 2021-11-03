@@ -839,10 +839,10 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@jscutlery/semver@2.11.4":
-  version "2.11.4"
-  resolved "https://registry.yarnpkg.com/@jscutlery/semver/-/semver-2.11.4.tgz#89b35b16a42d4d54e65dd6dabe6fa16cc539f9b3"
-  integrity sha512-Zc+B+TjndFOF0PXyJXWVKCc2RWgPRiMPukYntCMPv0ARBPgxQXa+NBwV/LJFwgPE/Q7Yy9LLNJ/1hX1pkBtF7g==
+"@jscutlery/semver@2.11.5":
+  version "2.11.5"
+  resolved "https://registry.yarnpkg.com/@jscutlery/semver/-/semver-2.11.5.tgz#3e2a299cff69f5ba1a08bef879293613c2e4b717"
+  integrity sha512-Nc84J0dFI7w4hGSxq2b5T9AwFFoCa1b6MV/DxHi//78fUnFGb89KD75njPvVAf7LXDOGzHOQYDI8yZE7WtXn0w==
   dependencies:
     "@nrwl/devkit" "^13.0.2"
     inquirer "^8.2.0"
