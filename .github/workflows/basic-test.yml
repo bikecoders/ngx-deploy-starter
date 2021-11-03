@@ -28,7 +28,6 @@ jobs:
         with:
           name: library-dist-${{ github.sha }}
           path: dist
-          retention-days: 1
 
   unit-test:
     runs-on: ubuntu-latest

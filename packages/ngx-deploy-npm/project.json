@@ -55,8 +55,7 @@
     "deploy": {
       "executor": "./dist/packages/ngx-deploy-npm:deploy",
       "options": {
-        "access": "public",
-        "noBuild": true
+        "access": "public"
       }
     },
     "version": {
