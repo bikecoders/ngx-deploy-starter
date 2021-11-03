@@ -36,10 +36,12 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Tag last-release
+        run: git tag -f last-release
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.MANAGE_REPO_TOKEN }}
           branch: ${{ github.ref }}
-          force: true
           tags: true
