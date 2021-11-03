@@ -5,11 +5,11 @@
 [![The MIT License][mit-licence-image]][mit-licence-url]
 [![Conventional Commits][conventional-commits-image]][conventional-commits-url]
 
-[![Build Test E2E][nightly-version-image]][nightly-version-link]
+[![Publishment Status][publishment-image]][publishment-link]
 
 <!-- Images -->
 
-[nightly-version-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/nightly-version-health.yml/badge.svg
+[publishment-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml/badge.svg?branch=master
 [npm-image]: https://badge.fury.io/js/ngx-deploy-npm.svg
 [mit-licence-image]: https://img.shields.io/badge/license-MIT-orange.svg?color=blue&style=flat-square
 [conventional-commits-image]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
@@ -17,7 +17,7 @@
 
 <!-- URLs -->
 
-[nightly-version-link]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/nightly-version-health.yml
+[publishment-link]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml
 [npm-url]: https://www.npmjs.com/package/ngx-deploy-npm
 [mit-licence-url]: http://opensource.org/licenses/MIT
 [conventional-commits-url]: https://conventionalcommits.org
