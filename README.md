@@ -49,8 +49,8 @@
 
 ---
 
-> **Note:** all the examples are focused on Nx, if you don't see an
-> explicit command for an Angular workspace just change `nx` for `ng`.
+> **Note:** all the examples are focused on Nx; if you don't see an
+> explicit command for an Angular workspace change `nx` for `ng`.
 >
 > Also, when you find references to `workspace.json`, you can find your file under the name `angular.json`.
 
@@ -81,7 +81,7 @@
 
 ## 🚀 Continuous Delivery <a name="continuous-delivery"></a>
 
-Independently of the CI/CD that you are using you must create an NPM token. To do so, you have two methods
+Independently of the CI/CD that you are using, you need an NPM token. To do so, you have two methods.
 
 - Via [NPM web page](https://docs.npmjs.com/creating-and-viewing-authentication-tokens)
 - Using [`npm token create`](https://docs.npmjs.com/cli/token.html)
@@ -89,7 +89,7 @@ Independently of the CI/CD that you are using you must create an NPM token. To d
 ### [CircleCI](http://circleci.com) <!-- omit in toc -->
 
 1. Set the env variable
-   - On your project setting ser the env variable. Let's call it `NPM_TOKEN`
+   - On your project setting the env variable. Let's call it `NPM_TOKEN`
 2. Indicate how to find the token
    - Before publishing, we must indicate to npm how to find that token,
      do it by creating a step with `run: echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > YOUR_REPO_DIRECTORY/.npmrc`
@@ -106,9 +106,9 @@ Independently of the CI/CD that you are using you must create an NPM token. To d
    | :------------------------------------------ | :------------------------------------------ |
    | <pre lang="sh">nx deploy your-library</pre> | <pre lang="sh">ng deploy your-library</pre> |
 
-5. Enjoy your just released package 🎉📦
+5. Enjoy your just-released package 🎉📦
 
-The job full example is for an Angular project is
+The complete job example is:
 
 ```yml
 # .circleci/config.yml
@@ -135,10 +135,10 @@ jobs:
 - Example:
   - `nx deploy --build-target=production` – The configuration `production` is being used to build your package
 
-The `buildTarget` simply points to an existing target configuration on your project,
+The `buildTarget` points to an existing target configuration on your project,
 as specified in the `configurations` section of `workspace.json`.
 
-This is equivalent to calling the command `nx build --configuration=XXX`.
+This option is equivalent to calling the command `nx build --configuration=XXX`.
 This command has no effect if the option `--no-build` option is active.
 
 #### --no-build
@@ -146,11 +146,11 @@ This command has no effect if the option `--no-build` option is active.
 - **optional**
 - Default: `false` (string)
 - Example:
-  - `nx deploy` – Angular project is build in production mode before the deployment
-  - `nx deploy --no-build` – Angular project is NOT build
+  - `nx deploy` – The library is built in production mode before the deployment
+  - `nx deploy --no-build` – The library is NOT built, but the deployment process is being made
 
 Skip build process during deployment.
-This can be used when you are sure that you haven't changed anything and want to deploy with the latest artifact.
+This option is useful when the building process is handled by something else.
 This command causes the `--build-target` setting to have no effect.
 
 #### --package-version
@@ -177,7 +177,7 @@ Registers the published package with the given tag, such that `npm install @` wi
 - Example:
   - `nx deploy --access public`
 
-Tells the registry whether this package should be published as public or restricted. It only applies to scoped packages, which default to restricted. If you don’t have a paid account, you must publish with --access public to publish scoped packages.
+Tells the registry whether to publish the package as public or restricted. It only applies to scoped packages, which default to restricted. If you don't have a paid account, you must publish with --access public to publish scoped packages.
 
 #### --otp
 
@@ -186,7 +186,7 @@ Tells the registry whether this package should be published as public or restric
 - Example:
   - `nx deploy --otp TOKEN`
 
-If you have two-factor authentication enabled in auth-and-writes mode then you can provide a code from your authenticator with this.
+If you have two-factor authentication enabled in auth-and-writes mode, you can provide a code from your authenticator.
 
 #### --dry-run
 
@@ -208,7 +208,7 @@ A list of all available options is also available [here](https://github.com/bike
 
 Example:
 
-```sh
+"`sh
 nx deploy your-library --tag alpha --access public --dry-run
 ```
 
@@ -227,7 +227,7 @@ becomes
 
 Now you can just run `nx deploy YOUR-LIBRARY` without all the options in the command line! 😄
 
-> ℹ️ You can always use the [--dry-run](#dry-run) option to verify if your configuration is right.
+> ℹ️ You can always use the [--dry-run](#dry-run) option to verify if your configuration is correct.
 
 ## 🧐 Essential considerations <a name="essential-considerations"></a>
 
@@ -235,15 +235,15 @@ Now you can just run `nx deploy YOUR-LIBRARY` without all the options in the com
 
 Those files must be at the root of the library. The executor is copying them at the moment of building.
 
-If you have those files outside the project's root, use the option `assets` on the executor that compiles your application.
+If you have those files outside the project's root, use the `assets` option on the executor that compiles your application.
 
 ### Version bumping <!-- omit in toc -->
 
-This deployer doesn't bump or generates a new version of the package, it just builds the **package/library**, take the package.json as it and **publish** it. You can use [`--package-version`](#--package-version) option to change it.
+This deployer doesn't bump or generate a new package version; here, we care about doing one thing well, publish your libs to NPM. You can change the version package at publishment using the [`--package-version`](#--package-version) option.
 
 ### Only publishable libraries are being configured <!-- omit in toc -->
 
-For Nx workspace, only publishable libraries are going to be configured
+For an Nx workspace, only publishable libraries are going to be configured.
 
 ## 🏁 Next milestones <a name="next-milestones"></a>
 
@@ -252,13 +252,13 @@ We are looking forward to the following features:
 - Implement Continuous Everything with Github Actions
 - Specify which library configure the builder on the installment (`init`)
 
-Your feature that's not on the list yet?
+Do you have a feature that's not on the list yet?
 
 We look forward to any help. PRs are welcome! 😃
 
 ## 🎉 Do you Want to Contribute? <a name="want-to-contribute"></a>
 
-We create a special document for you to give you through this path
+We create a unique document for you to give you through this path.
 
 [Readme for Contributors](./docs/README_contributors.md)
 
@@ -268,4 +268,4 @@ Code released under the [MIT license](LICENSE).
 
 ## Recognitions
 
-- 🚀 Initially Powered By [ngx-deploy-starter](https://github.com/angular-schule/ngx-deploy-starter)
+- 🚀 Initially Powered By [ngx-deploy-starter](https://github.com/`angular`-schule/ngx-deploy-starter)

@@ -38,7 +38,7 @@ Watch this video to know pretty much everything about this plugin development; i
 
 ## Angular workspace
 
-To test the functionality on an Angular workspace we need to perform some manual operations
+To test the functionality on an Angular workspace, we need to perform some manual operations
 
 1. Build the project
 
@@ -75,7 +75,7 @@ There are two ways of debugging:
 > ⚠️ Only works on VsCode!
 
 1. Place `debugger` statement or a red-point where you want your deployer to stop.
-2. Build your project `nx build ngx-deploy-npm`
+2. Build your project `nx build ngx-deploy-npm`.
 
 On VsCode, create a [_JavaScript Debug Terminal_](https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_javascript-debug-terminal) and execute the command that you want to debug
 
@@ -114,8 +114,8 @@ On VsCode, create a [_JavaScript Debug Terminal_](https://code.visualstudio.com/
 
 We at this project have E2E tests. They are handy to test production-like scenarios and to have confidence in your changes. This only works for Nx Workspaces, Angular Workspaces need to be tested manually.
 
-## When my changes are going to be public?
+## When are my changes going to be public?
 
 The CI handles the publishment of a new version. We use GitHub actions as CI. 
 
-When the maintainers integrate your PR to master, go to the [main branch actions](https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml) and search for the one that belongs to you. The CI will run some tests, and if they pass, the next job that publishes your introduces changes will be **on hold** waiting for an approval; once the maintainers approve the launching, your changes will be packed and posted to NPM.
+When the maintainers integrate your PR to master, go to the [main branch actions](https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml) and search for the one that belongs to you. The CI will run some tests,  if they pass, the next job that publishes your introduced changes will be **on hold** waiting for approval; once the maintainers approve the launching, your changes will be packed and posted to NPM.
