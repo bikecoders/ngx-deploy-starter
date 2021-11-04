@@ -755,10 +755,10 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@jscutlery/semver@2.11.5":
-  version "2.11.5"
-  resolved "https://registry.yarnpkg.com/@jscutlery/semver/-/semver-2.11.5.tgz#3e2a299cff69f5ba1a08bef879293613c2e4b717"
-  integrity sha512-Nc84J0dFI7w4hGSxq2b5T9AwFFoCa1b6MV/DxHi//78fUnFGb89KD75njPvVAf7LXDOGzHOQYDI8yZE7WtXn0w==
+"@jscutlery/semver@2.12.0":
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/@jscutlery/semver/-/semver-2.12.0.tgz#8c689e0dc540b62d448034c3cb62d187813e6da0"
+  integrity sha512-4LDO4jQYQ/mhpEvjN7+t/xAnPLkBH3XkNxuXnR1m5HJAcRkstPJg/IlpedPRzCfAvCPmLgivhHxNwTA8PGKJXQ==
   dependencies:
     "@nrwl/devkit" "^13.0.2"
     inquirer "^8.2.0"
