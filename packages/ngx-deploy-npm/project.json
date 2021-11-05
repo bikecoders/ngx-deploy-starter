@@ -62,8 +62,14 @@
       "executor": "@jscutlery/semver:version",
       "options": {
         "postTargets": ["ngx-deploy-npm:deploy"],
+        "versionTagPrefix": "v"
+      }
+    },
+    "version-preliminar": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
         "versionTagPrefix": "v",
-        "baseBranch": "master"
+        "dryRun": true
       }
     }
   },
