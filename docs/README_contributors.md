@@ -5,11 +5,12 @@
 - [How to start](#how-to-start)
 - [Angular workspace](#angular-workspace)
 - [Debugging on External Workspaces](#debugging-on-external-workspaces)
-  - [Option A), the easy one](#option-a-the-easy-one)
-  - [Option B), the traditional one](#option-b-the-traditional-one)
+    - [Option A), the easy one](#option-a-the-easy-one)
+    - [Option B), the traditional one](#option-b-the-traditional-one)
 - [Making a Contribution](#making-a-contribution)
 - [E2E test](#e2e-test)
-- [Publish to NPM](#publish-to-npm)
+- [Continuous Inspection (SonarQube)](#continuous-inspection-sonarqube)
+- [When are my changes going to be public?](#when-are-my-changes-going-to-be-public)
 
 ## How to start
 
@@ -113,6 +114,14 @@ On VsCode, create a [_JavaScript Debug Terminal_](https://code.visualstudio.com/
 ## E2E test
 
 We at this project have E2E tests. They are handy to test production-like scenarios and to have confidence in your changes. This only works for Nx Workspaces, Angular Workspaces need to be tested manually.
+
+## Continuous Inspection (SonarQube)
+
+We have continuous inspection for each PR that is made; we use SonarQube for this. It will suggest some changes, detect code smells in your changes and, security recommendations. We encourage implementing the changes that Sonar offers.
+
+If you are changing the Sonar configuration file is highly recommended to test the changes locally. We suggest using Docker to accomplish it. We made a small guide to guide you through.
+
+[SonarQube Dockerized](https://gist.github.com/dianjuar/5e53475e90da4b721df9871f8b14336f)
 
 ## When are my changes going to be public?
 

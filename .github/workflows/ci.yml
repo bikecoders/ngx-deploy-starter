@@ -1,11 +1,30 @@
 name: PR's
 on:
-  push:
-    branches-ignore:
-      - 'master'
-    pull_request:
-      branches:
-        - '**'
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+env:
+  PR_NUMBER: ${{ github.event.pull_request.number }}
+
 jobs:
   pr-test:
     uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@master #@master
+
+  pr-analysis:
+    name: SonarCloud Pr Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONARQUBE_SCANNER }}
+        with:
+          args: >
+            -Dsonar.pullrequest.base=${{ github.base_ref }}
+            -Dsonar.pullrequest.branch=${GITHUB_REF#refs/heads/}
+            -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}

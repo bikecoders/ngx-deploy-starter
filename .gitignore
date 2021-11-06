@@ -37,3 +37,21 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Created by https://www.toptal.com/developers/gitignore/api/sonarqube
+# Edit at https://www.toptal.com/developers/gitignore?templates=sonarqube
+
+### SonarQube ###
+# SonarQube ignore files.
+#
+# https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
+# Sonar Scanner working directories
+.sonar/
+.sonarqube/
+.scannerwork/
+
+# http://www.sonarlint.org/commandline/
+# SonarLint working directories, configuration files (including credentials)
+.sonarlint/
+
+# End of https://www.toptal.com/developers/gitignore/api/sonarqube

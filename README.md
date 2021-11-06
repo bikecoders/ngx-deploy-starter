@@ -42,7 +42,6 @@
   - [--dry-run](#--dry-run)
 - [📁 Configuration File](#configuration-file)
 - [🧐 Essential considerations](#essential-considerations)
-- [🏁 Next milestones](#next-milestones)
 - [🎉 Do you Want to Contribute?](#want-to-contribute)
 - [License](#license)
 - [Recognitions](#recognitions)
@@ -244,17 +243,6 @@ This deployer doesn't bump or generate a new package version; here, we care abou
 ### Only publishable libraries are being configured <!-- omit in toc -->
 
 For an Nx workspace, only publishable libraries are going to be configured.
-
-## 🏁 Next milestones <a name="next-milestones"></a>
-
-We are looking forward to the following features:
-
-- Implement Continuous Everything with Github Actions
-- Specify which library configure the builder on the installment (`init`)
-
-Do you have a feature that's not on the list yet?
-
-We look forward to any help. PRs are welcome! 😃
 
 ## 🎉 Do you Want to Contribute? <a name="want-to-contribute"></a>
 
