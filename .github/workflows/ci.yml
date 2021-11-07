@@ -10,6 +10,16 @@ jobs:
   pr-test:
     uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@master #@master
 
+  check-commit-lint:
+    name: Check commit message follows guidelines
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+
+      - name: Execute commitlint
+        run: npx commitlint --from=origin/${{ github.base_ref }}
+
   pr-analysis:
     name: SonarCloud Pr Analysis
     runs-on: ubuntu-latest
@@ -25,6 +35,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONARQUBE_SCANNER }}
         with:
           args: >
-            -Dsonar.pullrequest.base=${{ github.base_ref }}
-            -Dsonar.pullrequest.branch=${GITHUB_REF#refs/heads/}
-            -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
+            -Dsonar.pullrequest.key=${{ github.env.PR_NUMBER }}

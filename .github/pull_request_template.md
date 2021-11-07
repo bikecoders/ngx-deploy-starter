@@ -2,10 +2,9 @@
 
 Please check if your PR fulfills the following requirements:
 
-- [ ] The commit message follows our guidelines: https://www.conventionalcommits.org/en/v1.0.0/
 - [ ] Tests for the changes have been added (for bug fixes/features)
 - [ ] Docs have been added/updated (for bug fixes/features)
-- [ ] Both workspaces were tested Angular and Nx
+- [ ] Both workspaces were tested Angular and Nx (for bug fixes/features)
 
 ## What is the current behavior?
 
