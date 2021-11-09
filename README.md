@@ -5,10 +5,17 @@
 [![The MIT License][mit-licence-image]][mit-licence-url]
 [![Conventional Commits][conventional-commits-image]][conventional-commits-url]
 
+[![Reliability Rating][sonar-reliability-image]][sonar-link]
+[![Security Rating][sonar-security-image]][sonar-link]
+[![Maintainability Rating][sonar-maintainability-image]][sonar-link]
+
 [![Publishment Status][publishment-image]][publishment-link]
 
 <!-- Images -->
 
+[sonar-reliability-image]: https://sonarcloud.io/api/project_badges/measure?project=bikecoders_ngx-deploy-npm&metric=reliability_rating
+[sonar-security-image]: https://sonarcloud.io/api/project_badges/measure?project=bikecoders_ngx-deploy-npm&metric=security_rating
+[sonar-maintainability-image]: https://sonarcloud.io/api/project_badges/measure?project=bikecoders_ngx-deploy-npm&metric=sqale_rating
 [publishment-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml/badge.svg?branch=master
 [npm-image]: https://badge.fury.io/js/ngx-deploy-npm.svg
 [mit-licence-image]: https://img.shields.io/badge/license-MIT-orange.svg?color=blue&style=flat-square
@@ -17,6 +24,7 @@
 
 <!-- URLs -->
 
+[sonar-link]: https://sonarcloud.io/summary/new_code?id=bikecoders_ngx-deploy-npm
 [publishment-link]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml
 [npm-url]: https://www.npmjs.com/package/ngx-deploy-npm
 [mit-licence-url]: http://opensource.org/licenses/MIT
