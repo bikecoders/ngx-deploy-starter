@@ -19,6 +19,7 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONARQUBE_SCANNER }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release-preliminar:
     runs-on: ubuntu-latest
