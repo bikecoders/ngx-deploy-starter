@@ -264,4 +264,4 @@ Code released under the [MIT license](LICENSE).
 
 ## Recognitions
 
-- 🚀 Initially Powered By [ngx-deploy-starter](https://github.com/`angular`-schule/ngx-deploy-starter)
+- 🚀 Initially Powered By [ngx-deploy-starter](https://github.com/angular-schule/ngx-deploy-starter)
