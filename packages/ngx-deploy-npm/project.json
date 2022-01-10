@@ -64,13 +64,6 @@
         "postTargets": ["ngx-deploy-npm:deploy"],
         "versionTagPrefix": "v"
       }
-    },
-    "version-preliminar": {
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "versionTagPrefix": "v",
-        "dryRun": true
-      }
     }
   },
   "tags": []
