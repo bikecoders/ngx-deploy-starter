@@ -70,7 +70,7 @@ jobs:
         uses: CasperWA/push-protected@v2.8.0
         with:
           token: ${{ secrets.MANAGE_REPO_TOKEN }}
-          branch: master
+          ref: ${{ github.ref }}
           tags: true
           unprotect_reviews: true
           force: true
