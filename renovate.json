@@ -10,12 +10,15 @@
   },
   "packageRules": [
     {
-      "updateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true,
-      "automergeType": "pr"
+      "packagePatterns": ["*"],
+      "semanticCommitType": "build"
+    },
+    {
+      "matchPackagePatterns": ["^@nrwl/"],
+      "schedule": ["before 3am"]
     }
   ],
   "rangeStrategy": "update-lockfile",
   "commitMessage": "{{{commitMessagePrefix}}} 📦 {{{commitMessageAction}}} {{{commitMessageTopic}}} {{{commitMessageExtra}}} {{{commitMessageSuffix}}}",
-  "schedule": ["before 3am on Monday"]
+  "schedule": ["before 3am on the first day of the month"]
 }
