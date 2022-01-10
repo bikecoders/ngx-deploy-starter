@@ -109,7 +109,7 @@ Independently of the CI/CD that you are using, you need an NPM token. To do so, 
 
    - Create a step with:
 
-   | Nx🐬                                        | Angular🅰️                                   |
+   | Nx🐬                                         | Angular🅰️                                    |
    | :------------------------------------------ | :------------------------------------------ |
    | <pre lang="sh">nx deploy your-library</pre> | <pre lang="sh">ng deploy your-library</pre> |
 
@@ -132,6 +132,16 @@ jobs:
 ```
 
 > You can check the steps suggested in the [CircleCI's guide](https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/)
+
+## What is done when executing
+
+1. Will build the application using the target `build`
+   - This will be omitted if the paratemer `--no-build` is set
+2. Execute `npm publish`
+
+This is the activity diagram
+
+![Execution activity diagram](docs/UML/principal-activity-diagram.jpg)
 
 ## 📦 Options <a name="options"></a>
 
