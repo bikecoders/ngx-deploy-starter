@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - master
+    tags-ignore:
+      - 'v*'
+
 jobs:
   test:
     uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@master #@master
@@ -61,7 +64,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Tag last-release
-        run: git tag -f last-release
+        run: git tag --force last-release
 
       - name: Push to protected branch
         uses: CasperWA/push-protected@v2.5.0
@@ -70,3 +73,4 @@ jobs:
           branch: master
           tags: true
           unprotect_reviews: true
+          force: true
