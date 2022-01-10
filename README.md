@@ -40,17 +40,18 @@
 
 - [🚀 Quick Start (local development)](#quick-start)
 - [🚀 Continuous Delivery](#continuous-delivery)
+- [❓ What is done when executing `nx deploy`](#what-is-done-when-executing-nx-deploy)
 - [📦 Options](#options)
-  - [--build-target](#--build-target)
-  - [--no-build](#--no-build)
-  - [--package-version](#--package-version)
-  - [--tag](#--tag)
-  - [--access](#--access)
-  - [--otp](#--otp)
-  - [--dry-run](#--dry-run)
+    - [--build-target](#--build-target)
+    - [--no-build](#--no-build)
+    - [--package-version](#--package-version)
+    - [--tag](#--tag)
+    - [--access](#--access)
+    - [--otp](#--otp)
+    - [--dry-run](#--dry-run)
 - [📁 Configuration File](#configuration-file)
 - [🧐 Essential considerations](#essential-considerations)
-- [🎉 Do you Want to Contribute?](#want-to-contribute)
+- [🎉 Do you Want to Contribute?](#do-you-want-to-contribute)
 - [License](#license)
 - [Recognitions](#recognitions)
 
@@ -133,7 +134,7 @@ jobs:
 
 > You can check the steps suggested in the [CircleCI's guide](https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/)
 
-## What is done when executing
+## ❓What is done when executing `nx deploy` <a name="what-is-done-when-executing-nx-deploy"></a>
 
 1. Will build the application using the target `build`
    - This will be omitted if the paratemer `--no-build` is set
@@ -262,7 +263,7 @@ This deployer doesn't bump or generate a new package version; here, we care abou
 
 For an Nx workspace, only publishable libraries are going to be configured.
 
-## 🎉 Do you Want to Contribute? <a name="want-to-contribute"></a>
+## 🎉 Do you Want to Contribute? <a name="do-you-want-to-contribute"></a>
 
 We create a unique document for you to give you through this path.
 
