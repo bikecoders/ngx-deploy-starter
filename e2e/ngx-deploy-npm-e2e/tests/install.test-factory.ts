@@ -10,26 +10,37 @@ import {
 } from './utils';
 
 export const installTest = () => {
-  let projectWorkSpace: ProjectConfiguration;
+  const libSet1 = 'node-lib1';
+  let projectWorkSpaceLibSet1: ProjectConfiguration;
 
-  let publisableLib: string;
+  const libSet2 = 'node-lib2';
+  let projectWorkSpaceLibSet2: ProjectConfiguration;
+
+  const libNOTset = 'node-lib-not-set';
+  let projectWorkSpaceLibNOTSet: ProjectConfiguration;
 
   initNgxDeployNPMProject();
   installDependencies('@nrwl/node');
 
   // Init libs and projects
   beforeEach(async () => {
-    publisableLib = 'node-lib';
-
     await runNxCommandAsync(
-      `generate @nrwl/node:lib --name ${publisableLib} --publishable --importPath fake-team`
+      `generate @nrwl/node:lib --name ${libSet1} --publishable --importPath ${libSet1}`
     );
-  }, 120000);
+    await runNxCommandAsync(
+      `generate @nrwl/node:lib --name ${libSet2} --publishable --importPath ${libSet2}`
+    );
+    await runNxCommandAsync(
+      `generate @nrwl/node:lib --name ${libNOTset} --publishable --importPath ${libNOTset}`
+    );
+  }, 360000);
 
-  installNgxDeployNPMProject();
+  installNgxDeployNPMProject(`--projects ${libSet1},${libSet2}`);
 
   beforeEach(() => {
-    projectWorkSpace = readJson(`libs/${publisableLib}/project.json`);
+    projectWorkSpaceLibSet1 = readJson(`libs/${libSet1}/project.json`);
+    projectWorkSpaceLibSet2 = readJson(`libs/${libSet2}/project.json`);
+    projectWorkSpaceLibNOTSet = readJson(`libs/${libNOTset}/project.json`);
   });
 
   it('should modify the workspace for publishable libs', () => {
@@ -40,6 +51,8 @@ export const installTest = () => {
       } as DeployExecutorOptions,
     };
 
-    expect(projectWorkSpace.targets?.deploy).toEqual(expectedTarget);
+    expect(projectWorkSpaceLibSet1.targets?.deploy).toEqual(expectedTarget);
+    expect(projectWorkSpaceLibSet2.targets?.deploy).toEqual(expectedTarget);
+    expect(projectWorkSpaceLibNOTSet.targets?.deploy).toEqual(undefined);
   });
 };

@@ -9,17 +9,44 @@ import type { Tree } from '@nrwl/devkit';
 import type { InstallGeneratorOptions } from './schema';
 import { npmAccess } from '../../core';
 import { DeployExecutorOptions } from '../../executors/deploy/schema';
+import {
+  allProjectsAreValid,
+  buildInvalidProjectsErrorMessage,
+  determineWhichProjectsAreInvalid,
+} from './utils';
 
 export default async function install(
   tree: Tree,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   options: InstallGeneratorOptions
 ) {
-  const libs = getBuildableLibraries(tree);
+  let libs = getBuildableLibraries(tree);
 
   // If there is no libraries to install throw an exception
   if (libs.size === 0) {
     throw new Error('There is no publishable libraries in this workspace');
+  }
+
+  if (options.projects && options.projects.length > 0) {
+    // if there is projects that doesn't exists, throw an error indicating which projects are invalid
+    if (!allProjectsAreValid(options.projects, libs)) {
+      const invalidProjects = determineWhichProjectsAreInvalid(
+        options.projects,
+        libs
+      );
+
+      throw new Error(buildInvalidProjectsErrorMessage(invalidProjects));
+    }
+
+    const selectedLibs = new Map<string, ProjectConfiguration>();
+    options.projects.forEach(project => {
+      const lib = libs.get(project);
+
+      if (lib) {
+        selectedLibs.set(project, lib);
+      }
+    });
+
+    libs = selectedLibs;
   }
 
   Array.from(libs.entries()).forEach(([libKey, libConfig]) => {

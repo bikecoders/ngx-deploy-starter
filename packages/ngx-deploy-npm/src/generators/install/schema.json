@@ -4,5 +4,14 @@
   "$id": "Install",
   "title": "",
   "type": "object",
-  "properties": {}
+  "properties": {
+    "projects": {
+      "description": "Which libraries should configurate",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": []
 }

@@ -9,8 +9,8 @@ export function initNgxDeployNPMProject() {
   }, 120000);
 }
 
-export function installNgxDeployNPMProject() {
+export function installNgxDeployNPMProject(options: string = '') {
   beforeEach(async () => {
-    await runNxCommandAsync('generate ngx-deploy-npm:install');
+    await runNxCommandAsync(`generate ngx-deploy-npm:install ${options}`);
   }, 5000);
 }
