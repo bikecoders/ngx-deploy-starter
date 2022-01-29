@@ -12,4 +12,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/packages/ngx-deploy-npm',
+  coverageReporters: [['lcov', { projectRoot: 'packages/ngx-deploy-npm' }]],
 };

@@ -1,5 +1,5 @@
 name: Download Builds
-description: Downloading the github artifact creared with the build (dist folder)
+description: Downloading the github artifact created with the build (dist folder)
 runs:
   using: composite
   steps:

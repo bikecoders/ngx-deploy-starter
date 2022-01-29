@@ -1,0 +1,10 @@
+name: Download Coverage Reports
+description: Download the github artifact created with the `test --coverage`
+runs:
+  using: composite
+  steps:
+    - name: Download coverage report
+      uses: actions/download-artifact@v2
+      with:
+        name: ngx-deploy-npm-coverage-report-${{ github.sha }}
+        path: coverage/packages/ngx-deploy-npm

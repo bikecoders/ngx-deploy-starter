@@ -23,10 +23,13 @@ jobs:
   pr-analysis:
     name: SonarCloud Pr Analysis
     runs-on: ubuntu-latest
+    needs: pr-test
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+
+      - uses: ./.github/actions/download-coverage-report
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
