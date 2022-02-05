@@ -38,9 +38,9 @@
 
 **Table of contents:**
 
-- [🚀 Quick Start (local development)](#quick-start)
+- [🚀 Quick Start (local development)](#quick-start-local-development)
 - [🚀 Continuous Delivery](#continuous-delivery)
-- [❓ What is done when executing `nx deploy`](#what-is-done-when-executing-nx-deploy)
+- [❓What is done when executing `nx deploy`](#what-is-done-when-executing-nx-deploy)
 - [📦 Options](#options)
     - [--build-target](#--build-target)
     - [--no-build](#--no-build)
@@ -51,6 +51,7 @@
     - [--dry-run](#--dry-run)
 - [📁 Configuration File](#configuration-file)
 - [🧐 Essential considerations](#essential-considerations)
+  - [Version Generation](#version-generation)
 - [🎉 Do you Want to Contribute?](#do-you-want-to-contribute)
 - [License](#license)
 - [Recognitions](#recognitions)
@@ -62,7 +63,7 @@
 >
 > Also, when you find references to `workspace.json`, you can find your file under the name `angular.json`.
 
-## 🚀 Quick Start (local development) <a name="quick-start"></a>
+## 🚀 Quick Start (local development) <a name="quick-start-local-development"></a>
 
 1. Add `ngx-deploy-npm` to your project. It will configure all your publishable libraries present in the project:
 
@@ -255,9 +256,15 @@ Those files must be at the root of the library. The executor is copying them at 
 
 If you have those files outside the project's root, use the `assets` option on the executor that compiles your application.
 
-### Version bumping <!-- omit in toc -->
+### Version Generation
 
 This deployer doesn't bump or generate a new package version; here, we care about doing one thing well, publish your libs to NPM. You can change the version package at publishment using the [`--package-version`](#--package-version) option.
+
+We strongly recommend using [`@jscutlery/semver`](https://github.com/jscutlery/semver) to generate your package's version based on your commits automatically. When a new version is generated you can specify to publish it using `ngx-deploy-npm`.
+
+For more information go to semver's [documentation](https://github.com/jscutlery/semver#triggering-executors-post-release)
+
+We use `@jscutlery/semver` here on `ngx-deploy-npm` to generate the package's next version, and we use `ngx-deploy-npm` to publish that version to NPM. Yes, it uses itself, take a look by yourself [ngx-deploy-npm/project.json](https://github.com/bikecoders/ngx-deploy-npm/blob/master/packages/ngx-deploy-npm/project.json#L55-L67)
 
 ### Only publishable libraries are being configured <!-- omit in toc -->
 
