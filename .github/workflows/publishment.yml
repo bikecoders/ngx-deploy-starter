@@ -7,11 +7,11 @@ on:
 jobs:
   test:
     if: ${{ !contains(github.event.head_commit.message, 'chore(release)') }}
-    uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@master #@master
+    uses: ./.github/workflows/basic-test.yml
 
   e2e-test:
     if: ${{ !contains(github.event.head_commit.message, 'chore(release)') }}
-    uses: bikecoders/ngx-deploy-npm/.github/workflows/e2e-test.yml@master #@master
+    uses: ./.github/workflows/e2e-test.yml
 
   analysis:
     name: SonarCloud Main Analysis

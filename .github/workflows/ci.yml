@@ -8,10 +8,10 @@ env:
 
 jobs:
   pr-test:
-    uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@master #@master
+    uses: ./.github/workflows/basic-test.yml
 
   pr-e2e-test:
-    uses: bikecoders/ngx-deploy-npm/.github/workflows/e2e-test.yml@master #@master
+    uses: ./.github/workflows/e2e-test.yml
 
   check-commit-lint:
     name: Check commit message follows guidelines
