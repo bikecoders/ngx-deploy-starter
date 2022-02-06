@@ -10,6 +10,9 @@ jobs:
   pr-test:
     uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@master #@master
 
+  pr-e2e-test:
+    uses: bikecoders/ngx-deploy-npm/.github/workflows/e2e-test.yml@master #@master
+
   check-commit-lint:
     name: Check commit message follows guidelines
     runs-on: ubuntu-latest
