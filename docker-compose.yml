@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  sonar_server:
+    image: sonarqube
+    ports:
+      - '9000:9000'
+
+  sonar_cli:
+    image: sonarsource/sonar-scanner-cli
+    profiles: ['cli']
+    volumes:
+      - ./:/usr/src
+    env_file:
+      - tools/docker/sonarqube/env_vars
+    command: /bin/bash -c 'sonar-scanner -Dsonar.host.url=$$SONAR_HOST_URL -Dsonar.login=admin -Dsonar.password=$$SONAR_PASSWORD'
+
+  change_sonar_server_password:
+    image: curlimages/curl
+    volumes:
+      - ./tools/docker/sonarqube/change_password.sh:/home/curl_user/change_password.sh
+    env_file:
+      - tools/docker/sonarqube/env_vars
+    command: ash -c "/home/curl_user/change_password.sh"

@@ -25,7 +25,7 @@ The development process and project architecture are like any other [Nx Plugin](
 The maintainers recommend having some knowledge about:
 
 - [Angular Schematics](https://angular.io/guide/schematics) and,
-- [Nx Plugins][https://nx.dev/l/n/nx-plugin/overview]
+- [Nx Plugins](https://nx.dev/l/n/nx-plugin/overview)
 
 Watch this video to know pretty much everything about this plugin development; it's highly recommended.
 
@@ -119,9 +119,14 @@ We at this project have E2E tests. They are handy to test production-like scenar
 
 We have continuous inspection for each PR that is made; we use SonarQube for this. It will suggest some changes, detect code smells in your changes and, security recommendations. We encourage implementing the changes that Sonar offers.
 
-If you are changing the Sonar configuration file is highly recommended to test the changes locally. We suggest using Docker to accomplish it. We made a small guide to guide you through.
+If you are changing the Sonar configuration file is highly recommended to test the changes locally.
 
-[SonarQube Dockerized](https://gist.github.com/dianjuar/5e53475e90da4b721df9871f8b14336f)
+To init the server
+  - `npm run sonar:init-server`
+To run the analysis
+  - `npm run sonar:analysis`
+
+To inspect the analysis, go to http://localhost:9000. The credentials are `admin` and password `12345`
 
 ## When are my changes going to be public?
 

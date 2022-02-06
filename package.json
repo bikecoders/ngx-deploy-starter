@@ -8,7 +8,9 @@
     "test": "nx test",
     "release": "nx version",
     "commit": "cz",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "sonar:init-server": "docker-compose up",
+    "sonar:analysis": "docker-compose run --rm sonar_cli"
   },
   "private": true,
   "dependencies": {

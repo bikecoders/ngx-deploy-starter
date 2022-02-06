@@ -1,0 +1,2 @@
+SONAR_HOST_URL=http://host.docker.internal:9000
+SONAR_PASSWORD=12345
