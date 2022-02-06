@@ -10,10 +10,12 @@ services:
     image: sonarsource/sonar-scanner-cli
     profiles: ['cli']
     volumes:
-      - ./:/usr/src
+      - ./:/github/workspace
     env_file:
       - tools/docker/sonarqube/env_vars
     command: /bin/bash -c 'sonar-scanner -Dsonar.host.url=$$SONAR_HOST_URL -Dsonar.login=admin -Dsonar.password=$$SONAR_PASSWORD'
+    # To be able to provide absolute paths on configuration files
+    working_dir: /github/workspace
 
   change_sonar_server_password:
     image: curlimages/curl

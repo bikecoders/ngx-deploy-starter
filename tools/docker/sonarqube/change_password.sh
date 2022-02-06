@@ -9,10 +9,12 @@ change_password () {
 
     if [ "$response" == "204" ]
     then
+        echo "Server Responded with $response"
         echo "Password changed successfully to $SONAR_PASSWORD"
         true
     elif [ "$response" == "401" ]
     then
+        echo "Server Responded with $response"
         echo "Password already changed. Is $SONAR_PASSWORD"
         true
     else
