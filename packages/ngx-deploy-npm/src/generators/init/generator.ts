@@ -8,7 +8,7 @@ export async function initGenerator(
   tree: Tree,
   rawOptions: InitGeneratorOptions
 ): Promise<GeneratorCallback> {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // Put again the eslint ignore
   const options = normalizeOptions(rawOptions);
   const installPackagesTask = addDependencies(tree);
 

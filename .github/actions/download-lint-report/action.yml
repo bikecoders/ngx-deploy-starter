@@ -1,0 +1,10 @@
+name: Download Lint Reports
+description: Download the github artifact with the lint report
+runs:
+  using: composite
+  steps:
+    - name: Download lint report
+      uses: actions/download-artifact@v2
+      with:
+        name: lint-report-${{ github.sha }}
+        path: reports

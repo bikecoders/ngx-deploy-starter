@@ -11,7 +11,17 @@ jobs:
           fetch-depth: 0
       - uses: ./.github/actions/setup
 
-      - run: npx nx lint
+      - name: Lint
+        run: npx nx lint --outputFile=""
+
+      - name: Lint report
+        run: npx nx lint --format ./tools/sonarqube-linter-reporter.js
+
+      - name: Archive lint report results
+        uses: actions/upload-artifact@v2
+        with:
+          name: lint-report-${{ github.sha }}
+          path: reports
 
   build:
     runs-on: ubuntu-latest

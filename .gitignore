@@ -38,6 +38,8 @@ testem.log
 .DS_Store
 Thumbs.db
 
+reports/*
+
 # Created by https://www.toptal.com/developers/gitignore/api/sonarqube
 # Edit at https://www.toptal.com/developers/gitignore?templates=sonarqube
 

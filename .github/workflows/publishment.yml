@@ -22,7 +22,9 @@ jobs:
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
 
+      # Download reports
       - uses: ./.github/actions/download-coverage-report
+      - uses: ./.github/actions/download-lint-report
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
