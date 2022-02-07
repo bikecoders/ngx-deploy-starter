@@ -8,7 +8,7 @@ env:
 
 jobs:
   pr-test:
-    uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@add-linter-reports-sonar #@master
+    uses: bikecoders/ngx-deploy-npm/.github/workflows/basic-test.yml@master #@master
 
   pr-e2e-test:
     uses: bikecoders/ngx-deploy-npm/.github/workflows/e2e-test.yml@master #@master
