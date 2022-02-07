@@ -54,3 +54,24 @@ jobs:
         with:
           args: >
             -Dsonar.pullrequest.key=${{ github.env.PR_NUMBER }}
+
+  angular-e2e-test:
+    name: Angular workspace simple e2e tests
+    runs-on: ubuntu-latest
+    needs: pr-test
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      - uses: ./.github/actions/setup
+
+      - uses: ./.github/actions/download-build
+
+      - name: yarn link
+        shell: bash
+        run: |
+          cd dist/packages/ngx-deploy-npm
+          yarn link
+
+      - name: Execute e2e test
+        run: ./tools/create-angular-workspace.sh

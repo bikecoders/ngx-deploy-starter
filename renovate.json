@@ -14,7 +14,7 @@
       "semanticCommitType": "build"
     },
     {
-      "matchPackagePatterns": ["^@nrwl/"],
+      "matchPackagePatterns": ["^@nrwl", "@angular\\/cli"],
       "schedule": ["before 3am"]
     }
   ],
