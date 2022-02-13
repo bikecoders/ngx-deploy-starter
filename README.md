@@ -244,7 +244,7 @@ A list of all available options is also available [here](https://github.com/bike
 
 Example:
 
-"`sh
+```sh
 nx deploy your-library --tag alpha --access public --dry-run
 ```
 
@@ -256,7 +256,7 @@ becomes
   "options": {
     "tag": "alpha",
     "access": "public",
-    "dryRun": "true"
+    "dryRun": true
   }
 }
 ```
