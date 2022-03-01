@@ -795,10 +795,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@jscutlery/semver@2.18.0":
-  version "2.18.0"
-  resolved "https://registry.yarnpkg.com/@jscutlery/semver/-/semver-2.18.0.tgz#e7e6a8e4e0f5586e514a55098d537cf3662f1de9"
-  integrity sha512-YK00dXy/nrGUCKC5sSUEmBfRRLw59MlcTm4wp5jepWkI/pynB9SyTqq5V1IxVn/+SlCsBLx6od5ANi34+iq5Ow==
+"@jscutlery/semver@2.20.0":
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/@jscutlery/semver/-/semver-2.20.0.tgz#80e094a4cb0a06fa4fd9978fd2da4b7b493ac309"
+  integrity sha512-lOgqy3vAN+qp6RuGsnz9Qa62CnlAL+NPK4+tqpWBPEfKoO6mpTaCEC+/qxntNbH3nsnHULvt4XSSucYJLfXlmg==
   dependencies:
     "@nrwl/devkit" "^13.0.2"
     inquirer "^8.2.0"
