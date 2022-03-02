@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
 
@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test, e2e-test]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
 
       - name: Preliminar Version
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: release-preliminar
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
 
       - name: git config

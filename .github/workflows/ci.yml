@@ -17,7 +17,7 @@ jobs:
     name: Check commit message follows guidelines
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
 
       - name: Execute commitlint
@@ -27,7 +27,7 @@ jobs:
     name: Check files changes follow guidelines
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
 
       - name: Check if Prettier was run
@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: pr-test
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
 
@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: pr-test
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - uses: ./.github/actions/setup
