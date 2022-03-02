@@ -4,7 +4,7 @@ runs:
   using: composite
   steps:
     - name: Download dist folder
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: library-dist-${{ github.sha }}
         path: dist

@@ -4,7 +4,7 @@ runs:
   using: composite
   steps:
     - name: Download coverage report
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: ngx-deploy-npm-coverage-report-${{ github.sha }}
         path: coverage/packages/ngx-deploy-npm
