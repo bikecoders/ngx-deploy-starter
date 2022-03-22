@@ -12,6 +12,13 @@ import { InstallGeneratorOptions } from './schema';
 import { DeployExecutorOptions } from '../../executors/deploy/schema';
 import { npmAccess } from '../../core';
 import { buildInvalidProjectsErrorMessage } from './utils';
+import {
+  getApplication,
+  getLibPublishable,
+  getLibPublishableWithProdMode,
+  getNonPublishableLib,
+  getLibWithNoSpecification,
+} from '../../__mocks__/generators';
 
 describe('install/ng-add generator', () => {
   let appTree: Tree;
@@ -44,42 +51,18 @@ describe('install/ng-add generator', () => {
     workspaceConfig = new Map();
 
     libPublisable = {
-      key: 'libPublisable',
-      projectConfig: {
-        root: '',
-        projectType: 'library',
-        targets: {
-          build: {
-            executor: '@angular-devkit/build-ng-packagr:build',
-            options: { a: 'a', b: 'b' },
-          },
-        },
-      },
+      key: 'libPublishable1',
+      projectConfig: getLibPublishable(),
     };
 
     libPublisable2 = {
-      key: 'libPublisable2',
-      projectConfig: JSON.parse(JSON.stringify(libPublisable.projectConfig)),
+      key: 'libPublishableWithNoEspecification',
+      projectConfig: getLibWithNoSpecification(),
     };
 
     libPublisableWithProdMode = {
       key: 'libPublisablWithProd',
-      projectConfig: {
-        root: '',
-        projectType: 'library',
-        targets: {
-          build: {
-            executor: 'my-custom-builder',
-            options: {
-              a: 'a',
-              b: 'b',
-            },
-            configurations: {
-              production: {},
-            },
-          },
-        },
-      },
+      projectConfig: getLibPublishableWithProdMode(),
     };
 
     workspaceConfig.set(libPublisable.key, libPublisable.projectConfig);
@@ -107,40 +90,9 @@ describe('install/ng-add generator', () => {
         } as DeployExecutorOptions,
       };
 
-      workspaceConfig.set('project', {
-        root: '',
-        projectType: 'application',
-        targets: {
-          build: {
-            executor: 'a',
-            options: { b: 'b' },
-          },
-        },
-      });
-      workspaceConfig.set('non-publishable', {
-        root: '',
-        projectType: 'library',
-        targets: {
-          lint: {
-            executor: 'a',
-            options: {
-              b: 'b',
-            },
-          },
-        },
-      });
-      workspaceConfig.set('non-publishable2', {
-        root: '',
-        projectType: 'library',
-        targets: {
-          lint: {
-            executor: 'a',
-            options: {
-              b: 'b',
-            },
-          },
-        },
-      });
+      workspaceConfig.set('project', getApplication());
+      workspaceConfig.set('non-publishable', getNonPublishableLib());
+      workspaceConfig.set('non-publishable2', getNonPublishableLib());
     });
 
     // create workspace

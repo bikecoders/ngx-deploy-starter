@@ -13,6 +13,7 @@ import {
   allProjectsAreValid,
   buildInvalidProjectsErrorMessage,
   determineWhichProjectsAreInvalid,
+  isProjectAPublishableLib,
 } from './utils';
 
 export default async function install(
@@ -76,12 +77,12 @@ export default async function install(
 function getBuildableLibraries(tree: Tree): ReturnType<typeof getProjects> {
   const allProjects = getProjects(tree);
 
-  Array.from(allProjects.entries())
-    .filter(
-      ([, project]) =>
-        project.projectType !== 'library' || !project.targets?.build
-    )
-    .forEach(([key]) => allProjects.delete(key));
+  // remove all the non libiraries
+  Array.from(allProjects.entries()).forEach(([key, project]) => {
+    if (isProjectAPublishableLib(project) === false) {
+      allProjects.delete(key);
+    }
+  });
 
   return allProjects;
 }
