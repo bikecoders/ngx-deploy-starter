@@ -18,7 +18,7 @@ jobs:
         run: npx nx lint --format ./tools/sonarqube-linter-reporter.js
 
       - name: Archive lint report results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: lint-report-${{ github.sha }}
           path: reports
@@ -34,7 +34,7 @@ jobs:
       - run: npx nx build
 
       - name: Archive build result
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: library-dist-${{ github.sha }}
           path: dist
@@ -55,7 +55,7 @@ jobs:
 
       - if: matrix.node-version == 16
         name: Archive coverage report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ngx-deploy-npm-coverage-report-${{ github.sha }}
           path: coverage/packages/ngx-deploy-npm/lcov.info
