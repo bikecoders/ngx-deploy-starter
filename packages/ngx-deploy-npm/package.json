@@ -8,7 +8,7 @@
   "schematics": "./generators.json",
   "builders": "./executors.json",
   "dependencies": {
-    "@nrwl/devkit": "13.8.3"
+    "@nrwl/devkit": "13.9.5"
   },
   "ng-add": {
     "save": "devDependencies"
