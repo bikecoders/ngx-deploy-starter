@@ -34,7 +34,7 @@ jobs:
 
   release-preliminar:
     runs-on: ubuntu-latest
-    needs: [test, e2e-test]
+    needs: test
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
@@ -45,7 +45,7 @@ jobs:
   release:
     environment: production
     runs-on: ubuntu-latest
-    needs: release-preliminar
+    needs: [release-preliminar, e2e-test]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
