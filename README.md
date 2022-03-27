@@ -114,7 +114,7 @@ Independently of the CI/CD you are using, you need an NPM token. To do so, you h
 
    - Create a step with:
 
-   | Nx🐬                                         | Angular🅰️                                    |
+   | Nx🐬                                        | Angular🅰️                                   |
    | :------------------------------------------ | :------------------------------------------ |
    | <pre lang="sh">nx deploy your-library</pre> | <pre lang="sh">ng deploy your-library</pre> |
 

@@ -5,8 +5,8 @@
 - [How to start](#how-to-start)
 - [Angular workspace](#angular-workspace)
 - [Debugging on External Workspaces](#debugging-on-external-workspaces)
-    - [Option A), the easy one](#option-a-the-easy-one)
-    - [Option B), the traditional one](#option-b-the-traditional-one)
+  - [Option A), the easy one](#option-a-the-easy-one)
+  - [Option B), the traditional one](#option-b-the-traditional-one)
 - [Making a Contribution](#making-a-contribution)
 - [E2E test](#e2e-test)
 - [Continuous Inspection (SonarQube)](#continuous-inspection-sonarqube)
@@ -122,14 +122,15 @@ We have continuous inspection for each PR that is made; we use SonarQube for thi
 If you are changing the Sonar configuration file is highly recommended to test the changes locally.
 
 To init the server
-  - `npm run sonar:init-server`
-To run the analysis
-  - `npm run sonar:analysis`
+
+- `npm run sonar:init-server`
+  To run the analysis
+- `npm run sonar:analysis`
 
 To inspect the analysis, go to http://localhost:9000. The credentials are `admin` and password `12345`
 
 ## When are my changes going to be public?
 
-The CI handles the publishment of a new version. We use GitHub actions as CI. 
+The CI handles the publishment of a new version. We use GitHub actions as CI.
 
-When the maintainers integrate your PR to master, go to the [main branch actions](https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml) and search for the one that belongs to you. The CI will run some tests,  if they pass, the next job that publishes your introduced changes will be **on hold** waiting for approval; once the maintainers approve the launching, your changes will be packed and posted to NPM.
+When the maintainers integrate your PR to master, go to the [main branch actions](https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml) and search for the one that belongs to you. The CI will run some tests, if they pass, the next job that publishes your introduced changes will be **on hold** waiting for approval; once the maintainers approve the launching, your changes will be packed and posted to NPM.

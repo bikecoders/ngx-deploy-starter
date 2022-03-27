@@ -1,9 +1,3 @@
 {
-    "cSpell.ignoreWords": [
-        "circleci",
-        "deployer",
-        "npmjs",
-        "npmrc",
-        "whoami"
-    ]
+  "cSpell.ignoreWords": ["circleci", "deployer", "npmjs", "npmrc", "whoami"]
 }
