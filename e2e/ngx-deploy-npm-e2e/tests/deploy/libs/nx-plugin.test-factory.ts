@@ -1,9 +1,9 @@
 import { runCommandAsync, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
 import {
+  currentNrwlVersion,
   initNgxDeployNPMProject,
   installNgxDeployNPMProject,
 } from '../../utils';
-import { basicSetTestForLibs } from '../../utils/lib-test-set';
 
 export const nxPlugins = () => {
   const libName = 'nx-plugin';
@@ -12,7 +12,7 @@ export const nxPlugins = () => {
   initNgxDeployNPMProject();
 
   beforeEach(async () => {
-    await runCommandAsync(`yarn add -D ${nxPlugin}`);
+    await runCommandAsync(`yarn add -D ${nxPlugin}@${currentNrwlVersion}`);
   }, 120000);
 
   beforeEach(async () => {
