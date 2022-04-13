@@ -6,7 +6,8 @@
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
-    "automergeType": "pr"
+    "automergeType": "pr",
+    "commitMessageAction": "📦"
   },
   "packageRules": [
     {
