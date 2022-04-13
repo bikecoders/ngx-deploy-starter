@@ -19,6 +19,6 @@
     }
   ],
   "rangeStrategy": "update-lockfile",
-  "commitMessage": "{{{commitMessagePrefix}}} 📦 {{{commitMessageAction}}} {{{commitMessageTopic}}} {{{commitMessageExtra}}} {{{commitMessageSuffix}}}",
+  "commitMessageAction": "📦",
   "schedule": ["before 3am on the first day of the month"]
 }
