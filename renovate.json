@@ -7,7 +7,7 @@
     "enabled": true,
     "automerge": true,
     "automergeType": "pr",
-    "commitMessagePrefix": "📦"
+    "commitMessageAction": "📦 Lock file maintenance"
   },
   "packageRules": [
     {
@@ -20,6 +20,6 @@
     }
   ],
   "rangeStrategy": "update-lockfile",
-  "commitMessagePrefix": "📦",
+  "commitMessageAction": "📦",
   "schedule": ["before 3am on the first day of the month"]
 }
