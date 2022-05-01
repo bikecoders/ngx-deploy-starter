@@ -7,6 +7,9 @@
   "executors": "./executors.json",
   "schematics": "./generators.json",
   "builders": "./executors.json",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "dependencies": {
     "@nrwl/devkit": "14.0.5"
   },
