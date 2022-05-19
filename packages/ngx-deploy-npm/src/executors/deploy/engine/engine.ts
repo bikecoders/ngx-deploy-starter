@@ -13,7 +13,7 @@ export async function run(dir: string, options: DeployExecutorOptions) {
     options = prepareOptions(options);
 
     if (options.dryRun) {
-      logger.info('Dry-run: The pacakge is not going to be published');
+      logger.info('Dry-run: The package is not going to be published');
     }
 
     /*
