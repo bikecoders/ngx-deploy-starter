@@ -2,6 +2,14 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [4.0.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v3.1.9...v4.0.0) (2022-06-14)
+
+- build!: drop node12 and adopt node18 (#255) ([376de35](https://github.com/bikecoders/ngx-deploy-npm/commit/376de35704c19d67912271eac437e2d076a0ef22)), closes [#255](https://github.com/bikecoders/ngx-deploy-npm/issues/255) [#249](https://github.com/bikecoders/ngx-deploy-npm/issues/249)
+
+### BREAKING CHANGES
+
+- `ngx-deploy-npm` no longer offers support for node v12
+
 ## [3.1.9](https://github.com/bikecoders/ngx-deploy-npm/compare/v3.1.8...v3.1.9) (2022-05-01)
 
 ## [3.1.8](https://github.com/bikecoders/ngx-deploy-npm/compare/v3.1.7...v3.1.8) (2022-05-01)
