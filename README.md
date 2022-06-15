@@ -1,5 +1,6 @@
 # ngx-deploy-npm 🚀 <!-- omit in toc -->
 
+![Node version][supported-node-versions]
 [![NPM version][npm-image]][npm-url]
 [![NPM donwoads][downloads-image]][npm-url]
 [![The MIT License][mit-licence-image]][mit-licence-url]
@@ -21,6 +22,7 @@
 [mit-licence-image]: https://img.shields.io/badge/license-MIT-orange.svg?color=blue&style=flat-square
 [conventional-commits-image]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
 [downloads-image]: https://img.shields.io/npm/dm/ngx-deploy-npm
+[supported-node-versions]: https://img.shields.io/badge/node-v14%20v16%20v18-green
 
 <!-- URLs -->
 

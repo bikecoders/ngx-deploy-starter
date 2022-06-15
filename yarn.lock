@@ -10,18 +10,18 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@angular-devkit/architect@0.1400.1":
-  version "0.1400.1"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1400.1.tgz#f0929a2f534e66345fc6b004738f8f5ffc9b4e4b"
-  integrity sha512-GJ4hWLIJmhCq4nKNN9c4xocKtCt28muJxN88Wna292SOIaNQuNY5MP9860/4IWRGCJTeJH7LyCc4j/3V0zWrSQ==
+"@angular-devkit/architect@0.1400.2":
+  version "0.1400.2"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1400.2.tgz#acd6502687ccb47ed35c1712c1c094351c6a3daf"
+  integrity sha512-L+QIaN17M2APAJ4v3eVOSohqhnqTloDjT4omdaPA9XZpob+WQ6+ALCvMuEczCRrGBskXiOsBgXeyMjGBtq1+pw==
   dependencies:
-    "@angular-devkit/core" "14.0.1"
+    "@angular-devkit/core" "14.0.2"
     rxjs "6.6.7"
 
-"@angular-devkit/core@14.0.1":
-  version "14.0.1"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-14.0.1.tgz#085108714a7b65246cefe3e065d5bd848ed982b3"
-  integrity sha512-yiduPSPRp4s4yYKc3BOvbL5gOzaOPvRCMcJ3jeQbitLIXD/xwSHO8OmmsLsN/PnM1RzA8vVHsK7lN4v1JvhqPA==
+"@angular-devkit/core@14.0.2":
+  version "14.0.2"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-14.0.2.tgz#47f62a57cf36a2e102188a89ae00f5e5a05d837d"
+  integrity sha512-lT875LhgO+23HvjUmuCZomH/0ivetzo8xsaT+7YM8SeUpmjsNTpTA/xNAQ4uD4JGscsJeCKsGT/zJIwPAAe6vQ==
   dependencies:
     ajv "8.11.0"
     ajv-formats "2.1.1"
@@ -29,26 +29,26 @@
     rxjs "6.6.7"
     source-map "0.7.3"
 
-"@angular-devkit/schematics@14.0.1":
-  version "14.0.1"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-14.0.1.tgz#5a8c2cf14f89f5cd00bc7abafbd545c4701555fe"
-  integrity sha512-Ub9W2SIgmYs9+SWCW117/N+wSThOWWDo1j+JiZlh9jML7ZRc9HCTEzo8Yic+6/ZuouVcKExCUO90z0InVkOB7g==
+"@angular-devkit/schematics@14.0.2":
+  version "14.0.2"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-14.0.2.tgz#8d878bcdb9d8ad876c254ebec55b7da6773e05df"
+  integrity sha512-NCAYwvQBL71MbAzeF8XOM9LXYfZbUK7THYCW8UteKDY4Df6EdVOGhBdWY2LstAkZeVCaQWSJU7FcVRS9Ulvg0A==
   dependencies:
-    "@angular-devkit/core" "14.0.1"
+    "@angular-devkit/core" "14.0.2"
     jsonc-parser "3.0.0"
     magic-string "0.26.1"
     ora "5.4.1"
     rxjs "6.6.7"
 
 "@angular/cli@^14.0.0":
-  version "14.0.1"
-  resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-14.0.1.tgz#3cfefc32155140812ce6145e3d1021026d971aed"
-  integrity sha512-5NUfpHlIQ+BipsHIMHImP2bXu5nJcyr4sbs8Otf5ReCcqculJGfKwX0gYYgLfExbw1r4JtCTDggYanUcVgqkdw==
+  version "14.0.2"
+  resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-14.0.2.tgz#4e1702350795ecbbb2aa4ca39bf242b5d978806f"
+  integrity sha512-cCQr5KMLlr7JER8CtrYLBTQUT4g22CTh3f0D9cdSjpBOhmEq62ZXApbmHNgPoHrTNub+7+FwANleIuqyN7nojg==
   dependencies:
-    "@angular-devkit/architect" "0.1400.1"
-    "@angular-devkit/core" "14.0.1"
-    "@angular-devkit/schematics" "14.0.1"
-    "@schematics/angular" "14.0.1"
+    "@angular-devkit/architect" "0.1400.2"
+    "@angular-devkit/core" "14.0.2"
+    "@angular-devkit/schematics" "14.0.2"
+    "@schematics/angular" "14.0.2"
     "@yarnpkg/lockfile" "1.1.0"
     ansi-colors "4.1.1"
     debug "4.3.4"
@@ -1298,13 +1298,13 @@
   dependencies:
     esquery "^1.0.1"
 
-"@schematics/angular@14.0.1":
-  version "14.0.1"
-  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-14.0.1.tgz#fad1b0b44022c1044252bfa41b2b74e942f39d87"
-  integrity sha512-K4y3/Zbtc38M66J5KJ5oXeGSkDrAJXdhtY9ksU6NHXQ0uUiXNzyG05+v8aFrQ5CinyuLZK3v/mqmS/cBQmdT9Q==
+"@schematics/angular@14.0.2":
+  version "14.0.2"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-14.0.2.tgz#b669c59b8e054db14fbf0b44fc337f5f1f886a4e"
+  integrity sha512-DmLD0s4zUGuX+hjkIkW/aZi+JZZFZfhBxhumG9nftWPYT9/AjX3C2YZCarRWJ83jy/K3N9y4cnva0NVqKxTa3A==
   dependencies:
-    "@angular-devkit/core" "14.0.1"
-    "@angular-devkit/schematics" "14.0.1"
+    "@angular-devkit/core" "14.0.2"
+    "@angular-devkit/schematics" "14.0.2"
     jsonc-parser "3.0.0"
 
 "@sinclair/typebox@^0.23.3":
