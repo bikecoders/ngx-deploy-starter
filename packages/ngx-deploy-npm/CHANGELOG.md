@@ -2,6 +2,12 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [4.0.3](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.0.2...v4.0.3) (2022-06-15)
+
+### Bug Fixes
+
+- misspelled word on dry-run log([#308](https://github.com/bikecoders/ngx-deploy-npm/issues/308)) ([4b9d2ed](https://github.com/bikecoders/ngx-deploy-npm/commit/4b9d2ed8f3ca69a1ac62ffb964f991c87ada63d5))
+
 ## [4.0.2](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.0.1...v4.0.2) (2022-06-14)
 
 ## [4.0.1](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.0.0...v4.0.1) (2022-06-14)
