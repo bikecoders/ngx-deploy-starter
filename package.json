@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@angular/cli": "^14.0.0",
-    "@commitlint/cli": "16.2.4",
+    "@commitlint/cli": "16.3.0",
     "@commitlint/config-conventional": "16.2.4",
     "@jscutlery/semver": "2.25.2",
     "@nrwl/cli": "14.3.6",
