@@ -2,6 +2,8 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [4.0.4](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.0.3...v4.0.4) (2022-06-19)
+
 ## [4.0.3](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.0.2...v4.0.3) (2022-06-15)
 
 ### Bug Fixes
