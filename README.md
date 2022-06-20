@@ -45,15 +45,16 @@
 - [❓What is done when executing `nx deploy`](#what-is-done-when-executing-nx-deploy)
 - [📦 Options](#options)
   - [install/ng-add](#installng-add)
-    - [--projects](#--projects)
+    - [`--projects`](#--projects)
+    - [`--access`](#--access-ng-add-install)
   - [deploy](#deploy)
-    - [--build-target](#--build-target)
-    - [--no-build](#--no-build)
-    - [--package-version](#--package-version)
-    - [--tag](#--tag)
-    - [--access](#--access)
-    - [--otp](#--otp)
-    - [--dry-run](#--dry-run)
+    - [`--build-target`](#--build-target)
+    - [`--no-build`](#--no-build)
+    - [`--package-version`](#--package-version)
+    - [`--tag`](#--tag)
+    - [`--access`](#--access)
+    - [`--otp`](#--otp)
+    - [`--dry-run`](#--dry-run)
 - [📁 Configuration File](#configuration-file)
 - [🧐 Essential considerations](#essential-considerations)
   - [Version Generation](#version-generation)
@@ -154,7 +155,7 @@ The following is the activity diagram.
 
 ### install/ng-add
 
-#### --projects
+#### `--projects`
 
 - **optional**
 - Default: Doesn't have any default value (array string)
@@ -164,9 +165,18 @@ The following is the activity diagram.
 Specify which libraries should be configurated. Useful when you have a workspace with several libraries and don't want to overwrite existing configuration
 Should be `,` separated, without spaces.
 
+### `--access` <a name="--access-ng-add-install"></a>
+
+- **optional**
+- Default: `public`
+- Example:
+  - `nx generate ngx-deploy-npm:install --access=restricted`
+
+Tells the registry whether to publish the package as public or restricted. It only applies to scoped packages, which default to restricted. If you don't have a paid account, you must publish with --access public to publish scoped packages.
+
 ### deploy
 
-#### --build-target
+#### `--build-target`
 
 - **optional**
 - Default: Doesn't have any default value (string)
@@ -179,7 +189,7 @@ as specified in the `configurations` section of `workspace.json`.
 This option is equivalent to calling the command `nx build --configuration=XXX`.
 This command has no effect if the option `--no-build` option is active.
 
-#### --no-build
+#### `--no-build`
 
 - **optional**
 - Default: `false` (string)
@@ -191,7 +201,7 @@ Skip build process during deployment.
 This option is useful when the building process is handled by something else.
 This command causes the `--build-target` setting to have no effect.
 
-#### --package-version
+#### `--package-version`
 
 - **optional**
 - Default: Doesn't have any default value (string)
@@ -200,7 +210,7 @@ This command causes the `--build-target` setting to have no effect.
 
 It's going to put that version on your `package.json` and publish the library with that version on NPM.
 
-#### --tag
+#### `--tag`
 
 - **optional**
 - Default: `latest` (string)
@@ -209,7 +219,7 @@ It's going to put that version on your `package.json` and publish the library wi
 
 Registers the published package with the given tag, such that `npm install @` will install this version. By default, `npm publish` updates and `npm install` installs the `latest` tag. See [`npm-dist-tag`](https://docs.npmjs.com/cli/dist-tag) for details about tags.
 
-#### --access
+#### `--access`
 
 - Default: `public` (string)
 - Example:
@@ -217,7 +227,7 @@ Registers the published package with the given tag, such that `npm install @` wi
 
 Tells the registry whether to publish the package as public or restricted. It only applies to scoped packages, which default to restricted. If you don't have a paid account, you must publish with --access public to publish scoped packages.
 
-#### --otp
+#### `--otp`
 
 - **optional**
 - Default: Doesn't have any default value (string)
@@ -226,7 +236,7 @@ Tells the registry whether to publish the package as public or restricted. It on
 
 If you have two-factor authentication enabled in auth-and-writes mode, you can provide a code from your authenticator.
 
-#### --dry-run
+#### `--dry-run`
 
 - **optional**
 - Default: `false` (boolean)

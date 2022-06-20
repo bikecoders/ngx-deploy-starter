@@ -18,7 +18,7 @@ export interface DeployExecutorOptions {
   /**
    * Tells the registry whether this package should be published as public or restricted. Only applies to scoped packages, which default to restricted. If you don’t have a paid account, you must publish with --access public to publish scoped packages.
    */
-  access?: string;
+  access?: 'public' | 'restricted';
   /**
    * If you have two-factor authentication enabled in auth-and-writes mode then you can provide a code from your authenticator with this. If you don’t include this and you’re running from a TTY then you’ll be prompted.
    */

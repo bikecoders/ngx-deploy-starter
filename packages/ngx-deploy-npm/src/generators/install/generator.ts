@@ -7,20 +7,21 @@ import {
 import type { Tree } from '@nrwl/devkit';
 
 import type { InstallGeneratorOptions } from './schema';
-import { npmAccess } from '../../core';
 import { DeployExecutorOptions } from '../../executors/deploy/schema';
 import {
   allProjectsAreValid,
   buildInvalidProjectsErrorMessage,
   determineWhichProjectsAreInvalid,
   isProjectAPublishableLib,
+  normalizeOptions,
 } from './utils';
 
 export default async function install(
   tree: Tree,
-  options: InstallGeneratorOptions
+  rawOptions: InstallGeneratorOptions
 ) {
   let libs = getBuildableLibraries(tree);
+  const options = normalizeOptions(rawOptions);
 
   // If there is no libraries to install throw an exception
   if (libs.size === 0) {
@@ -53,7 +54,7 @@ export default async function install(
   Array.from(libs.entries()).forEach(([libKey, libConfig]) => {
     if (libConfig.targets) {
       const executorOptions: DeployExecutorOptions = {
-        access: npmAccess.public,
+        access: options.access,
         ...setUpProductionModeIfHasIt(libConfig),
       };
 
