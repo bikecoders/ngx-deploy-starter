@@ -29,13 +29,7 @@ The maintainers recommend having some knowledge about:
 
 Watch this video to know pretty much everything about this plugin development; it's highly recommended.
 
-<iframe
-  width="560"
-  height="315"
-  src="https://www.youtube.com/embed/fC1-4fAZDP4?start=40&end=182"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pict
+[![Nx Plugin](https://img.youtube.com/vi/fC1-4fAZDP4/0.jpg)](https://www.youtube.com/embed/fC1-4fAZDP4?start=40&end=182)
 
 ## Angular workspace
 
