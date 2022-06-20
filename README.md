@@ -17,7 +17,7 @@
 [sonar-reliability-image]: https://sonarcloud.io/api/project_badges/measure?project=bikecoders_ngx-deploy-npm&metric=reliability_rating
 [sonar-security-image]: https://sonarcloud.io/api/project_badges/measure?project=bikecoders_ngx-deploy-npm&metric=security_rating
 [sonar-maintainability-image]: https://sonarcloud.io/api/project_badges/measure?project=bikecoders_ngx-deploy-npm&metric=sqale_rating
-[publishment-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml/badge.svg?branch=master
+[publishment-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml/badge.svg?branch=main
 [npm-image]: https://badge.fury.io/js/ngx-deploy-npm.svg
 [mit-licence-image]: https://img.shields.io/badge/license-MIT-orange.svg?color=blue&style=flat-square
 [conventional-commits-image]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
@@ -252,7 +252,7 @@ configuration in the `workspace.json` file in the `options` attribute
 of your deploy project's executor.
 Just change the option to lower camel case.
 
-A list of all available options is also available [here](https://github.com/bikecoders/ngx-deploy-npm/blob/master/src/deploy/schema.json).
+A list of all available options is also available [here](https://github.com/bikecoders/ngx-deploy-npm/blob/main/src/deploy/schema.json).
 
 Example:
 
@@ -293,7 +293,7 @@ We strongly recommend using [`@jscutlery/semver`](https://github.com/jscutlery/s
 
 For more information go to semver's [documentation](https://github.com/jscutlery/semver#triggering-executors-post-release)
 
-We use `@jscutlery/semver` here on `ngx-deploy-npm` to generate the package's next version, and we use `ngx-deploy-npm` to publish that version to NPM. Yes, it uses itself, take a look by yourself [ngx-deploy-npm/project.json](https://github.com/bikecoders/ngx-deploy-npm/blob/master/packages/ngx-deploy-npm/project.json#L55-L67)
+We use `@jscutlery/semver` here on `ngx-deploy-npm` to generate the package's next version, and we use `ngx-deploy-npm` to publish that version to NPM. Yes, it uses itself, take a look by yourself [ngx-deploy-npm/project.json](https://github.com/bikecoders/ngx-deploy-npm/blob/main/packages/ngx-deploy-npm/project.json#L55-L67)
 
 ### Only publishable libraries are being configured <!-- omit in toc -->
 

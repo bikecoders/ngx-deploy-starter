@@ -101,7 +101,7 @@ On VsCode, create a [_JavaScript Debug Terminal_](https://code.visualstudio.com/
    - If you need help use `yarn commit`
    - We use the commit history to generate the changelog automagically, do your best describing the changes that you introduce 😄. Creating the commit right is essential.
    - We encourage the use of Unit Tests for the fixes and new features. Don't you know how to write Unit Tests? Don't let that stop your contribution; we are here to help 👋.
-5. Make a PR against `master`
+5. Make a PR against `main`
 6. Wait for the review
 7. Merge and Party 🎉
 
@@ -127,4 +127,4 @@ To inspect the analysis, go to http://localhost:9000. The credentials are `admin
 
 The CI handles the publishment of a new version. We use GitHub actions as CI.
 
-When the maintainers integrate your PR to master, go to the [main branch actions](https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml) and search for the one that belongs to you. The CI will run some tests, if they pass, the next job that publishes your introduced changes will be **on hold** waiting for approval; once the maintainers approve the launching, your changes will be packed and posted to NPM.
+When the maintainers integrate your PR to `main`, go to the [main branch actions](https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml) and search for the one that belongs to you. The CI will run some tests, if they pass, the next job that publishes your introduced changes will be **on hold** waiting for approval; once the maintainers approve the launching, your changes will be packed and posted to NPM.

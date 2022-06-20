@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/renovate",
   "extends": ["config:base", ":semanticCommitScopeDisabled"],
-  "baseBranches": ["master"],
+  "baseBranches": ["main"],
   "rebaseWhen": "behind-base-branch",
   "lockFileMaintenance": {
     "enabled": true,
