@@ -1,9 +1,11 @@
 import type { InstallGeneratorOptions } from '../schema';
+import { npmAccess } from '../../../core';
 
 export function normalizeOptions(
-  options: InstallGeneratorOptions
+  rawOptions: InstallGeneratorOptions
 ): InstallGeneratorOptions {
   return {
-    ...options,
+    ...rawOptions,
+    access: rawOptions.access || npmAccess.public,
   };
 }

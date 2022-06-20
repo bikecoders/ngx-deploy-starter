@@ -22,7 +22,7 @@ import {
 
 describe('install/ng-add generator', () => {
   let appTree: Tree;
-  let options: InstallGeneratorOptions;
+  let rawOptions: InstallGeneratorOptions;
 
   type publishableLibConfig = {
     key: string;
@@ -42,7 +42,7 @@ describe('install/ng-add generator', () => {
     );
 
   beforeEach(() => {
-    options = {};
+    rawOptions = {};
 
     appTree = createTreeWithEmptyWorkspace();
   });
@@ -101,7 +101,7 @@ describe('install/ng-add generator', () => {
     describe('default Options', () => {
       // install
       beforeEach(async () => {
-        await generator(appTree, options);
+        await generator(appTree, rawOptions);
       });
 
       it('should set the deployer only on publishable libraries', async () => {
@@ -137,15 +137,25 @@ describe('install/ng-add generator', () => {
 
         expect(targetDeploy).toEqual(expectedTargetWithProductionMode);
       });
+
+      it('should set the `access` option as `public` by default', async () => {
+        const allProjects = getProjects(appTree);
+        const project = allProjects.get(libPublisable.key);
+
+        const setOptions: InstallGeneratorOptions =
+          project?.targets?.deploy.options;
+
+        expect(setOptions.access).toEqual(npmAccess.public);
+      });
     });
 
     describe('--projects', () => {
       it('should add config only to specified projects', async () => {
-        options = {
+        rawOptions = {
           projects: [libPublisable.key, libPublisable2.key],
         };
         // install
-        await generator(appTree, options);
+        await generator(appTree, rawOptions);
         const allProjects = getProjects(appTree);
 
         const projectsAffected = Array.from(allProjects.entries())
@@ -158,11 +168,11 @@ describe('install/ng-add generator', () => {
       });
 
       it('should add config to all projects if --projects option is empty', async () => {
-        options = {
+        rawOptions = {
           projects: [],
         };
         // install
-        await generator(appTree, options);
+        await generator(appTree, rawOptions);
         const allProjects = getProjects(appTree);
 
         const projectsAffected = Array.from(allProjects.entries())
@@ -178,23 +188,59 @@ describe('install/ng-add generator', () => {
         );
       });
     });
+
+    describe('--access', () => {
+      it('should set the `access` option as `public` when is set to `public` on rawoption', async () => {
+        rawOptions = {
+          projects: [libPublisable.key],
+          access: npmAccess.public,
+        };
+        // install
+        await generator(appTree, rawOptions);
+
+        const allProjects = getProjects(appTree);
+        const project = allProjects.get(libPublisable.key);
+
+        const setOptions: InstallGeneratorOptions =
+          project?.targets?.deploy.options;
+
+        expect(setOptions.access).toEqual(npmAccess.public);
+      });
+
+      it('should set the `access` option as `public` when is set to `restricted` on rawoption', async () => {
+        rawOptions = {
+          projects: [libPublisable.key],
+          access: npmAccess.restricted,
+        };
+        // install
+        await generator(appTree, rawOptions);
+
+        const allProjects = getProjects(appTree);
+        const project = allProjects.get(libPublisable.key);
+
+        const setOptions: InstallGeneratorOptions =
+          project?.targets?.deploy.options;
+
+        expect(setOptions.access).toEqual(npmAccess.restricted);
+      });
+    });
   });
 
   describe('error handling', () => {
     it('should throw an error if there is no publishable library', () => {
-      expect(generator(appTree, options)).rejects.toEqual(
+      expect(generator(appTree, rawOptions)).rejects.toEqual(
         new Error('There is no publishable libraries in this workspace')
       );
     });
 
     it('should throw an error if invalid projects are pass on --projects', () => {
       const invalidProjects = ['i', 'dont', 'exists'];
-      options = {
+      rawOptions = {
         projects: [libPublisable.key, ...invalidProjects],
       };
       createWorkspace();
 
-      expect(generator(appTree, options)).rejects.toEqual(
+      expect(generator(appTree, rawOptions)).rejects.toEqual(
         new Error(buildInvalidProjectsErrorMessage(invalidProjects))
       );
     });
