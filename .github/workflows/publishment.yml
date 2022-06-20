@@ -2,7 +2,7 @@ name: Publishment
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   test:
