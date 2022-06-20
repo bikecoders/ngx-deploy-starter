@@ -2,6 +2,12 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [4.1.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.0.4...v4.1.0) (2022-06-20)
+
+### Features
+
+- add `access` option to ng-add/install ([#323](https://github.com/bikecoders/ngx-deploy-npm/issues/323)) ([5e3a40c](https://github.com/bikecoders/ngx-deploy-npm/commit/5e3a40ceed8f78a5c276f64e828bbea8a3fbb4de)), closes [#206](https://github.com/bikecoders/ngx-deploy-npm/issues/206)
+
 ## [4.0.4](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.0.3...v4.0.4) (2022-06-19)
 
 ## [4.0.3](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.0.2...v4.0.3) (2022-06-15)
