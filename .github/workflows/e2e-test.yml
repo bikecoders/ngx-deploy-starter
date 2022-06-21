@@ -1,6 +1,13 @@
 name: E2E Test
 
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      # Install @nrwl@next instead of the current one on the package.json
+      install-next-version:
+        type: boolean
+        default: false
+        required: false
 
 jobs:
   e2e-test:
@@ -15,4 +22,10 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
+
+      # Perform e2e with @nrwl@next
+      - if: inputs.install-next-version == true
+        name: install @nrwl@next
+        run: npx update-by-scope -t next @nrwl
+
       - run: npx nx e2e ngx-deploy-npm-e2e
