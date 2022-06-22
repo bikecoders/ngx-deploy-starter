@@ -1,6 +1,19 @@
 name: Essential Test
 
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      # Enable reports on workflow (lint and coverage)
+      reports:
+        type: boolean
+        default: true
+        required: false
+
+      # Install @nrwl@next instead of the current one on the package.json
+      install-next-version:
+        type: boolean
+        default: false
+        required: false
 
 jobs:
   lint:
@@ -11,13 +24,20 @@ jobs:
           fetch-depth: 0
       - uses: ./.github/actions/setup
 
+      # Perform lint with @nrwl@next
+      - if: inputs.install-next-version == true
+        name: install @nrwl@next
+        run: npx update-by-scope -t next @nrwl
+
       - name: Lint
         run: npx nx lint --outputFile=""
 
-      - name: Lint report
+      - if: inputs.reports == true
+        name: Lint report
         run: npx nx lint --format ./tools/sonarqube-linter-reporter.js
 
-      - name: Archive lint report results
+      - if: inputs.reports == true
+        name: Archive lint report results
         uses: actions/upload-artifact@v3
         with:
           name: lint-report-${{ github.sha }}
@@ -30,6 +50,11 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
+
+      # Perform build with @nrwl@next
+      - if: inputs.install-next-version == true
+        name: install @nrwl@next
+        run: npx update-by-scope -t next @nrwl
 
       - run: npx nx build
 
@@ -51,9 +76,15 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
+
+      # Perform unit test with @nrwl@next
+      - if: inputs.install-next-version == true
+        name: install @nrwl@next
+        run: npx update-by-scope -t next @nrwl
+
       - run: npx nx test --code-coverage
 
-      - if: matrix.node-version == 16
+      - if: matrix.node-version == 16 && inputs.reports == true
         name: Archive coverage report
         uses: actions/upload-artifact@v3
         with:

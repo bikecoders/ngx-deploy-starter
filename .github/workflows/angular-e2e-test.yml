@@ -1,0 +1,35 @@
+name: Angular E2E Test
+
+on:
+  workflow_call:
+    inputs:
+      # Install @angular@next instead of the current one on the package.json
+      install-next-version:
+        type: boolean
+        default: false
+        required: false
+
+jobs:
+  angular-e2e-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+
+      # Perform angular e2e with @angular@next
+      - if: inputs.install-next-version == true
+        name: install @angular@next
+        run: npx update-by-scope -t next @angular
+
+      - uses: ./.github/actions/download-build
+
+      - name: yarn link
+        shell: bash
+        run: |
+          cd dist/packages/ngx-deploy-npm
+          yarn link
+
+      - name: Execute e2e test
+        run: ./tools/create-angular-workspace.sh
