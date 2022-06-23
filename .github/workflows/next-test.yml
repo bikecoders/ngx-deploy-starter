@@ -1,4 +1,4 @@
-name: 'Tests against @next version of nrwl and angular'
+name: 'Tests @next version nrwl and angular'
 
 on:
   schedule:
