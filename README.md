@@ -11,6 +11,7 @@
 [![Maintainability Rating][sonar-maintainability-image]][sonar-link]
 
 [![Publishment Status][publishment-image]][publishment-link]
+[![Tests @next version nrwl and angular][next-tests-image]][next-tests-link]
 
 <!-- Images -->
 
@@ -23,6 +24,7 @@
 [conventional-commits-image]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
 [downloads-image]: https://img.shields.io/npm/dm/ngx-deploy-npm
 [supported-node-versions]: https://img.shields.io/badge/node-v14%20v16%20v18-green
+[next-tests-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/next-test.yml/badge.svg
 
 <!-- URLs -->
 
@@ -31,6 +33,7 @@
 [npm-url]: https://www.npmjs.com/package/ngx-deploy-npm
 [mit-licence-url]: http://opensource.org/licenses/MIT
 [conventional-commits-url]: https://conventionalcommits.org
+[next-tests-link]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/next-test.yml
 
 ![Cover Image](docs/cover.png)
 
