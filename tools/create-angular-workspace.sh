@@ -10,10 +10,10 @@ cd tmp
 # Delete the previous workspace
 rm -Rif angular-workspace
 
-npx --no-install @angular/cli version
+npx ng version
 
 echo "Create Angular Workspace"
-npx --no-install @angular/cli new --name angular-workspace --interactive false
+npx ng new --name angular-workspace --interactive false
 cd angular-workspace
 
 echo "Generate lib"
