@@ -11,7 +11,7 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
-    "@nrwl/devkit": "14.3.6"
+    "@nrwl/devkit": "14.4.2"
   },
   "ng-add": {
     "save": "devDependencies"
