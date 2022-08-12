@@ -2,6 +2,12 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [4.2.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.1.4...v4.2.0) (2022-08-12)
+
+### Features
+
+- allow `otp` parameter to be a number ([#353](https://github.com/bikecoders/ngx-deploy-npm/issues/353)) ([c09fb8c](https://github.com/bikecoders/ngx-deploy-npm/commit/c09fb8c24f763084b1d442cdc6a9351c43c13d30)), closes [#351](https://github.com/bikecoders/ngx-deploy-npm/issues/351)
+
 ## [4.1.4](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.1.3...v4.1.4) (2022-08-05)
 
 ## [4.1.3](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.1.2...v4.1.3) (2022-07-29)
