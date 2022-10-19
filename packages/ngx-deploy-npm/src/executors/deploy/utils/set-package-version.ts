@@ -1,4 +1,4 @@
-import * as fs from '../utils/fs-async';
+import * as fs from './file-utils';
 import * as path from 'path';
 
 export async function setPackageVersion(dir: string, packageVersion: string) {

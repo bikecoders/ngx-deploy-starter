@@ -58,6 +58,7 @@
     - [`--access`](#--access)
     - [`--otp`](#--otp)
     - [`--dry-run`](#--dry-run)
+    - [`--dist-folder-path`](#--dist-folder-path)
 - [📁 Configuration File](#configuration-file)
 - [🧐 Essential considerations](#essential-considerations)
   - [Version Generation](#version-generation)
@@ -113,7 +114,7 @@ Independently of the CI/CD you are using, you need an NPM token. To do so, you h
      do it by creating a step with `run: echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > YOUR_REPO_DIRECTORY/.npmrc`
    - Replace `YOUR_REPO_DIRECTORY` for the path of your project,
      commonly is `/home/circleci/repo`
-3. **(Optional) check that you are logged**
+3. **(Optional)** check that you are logged
    - Creating a step with `run: npm whoami`
    - The output should be the username of your npm account
 4. Deploy your package
@@ -161,11 +162,10 @@ The following is the activity diagram.
 #### `--projects`
 
 - **optional**
-- Default: Doesn't have any default value (array string)
 - Example:
-  - `nx generate ngx-deploy-npm:install --projects=lib-1,lib-2` – Only `lib-1` and `lib-2` are going to be configurated
+  - `nx generate ngx-deploy-npm:install --projects=lib-1,lib-2` – Only `lib-1` and `lib-2` are going to configure
 
-Specify which libraries should be configurated. Useful when you have a workspace with several libraries and don't want to overwrite existing configuration
+Specify which libraries should be configured. Useful when you have a workspace with several libraries and don't want to overwrite existing configuration
 Should be `,` separated, without spaces.
 
 ### `--access` <a name="--access-ng-add-install"></a>
@@ -182,7 +182,6 @@ Tells the registry whether to publish the package as public or restricted. It on
 #### `--build-target`
 
 - **optional**
-- Default: Doesn't have any default value (string)
 - Example:
   - `nx deploy --build-target=production` – The configuration `production` is being used to build your package
 
@@ -207,7 +206,6 @@ This command causes the `--build-target` setting to have no effect.
 #### `--package-version`
 
 - **optional**
-- Default: Doesn't have any default value (string)
 - Example:
   - `nx deploy --package-version 2.3.4`
 
@@ -233,7 +231,6 @@ Tells the registry whether to publish the package as public or restricted. It on
 #### `--otp`
 
 - **optional**
-- Default: Doesn't have any default value (string)
 - Example:
   - `nx deploy --otp TOKEN`
 
@@ -247,6 +244,16 @@ If you have two-factor authentication enabled in auth-and-writes mode, you can p
   - `nx deploy --dry-run`
 
 For testing: Run through without making any changes. Execute with `--dry-run`, and nothing will happen. It will show a list of the options used on the console.
+
+#### `--dist-folder-path`
+
+- **optional**
+- Example:
+  - `nx deploy --dist-folder-path 'dist/my-unsupported-project'`
+
+Indicate a custom dist folder path.
+The path must relative to project's root.
+Especially useful when ngx-deploy-npm can not detect your library dist folder path automatically. [Write us an issue](https://github.com/bikecoders/ngx-deploy-npm/issues/new) if you think we should support the library you are trying to publish
 
 ## 📁 Configuration File <a name="configuration-file"></a>
 

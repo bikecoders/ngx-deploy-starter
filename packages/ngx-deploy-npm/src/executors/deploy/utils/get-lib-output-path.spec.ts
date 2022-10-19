@@ -1,20 +1,22 @@
 import * as path from 'path';
-import * as fs from './fs-async';
+import * as fs from './file-utils';
 
 import { getLibOutPutPath } from './get-lib-output-path';
 
 describe('Getting Lib Output Path', () => {
   let projectRoot: Parameters<typeof getLibOutPutPath>[0];
   let buildOptions: Parameters<typeof getLibOutPutPath>[1];
-  let libName: Parameters<typeof getLibOutPutPath>[2];
+  let options: Parameters<typeof getLibOutPutPath>[2];
+  let libName: Parameters<typeof getLibOutPutPath>[3];
   let expectedOutput: string;
 
   beforeEach(() => {
     projectRoot = 'some/random/system/path';
+    options = {};
     libName = 'random-name';
   });
 
-  describe('With Output Path', () => {
+  describe('from OutputPath build option', () => {
     beforeEach(() => {
       buildOptions = {
         outputPath: 'some/dist/path',
@@ -28,6 +30,7 @@ describe('Getting Lib Output Path', () => {
       const gottenPath = await getLibOutPutPath(
         projectRoot,
         buildOptions,
+        options,
         libName
       );
 
@@ -35,7 +38,7 @@ describe('Getting Lib Output Path', () => {
     });
   });
 
-  describe('Without Output Path', () => {
+  describe('from ngPackage file', () => {
     let finalDestination: string;
 
     beforeEach(() => {
@@ -62,10 +65,33 @@ describe('Getting Lib Output Path', () => {
       const gottenPath = await getLibOutPutPath(
         projectRoot,
         buildOptions,
+        options,
         libName
       );
 
       expect(gottenPath).toEqual(expectedOutput);
+    });
+  });
+
+  describe('from custom dist path', () => {
+    let customDistPath: string;
+
+    beforeEach(() => {
+      customDistPath = 'different/dist/path';
+      options = {
+        distFolderPath: customDistPath,
+      };
+    });
+
+    it('should call the deployer with the set dist folder path', async () => {
+      const gottenPath = await getLibOutPutPath(
+        projectRoot,
+        buildOptions,
+        options,
+        libName
+      );
+
+      expect(gottenPath).toEqual(`${projectRoot}/${customDistPath}`);
     });
   });
 });

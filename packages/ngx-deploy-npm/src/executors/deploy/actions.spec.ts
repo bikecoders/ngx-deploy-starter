@@ -14,9 +14,9 @@ describe('Deploy Angular apps', () => {
 
   const PROJECT = 'RANDOM-PROJECT';
   const mockEngine = {
-    run: () => Promise.resolve(),
-  };
-  const getBuildTarget = (customConf = 'production'): BuildTarget => ({
+    run: jest.fn().mockImplementation(() => () => Promise.resolve()),
+  } as unknown as Parameters<typeof deploy>[0];
+  const getMockBuildTarget = (customConf = 'production'): BuildTarget => ({
     name: `${PROJECT}:build:${customConf}`,
   });
 
@@ -60,7 +60,7 @@ describe('Deploy Angular apps', () => {
   });
 
   it('should invoke the builder', async () => {
-    await deploy(mockEngine, context, getBuildTarget(), {});
+    await deploy(mockEngine, context, getMockBuildTarget(), {});
 
     expect(runExecutorSpy).toHaveBeenCalledWith(
       {
@@ -76,7 +76,7 @@ describe('Deploy Angular apps', () => {
   it('should invoke the builder with the right configuration', async () => {
     const customConf = 'my-custom-conf';
 
-    await deploy(mockEngine, context, getBuildTarget(customConf), {
+    await deploy(mockEngine, context, getMockBuildTarget(customConf), {
       buildTarget: customConf,
     });
 
@@ -91,12 +91,14 @@ describe('Deploy Angular apps', () => {
     );
   });
 
-  it('should not invoke the builder if the option --no-build is passed', async () => {
-    await deploy(mockEngine, context, getBuildTarget(), {
-      noBuild: true,
-    });
+  describe('option --no-build', () => {
+    it('should not invoke the builder if the option --no-build is passed', async () => {
+      await deploy(mockEngine, context, getMockBuildTarget(), {
+        noBuild: true,
+      });
 
-    expect(runExecutorSpy).not.toHaveBeenCalled();
+      expect(runExecutorSpy).not.toHaveBeenCalled();
+    });
   });
 
   describe('Error Handling', () => {
@@ -104,7 +106,7 @@ describe('Deploy Angular apps', () => {
       shouldBuilderSuccess = false;
 
       try {
-        await deploy(mockEngine, context, getBuildTarget(), {});
+        await deploy(mockEngine, context, getMockBuildTarget(), {});
         fail('should cause an error');
       } catch (e: unknown) {
         expect(e instanceof Error).toBeTruthy();

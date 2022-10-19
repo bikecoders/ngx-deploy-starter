@@ -1,6 +1,6 @@
 export interface InstallGeneratorOptions {
   /**
-   * Which library should configurate
+   * Which library should configure
    */
   projects?: string[];
   /**

@@ -1,5 +1,9 @@
 export interface DeployExecutorOptions {
   /**
+   * Indicate the dist folder path. This is useful when ngx-deploy-npm can not detect your library dist folder automatically. The path should be relative to the project's root
+   */
+  distFolderPath?: string;
+  /**
    * A named build target, as specified in the `configurations` section of workspace/angular.json. Each named target is accompanied by a configuration of option defaults for that target. This is equivalent to calling the command `[nx|ng] build --configuration=XXX`.
    */
   buildTarget?: string;
