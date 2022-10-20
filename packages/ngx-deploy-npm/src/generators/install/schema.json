@@ -6,7 +6,7 @@
   "type": "object",
   "properties": {
     "projects": {
-      "description": "Which libraries should configurate",
+      "description": "Which libraries should configure",
       "type": "array",
       "items": {
         "type": "string"

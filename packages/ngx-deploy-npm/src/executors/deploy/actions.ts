@@ -31,6 +31,7 @@ export default async function deploy(
   const outputPath = await getLibOutPutPath(
     context.root,
     buildOptions,
+    options,
     targetDescription.project
   );
 
