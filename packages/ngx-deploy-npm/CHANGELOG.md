@@ -2,6 +2,12 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [4.3.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.2.5...v4.3.0) (2022-10-20)
+
+### Features
+
+- add the option to define a custom dist folder path ([#384](https://github.com/bikecoders/ngx-deploy-npm/issues/384)) ([ce50abb](https://github.com/bikecoders/ngx-deploy-npm/commit/ce50abbd86af81c20eb1694b0acc51f7739c2ff3))
+
 ## [4.2.5](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.2.4...v4.2.5) (2022-09-28)
 
 ## [4.2.4](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.2.3...v4.2.4) (2022-09-12)
