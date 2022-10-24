@@ -28,12 +28,13 @@ export default async function deploy(
 
   const buildOptions = readTargetOptions(targetDescription, context);
 
-  const outputPath = await getLibOutPutPath(
-    context.root,
-    buildOptions,
-    options,
-    targetDescription.project
-  );
+  let outputPath: string;
+  try {
+    outputPath = await getLibOutPutPath(context.root, buildOptions, options);
+  } catch (error) {
+    logger.error(error);
+    throw new NotAbleToGetDistFolderPathError();
+  }
 
   await engine.run(outputPath, options);
 }
@@ -54,7 +55,34 @@ async function buildLibrary(
 
   for await (const output of buildResult) {
     if (!output.success) {
-      throw new Error('Could not build the library');
+      throw new CouldNotBuildTheLibraryError();
     }
+  }
+}
+
+export class CouldNotBuildTheLibraryError extends Error {
+  constructor() {
+    const errorMsg = 'Could not build the library';
+    super(errorMsg);
+    // Ensure the name of this error is the same as the class name
+    this.name = this.constructor.name;
+
+    // It does make the stack trace a little nicer.
+    //  @see Node.js reference (bottom)
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
+export class NotAbleToGetDistFolderPathError extends Error {
+  constructor() {
+    const errorMsg =
+      "There is an error trying to locate the library's dist path";
+    super(errorMsg);
+    // Ensure the name of this error is the same as the class name
+    this.name = this.constructor.name;
+
+    // It does make the stack trace a little nicer.
+    //  @see Node.js reference (bottom)
+    Error.captureStackTrace(this, this.constructor);
   }
 }

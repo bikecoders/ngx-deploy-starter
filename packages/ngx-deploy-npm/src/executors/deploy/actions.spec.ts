@@ -1,8 +1,11 @@
 import * as nxDevKit from '@nrwl/devkit';
 
-import deploy from './actions';
+import deploy, {
+  CouldNotBuildTheLibraryError,
+  NotAbleToGetDistFolderPathError,
+} from './actions';
 import type { BuildTarget } from './utils';
-import * as getLibOutputPathModule from './utils/get-lib-output-path';
+import * as utilsModule from './utils';
 
 describe('Deploy Angular apps', () => {
   let context: nxDevKit.ExecutorContext;
@@ -25,15 +28,15 @@ describe('Deploy Angular apps', () => {
   });
 
   beforeEach(() => {
-    outputPath = `../../dist/randomness/${PROJECT}`;
-
     context = {
-      root: 'random/system/path',
+      root: '/absolute/mock/project-root',
       projectName: PROJECT,
       target: {
         executor: 'ngx-deploy-npm',
       },
     } as nxDevKit.ExecutorContext;
+
+    outputPath = `${context.root}/dist/path/to/project/${PROJECT}`;
 
     shouldBuilderSuccess = true;
   });
@@ -43,7 +46,7 @@ describe('Deploy Angular apps', () => {
     jest.spyOn(nxDevKit, 'readTargetOptions').mockImplementation(() => ({}));
 
     jest
-      .spyOn(getLibOutputPathModule, 'getLibOutPutPath')
+      .spyOn(utilsModule, 'getLibOutPutPath')
       .mockImplementation(() => Promise.resolve(outputPath));
 
     runExecutorSpy = jest
@@ -102,15 +105,24 @@ describe('Deploy Angular apps', () => {
   });
 
   describe('Error Handling', () => {
-    it('throws if app building fails', async () => {
+    it('should throw error if app building fails', async () => {
       shouldBuilderSuccess = false;
 
-      try {
-        await deploy(mockEngine, context, getMockBuildTarget(), {});
-        fail('should cause an error');
-      } catch (e: unknown) {
-        expect(e instanceof Error).toBeTruthy();
-      }
+      await expect(() =>
+        deploy(mockEngine, context, getMockBuildTarget(), {})
+      ).rejects.toThrowError(CouldNotBuildTheLibraryError);
+    });
+
+    it('should throw if getLibOutPutPath fails', async () => {
+      jest
+        .spyOn(utilsModule, 'getLibOutPutPath')
+        .mockImplementation(async () => {
+          throw new Error('any error');
+        });
+
+      await expect(() =>
+        deploy(mockEngine, context, getMockBuildTarget(), {})
+      ).rejects.toThrowError(NotAbleToGetDistFolderPathError);
     });
   });
 });
