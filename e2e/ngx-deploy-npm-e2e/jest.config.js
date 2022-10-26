@@ -11,4 +11,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/e2e/ngx-deploy-npm-e2e',
+  testPathIgnorePatterns: ['/node_modules/', 'integration/.*'],
 };

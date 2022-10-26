@@ -13,6 +13,9 @@ jobs:
   pr-e2e-test:
     uses: ./.github/workflows/e2e-test.yml
 
+  pr-integration-test:
+    uses: ./.github/workflows/integration-test.yml
+
   check-commit-lint:
     name: Check commit message follows guidelines
     runs-on: ubuntu-latest

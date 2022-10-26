@@ -27,7 +27,6 @@
     "@nrwl/jest": "14.7.17",
     "@nrwl/js": "14.7.17",
     "@nrwl/linter": "14.7.17",
-    "@nrwl/node": "14.7.17",
     "@nrwl/nx-plugin": "14.7.17",
     "@nrwl/workspace": "14.7.17",
     "@types/jest": "29.2.2",

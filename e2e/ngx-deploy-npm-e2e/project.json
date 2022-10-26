@@ -7,7 +7,8 @@
       "executor": "@nrwl/nx-plugin:e2e",
       "options": {
         "target": "ngx-deploy-npm:build",
-        "jestConfig": "e2e/ngx-deploy-npm-e2e/jest.config.js"
+        "jestConfig": "e2e/ngx-deploy-npm-e2e/jest.config.js",
+        "runInBand": true
       }
     }
   },
