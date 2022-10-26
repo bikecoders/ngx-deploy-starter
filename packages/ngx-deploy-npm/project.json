@@ -36,6 +36,11 @@
             "output": "./src"
           },
           {
+            "input": "docs",
+            "glob": "**/(*.png|*.jpg)",
+            "output": "./docs"
+          },
+          {
             "input": "./packages/ngx-deploy-npm/src",
             "glob": "**/*.d.ts",
             "output": "./src"
