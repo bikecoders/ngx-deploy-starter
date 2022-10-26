@@ -289,12 +289,6 @@ Now you can just run `nx deploy YOUR-LIBRARY` without all the options in the com
 
 ## 🧐 Essential considerations <a name="essential-considerations"></a>
 
-### README and LICENCE files <!-- omit in toc -->
-
-Those files must be at the root of the library. The executor is copying them at the moment of building.
-
-If you have those files outside the project's root, use the `assets` option on the executor that compiles your application.
-
 ### Version Generation
 
 This deployer doesn't bump or generate a new package version; here, we care about doing one thing well, publish your libs to NPM. You can change the version package at publishment using the [`--package-version`](#--package-version) option.
