@@ -16,8 +16,8 @@ export default async function runExecutor(
   try {
     await deploy(engine, context, buildTarget, options);
   } catch (e) {
-    logger.error(`Error when trying to deploy ${context.projectName}`);
     logger.error(e);
+    logger.error('Error when trying to publish the library');
     return { success: false };
   }
 
