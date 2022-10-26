@@ -245,7 +245,7 @@ If you have two-factor authentication enabled in auth-and-writes mode, you can p
 
 For testing: Run through without making any changes. Execute with `--dry-run`, and nothing will happen. It will show a list of the options used on the console.
 
-#### `--dist-folder-path`
+#### `--dist-folder-path`
 
 - **optional**
 - Example:
