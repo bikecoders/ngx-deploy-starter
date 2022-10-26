@@ -2,6 +2,12 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [4.3.1](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.3.0...v4.3.1) (2022-10-26)
+
+### Bug Fixes
+
+- improve dist folder detection ([#390](https://github.com/bikecoders/ngx-deploy-npm/issues/390)) ([91e829e](https://github.com/bikecoders/ngx-deploy-npm/commit/91e829ee0dc654d23045cbbadc59de06c8236465)), closes [#385](https://github.com/bikecoders/ngx-deploy-npm/issues/385)
+
 # [4.3.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.2.5...v4.3.0) (2022-10-20)
 
 ### Features
