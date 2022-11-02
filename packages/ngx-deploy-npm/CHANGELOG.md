@@ -2,6 +2,56 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [4.3.1](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.3.0...v4.3.1) (2022-10-26)
+
+### Bug Fixes
+
+- improve dist folder detection ([#390](https://github.com/bikecoders/ngx-deploy-npm/issues/390)) ([91e829e](https://github.com/bikecoders/ngx-deploy-npm/commit/91e829ee0dc654d23045cbbadc59de06c8236465)), closes [#385](https://github.com/bikecoders/ngx-deploy-npm/issues/385)
+
+# [4.3.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.2.5...v4.3.0) (2022-10-20)
+
+### Features
+
+- add the option to define a custom dist folder path ([#384](https://github.com/bikecoders/ngx-deploy-npm/issues/384)) ([ce50abb](https://github.com/bikecoders/ngx-deploy-npm/commit/ce50abbd86af81c20eb1694b0acc51f7739c2ff3))
+
+## [4.2.5](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.2.4...v4.2.5) (2022-09-28)
+
+## [4.2.4](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.2.3...v4.2.4) (2022-09-12)
+
+## [4.2.3](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.2.2...v4.2.3) (2022-09-06)
+
+## [4.2.2](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.2.1...v4.2.2) (2022-08-24)
+
+## [4.2.1](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.2.0...v4.2.1) (2022-08-17)
+
+# [4.2.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.1.4...v4.2.0) (2022-08-12)
+
+### Features
+
+- allow `otp` parameter to be a number ([#353](https://github.com/bikecoders/ngx-deploy-npm/issues/353)) ([c09fb8c](https://github.com/bikecoders/ngx-deploy-npm/commit/c09fb8c24f763084b1d442cdc6a9351c43c13d30)), closes [#351](https://github.com/bikecoders/ngx-deploy-npm/issues/351)
+
+## [4.1.4](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.1.3...v4.1.4) (2022-08-05)
+
+## [4.1.3](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.1.2...v4.1.3) (2022-07-29)
+
+## [4.1.2](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.1.1...v4.1.2) (2022-07-19)
+
+## [4.1.1](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.1.0...v4.1.1) (2022-07-08)
+
+# [4.1.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.0.4...v4.1.0) (2022-06-20)
+
+### Features
+
+- add `access` option to ng-add/install ([#323](https://github.com/bikecoders/ngx-deploy-npm/issues/323)) ([5e3a40c](https://github.com/bikecoders/ngx-deploy-npm/commit/5e3a40ceed8f78a5c276f64e828bbea8a3fbb4de)), closes [#206](https://github.com/bikecoders/ngx-deploy-npm/issues/206)
+
+## [4.0.4](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.0.3...v4.0.4) (2022-06-19)
+
+## [4.0.3](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.0.2...v4.0.3) (2022-06-15)
+
+### Bug Fixes
+
+- misspelled word on dry-run log([#308](https://github.com/bikecoders/ngx-deploy-npm/issues/308)) ([4b9d2ed](https://github.com/bikecoders/ngx-deploy-npm/commit/4b9d2ed8f3ca69a1ac62ffb964f991c87ada63d5))
+
 ## [4.0.2](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.0.1...v4.0.2) (2022-06-14)
 
 ## [4.0.1](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.0.0...v4.0.1) (2022-06-14)

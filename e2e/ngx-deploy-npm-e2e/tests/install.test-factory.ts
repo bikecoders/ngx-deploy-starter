@@ -10,11 +10,14 @@ import {
 } from './utils';
 
 export const installTest = () => {
-  const libSet1 = 'node-lib1';
-  let projectWorkSpaceLibSet1: ProjectConfiguration;
+  const publicLib = 'node-lib1';
+  let projectWorkSpacepublicLib: ProjectConfiguration;
 
-  const libSet2 = 'node-lib2';
-  let projectWorkSpaceLibSet2: ProjectConfiguration;
+  const publicLib2 = 'node-lib2';
+  let projectWorkSpacePublicLib2: ProjectConfiguration;
+
+  const resctrictedLib = 'node-resctricted';
+  let projectWorkSpaceRestrictedLib: ProjectConfiguration;
 
   const libNOTset = 'node-lib-not-set';
   let projectWorkSpaceLibNOTSet: ProjectConfiguration;
@@ -25,34 +28,58 @@ export const installTest = () => {
   // Init libs and projects
   beforeEach(async () => {
     await runNxCommandAsync(
-      `generate @nrwl/node:lib --name ${libSet1} --publishable --importPath ${libSet1}`
+      `generate @nrwl/node:lib --name ${publicLib} --publishable --importPath ${publicLib}`
     );
     await runNxCommandAsync(
-      `generate @nrwl/node:lib --name ${libSet2} --publishable --importPath ${libSet2}`
+      `generate @nrwl/node:lib --name ${publicLib2} --publishable --importPath ${publicLib2}`
+    );
+    await runNxCommandAsync(
+      `generate @nrwl/node:lib --name ${resctrictedLib} --publishable --importPath ${resctrictedLib}`
     );
     await runNxCommandAsync(
       `generate @nrwl/node:lib --name ${libNOTset} --publishable --importPath ${libNOTset}`
     );
   }, 360000);
 
-  installNgxDeployNPMProject(`--projects ${libSet1},${libSet2}`);
+  installNgxDeployNPMProject(`--projects ${publicLib},${publicLib2}`);
+
+  installNgxDeployNPMProject(
+    `--projects ${resctrictedLib} --access ${npmAccess.restricted}`
+  );
 
   beforeEach(() => {
-    projectWorkSpaceLibSet1 = readJson(`libs/${libSet1}/project.json`);
-    projectWorkSpaceLibSet2 = readJson(`libs/${libSet2}/project.json`);
+    projectWorkSpacepublicLib = readJson(`libs/${publicLib}/project.json`);
+    projectWorkSpacePublicLib2 = readJson(`libs/${publicLib2}/project.json`);
+    projectWorkSpaceRestrictedLib = readJson(
+      `libs/${resctrictedLib}/project.json`
+    );
     projectWorkSpaceLibNOTSet = readJson(`libs/${libNOTset}/project.json`);
   });
 
   it('should modify the workspace for publishable libs', () => {
-    const expectedTarget: TargetConfiguration = {
+    const expectedPublicTarget: TargetConfiguration = {
       executor: 'ngx-deploy-npm:deploy',
       options: {
         access: npmAccess.public,
       } as DeployExecutorOptions,
     };
 
-    expect(projectWorkSpaceLibSet1.targets?.deploy).toEqual(expectedTarget);
-    expect(projectWorkSpaceLibSet2.targets?.deploy).toEqual(expectedTarget);
+    const expectedRestrictedTarget: TargetConfiguration = {
+      executor: 'ngx-deploy-npm:deploy',
+      options: {
+        access: npmAccess.restricted,
+      } as DeployExecutorOptions,
+    };
+
+    expect(projectWorkSpacepublicLib.targets?.deploy).toEqual(
+      expectedPublicTarget
+    );
+    expect(projectWorkSpacePublicLib2.targets?.deploy).toEqual(
+      expectedPublicTarget
+    );
+    expect(projectWorkSpaceRestrictedLib.targets?.deploy).toEqual(
+      expectedRestrictedTarget
+    );
     expect(projectWorkSpaceLibNOTSet.targets?.deploy).toEqual(undefined);
   });
 };

@@ -1,4 +1,4 @@
-import * as fs from '../utils/fs-async';
+import * as fs from '../utils/file-utils';
 import { setPackageVersion } from './set-package-version';
 
 describe('setPackageVersion', () => {

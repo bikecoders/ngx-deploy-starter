@@ -11,18 +11,20 @@
 [![Maintainability Rating][sonar-maintainability-image]][sonar-link]
 
 [![Publishment Status][publishment-image]][publishment-link]
+[![Tests @next version nrwl and angular][next-tests-image]][next-tests-link]
 
 <!-- Images -->
 
 [sonar-reliability-image]: https://sonarcloud.io/api/project_badges/measure?project=bikecoders_ngx-deploy-npm&metric=reliability_rating
 [sonar-security-image]: https://sonarcloud.io/api/project_badges/measure?project=bikecoders_ngx-deploy-npm&metric=security_rating
 [sonar-maintainability-image]: https://sonarcloud.io/api/project_badges/measure?project=bikecoders_ngx-deploy-npm&metric=sqale_rating
-[publishment-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml/badge.svg?branch=master
+[publishment-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml/badge.svg?branch=main
 [npm-image]: https://badge.fury.io/js/ngx-deploy-npm.svg
 [mit-licence-image]: https://img.shields.io/badge/license-MIT-orange.svg?color=blue&style=flat-square
 [conventional-commits-image]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
 [downloads-image]: https://img.shields.io/npm/dm/ngx-deploy-npm
 [supported-node-versions]: https://img.shields.io/badge/node-v14%20v16%20v18-green
+[next-tests-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/next-test.yml/badge.svg
 
 <!-- URLs -->
 
@@ -31,6 +33,7 @@
 [npm-url]: https://www.npmjs.com/package/ngx-deploy-npm
 [mit-licence-url]: http://opensource.org/licenses/MIT
 [conventional-commits-url]: https://conventionalcommits.org
+[next-tests-link]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/next-test.yml
 
 ![Cover Image](docs/cover.png)
 
@@ -45,15 +48,17 @@
 - [❓What is done when executing `nx deploy`](#what-is-done-when-executing-nx-deploy)
 - [📦 Options](#options)
   - [install/ng-add](#installng-add)
-    - [--projects](#--projects)
+    - [`--projects`](#--projects)
+    - [`--access`](#--access-ng-add-install)
   - [deploy](#deploy)
-    - [--build-target](#--build-target)
-    - [--no-build](#--no-build)
-    - [--package-version](#--package-version)
-    - [--tag](#--tag)
-    - [--access](#--access)
-    - [--otp](#--otp)
-    - [--dry-run](#--dry-run)
+    - [`--build-target`](#--build-target)
+    - [`--no-build`](#--no-build)
+    - [`--package-version`](#--package-version)
+    - [`--tag`](#--tag)
+    - [`--access`](#--access)
+    - [`--otp`](#--otp)
+    - [`--dry-run`](#--dry-run)
+    - [`--dist-folder-path`](#--dist-folder-path)
 - [📁 Configuration File](#configuration-file)
 - [🧐 Essential considerations](#essential-considerations)
   - [Version Generation](#version-generation)
@@ -109,7 +114,7 @@ Independently of the CI/CD you are using, you need an NPM token. To do so, you h
      do it by creating a step with `run: echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > YOUR_REPO_DIRECTORY/.npmrc`
    - Replace `YOUR_REPO_DIRECTORY` for the path of your project,
      commonly is `/home/circleci/repo`
-3. **(Optional) check that you are logged**
+3. **(Optional)** check that you are logged
    - Creating a step with `run: npm whoami`
    - The output should be the username of your npm account
 4. Deploy your package
@@ -154,22 +159,29 @@ The following is the activity diagram.
 
 ### install/ng-add
 
-#### --projects
+#### `--projects`
 
 - **optional**
-- Default: Doesn't have any default value (array string)
 - Example:
-  - `nx generate ngx-deploy-npm:install --projects=lib-1,lib-2` – Only `lib-1` and `lib-2` are going to be configurated
+  - `nx generate ngx-deploy-npm:install --projects=lib-1,lib-2` – Only `lib-1` and `lib-2` are going to configure
 
-Specify which libraries should be configurated. Useful when you have a workspace with several libraries and don't want to overwrite existing configuration
+Specify which libraries should be configured. Useful when you have a workspace with several libraries and don't want to overwrite existing configuration
 Should be `,` separated, without spaces.
+
+### `--access` <a name="--access-ng-add-install"></a>
+
+- **optional**
+- Default: `public`
+- Example:
+  - `nx generate ngx-deploy-npm:install --access=restricted`
+
+Tells the registry whether to publish the package as public or restricted. It only applies to scoped packages, which default to restricted. If you don't have a paid account, you must publish with --access public to publish scoped packages.
 
 ### deploy
 
-#### --build-target
+#### `--build-target`
 
 - **optional**
-- Default: Doesn't have any default value (string)
 - Example:
   - `nx deploy --build-target=production` – The configuration `production` is being used to build your package
 
@@ -179,7 +191,7 @@ as specified in the `configurations` section of `workspace.json`.
 This option is equivalent to calling the command `nx build --configuration=XXX`.
 This command has no effect if the option `--no-build` option is active.
 
-#### --no-build
+#### `--no-build`
 
 - **optional**
 - Default: `false` (string)
@@ -191,16 +203,15 @@ Skip build process during deployment.
 This option is useful when the building process is handled by something else.
 This command causes the `--build-target` setting to have no effect.
 
-#### --package-version
+#### `--package-version`
 
 - **optional**
-- Default: Doesn't have any default value (string)
 - Example:
   - `nx deploy --package-version 2.3.4`
 
 It's going to put that version on your `package.json` and publish the library with that version on NPM.
 
-#### --tag
+#### `--tag`
 
 - **optional**
 - Default: `latest` (string)
@@ -209,7 +220,7 @@ It's going to put that version on your `package.json` and publish the library wi
 
 Registers the published package with the given tag, such that `npm install @` will install this version. By default, `npm publish` updates and `npm install` installs the `latest` tag. See [`npm-dist-tag`](https://docs.npmjs.com/cli/dist-tag) for details about tags.
 
-#### --access
+#### `--access`
 
 - Default: `public` (string)
 - Example:
@@ -217,16 +228,15 @@ Registers the published package with the given tag, such that `npm install @` wi
 
 Tells the registry whether to publish the package as public or restricted. It only applies to scoped packages, which default to restricted. If you don't have a paid account, you must publish with --access public to publish scoped packages.
 
-#### --otp
+#### `--otp`
 
 - **optional**
-- Default: Doesn't have any default value (string)
 - Example:
   - `nx deploy --otp TOKEN`
 
 If you have two-factor authentication enabled in auth-and-writes mode, you can provide a code from your authenticator.
 
-#### --dry-run
+#### `--dry-run`
 
 - **optional**
 - Default: `false` (boolean)
@@ -235,6 +245,16 @@ If you have two-factor authentication enabled in auth-and-writes mode, you can p
 
 For testing: Run through without making any changes. Execute with `--dry-run`, and nothing will happen. It will show a list of the options used on the console.
 
+#### `--dist-folder-path`
+
+- **optional**
+- Example:
+  - `nx deploy --dist-folder-path 'dist/my-unsupported-project'`
+
+Indicate a custom dist folder path.
+The path must relative to project's root.
+Especially useful when ngx-deploy-npm can not detect your library dist folder path automatically. [Write us an issue](https://github.com/bikecoders/ngx-deploy-npm/issues/new) if you think we should support the library you are trying to publish
+
 ## 📁 Configuration File <a name="configuration-file"></a>
 
 To avoid all these command-line cmd options, you can write down your
@@ -242,7 +262,7 @@ configuration in the `workspace.json` file in the `options` attribute
 of your deploy project's executor.
 Just change the option to lower camel case.
 
-A list of all available options is also available [here](https://github.com/bikecoders/ngx-deploy-npm/blob/master/src/deploy/schema.json).
+A list of all available options is also available [here](https://github.com/bikecoders/ngx-deploy-npm/blob/main/src/deploy/schema.json).
 
 Example:
 
@@ -269,12 +289,6 @@ Now you can just run `nx deploy YOUR-LIBRARY` without all the options in the com
 
 ## 🧐 Essential considerations <a name="essential-considerations"></a>
 
-### README and LICENCE files <!-- omit in toc -->
-
-Those files must be at the root of the library. The executor is copying them at the moment of building.
-
-If you have those files outside the project's root, use the `assets` option on the executor that compiles your application.
-
 ### Version Generation
 
 This deployer doesn't bump or generate a new package version; here, we care about doing one thing well, publish your libs to NPM. You can change the version package at publishment using the [`--package-version`](#--package-version) option.
@@ -283,7 +297,7 @@ We strongly recommend using [`@jscutlery/semver`](https://github.com/jscutlery/s
 
 For more information go to semver's [documentation](https://github.com/jscutlery/semver#triggering-executors-post-release)
 
-We use `@jscutlery/semver` here on `ngx-deploy-npm` to generate the package's next version, and we use `ngx-deploy-npm` to publish that version to NPM. Yes, it uses itself, take a look by yourself [ngx-deploy-npm/project.json](https://github.com/bikecoders/ngx-deploy-npm/blob/master/packages/ngx-deploy-npm/project.json#L55-L67)
+We use `@jscutlery/semver` here on `ngx-deploy-npm` to generate the package's next version, and we use `ngx-deploy-npm` to publish that version to NPM. Yes, it uses itself, take a look by yourself [ngx-deploy-npm/project.json](https://github.com/bikecoders/ngx-deploy-npm/blob/main/packages/ngx-deploy-npm/project.json#L55-L67)
 
 ### Only publishable libraries are being configured <!-- omit in toc -->
 

@@ -2,7 +2,7 @@ name: Publishment
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   test:
@@ -12,6 +12,10 @@ jobs:
   e2e-test:
     if: ${{ !contains(github.event.head_commit.message, 'chore(release)') }}
     uses: ./.github/workflows/e2e-test.yml
+
+  angular-e2e-test:
+    needs: test
+    uses: ./.github/workflows/angular-e2e-test.yml
 
   analysis:
     name: SonarCloud Main Analysis
@@ -34,7 +38,6 @@ jobs:
 
   release-preliminar:
     runs-on: ubuntu-latest
-    needs: test
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
@@ -45,7 +48,7 @@ jobs:
   release:
     environment: production
     runs-on: ubuntu-latest
-    needs: [release-preliminar, e2e-test]
+    needs: [release-preliminar, e2e-test, angular-e2e-test, test]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
@@ -75,7 +78,7 @@ jobs:
         run: git tag --force last-release
 
       - name: Push to protected branch
-        uses: CasperWA/push-protected@v2.10.0
+        uses: CasperWA/push-protected@v2.14.0
         with:
           token: ${{ secrets.MANAGE_REPO_TOKEN }}
           ref: ${{ github.ref }}

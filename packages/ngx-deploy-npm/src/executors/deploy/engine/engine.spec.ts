@@ -54,18 +54,13 @@ describe('engine', () => {
 
   it('should indicate that an error occurred when there is an error publishing the package', async () => {
     const customErr = 'custom err';
-    jest
-      .spyOn(exec, 'execAsync')
-      .mockImplementation(
-        () => Promise.reject(customErr) as execAsyncReturnType
-      );
+    jest.spyOn(exec, 'execAsync').mockImplementation(() => {
+      throw new Error(customErr);
+    });
 
-    try {
+    await expect(async () => {
       await engine.run(dir, options);
-      fail('should enter in the catch section');
-    } catch (error) {
-      expect(customErr).toEqual(error);
-    }
+    }).rejects.toThrow();
   });
 
   describe('Options Management', () => {
