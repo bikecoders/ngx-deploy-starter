@@ -30,7 +30,10 @@ export async function run(dir: string, options: DeployExecutorOptions) {
       npmOptions
     )}`;
 
-    const { stdout, stderr } = await execAsync(commandToPublish);
+    const maxBuffer = 100 * 1024 * 1024; // 100 times bigger than the default
+    const { stdout, stderr } = await execAsync(commandToPublish, {
+      maxBuffer, // Hot Fix for #401. A definitive solutions seems to replace exec in favor of spawn
+    });
 
     logger.info(stdout);
     logger.info(stderr);

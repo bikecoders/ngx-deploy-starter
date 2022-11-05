@@ -2,6 +2,12 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [4.3.2](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.3.1...v4.3.2) (2022-11-04)
+
+### Bug Fixes
+
+- increment exec buffer size to allow package publishment with a large set of files ([#403](https://github.com/bikecoders/ngx-deploy-npm/issues/403)) ([774b14f](https://github.com/bikecoders/ngx-deploy-npm/commit/774b14fccf73e841628a53354f2786635a1a4c0b)), closes [#401](https://github.com/bikecoders/ngx-deploy-npm/issues/401)
+
 ## [4.3.1](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.3.0...v4.3.1) (2022-10-26)
 
 ### Bug Fixes

@@ -48,7 +48,8 @@ describe('engine', () => {
     await engine.run(dir, options);
 
     expect(exec.execAsync).toHaveBeenCalledWith(
-      `npm publish "${dir}" ${optionsOnCMD}`
+      `npm publish "${dir}" ${optionsOnCMD}`,
+      expect.anything()
     );
   });
 
@@ -71,7 +72,8 @@ describe('engine', () => {
       await engine.run(dir, options);
 
       expect(exec.execAsync).toHaveBeenCalledWith(
-        `npm publish "${dir}" ${optionsOnCMD}`
+        `npm publish "${dir}" ${optionsOnCMD}`,
+        expect.anything()
       );
     });
 
@@ -86,7 +88,8 @@ describe('engine', () => {
       await engine.run(dir, options);
 
       expect(exec.execAsync).toHaveBeenCalledWith(
-        `npm publish "${dir}" ${optionsOnCMD}`
+        `npm publish "${dir}" ${optionsOnCMD}`,
+        expect.anything()
       );
     });
 
@@ -100,7 +103,8 @@ describe('engine', () => {
       await engine.run(dir, options);
 
       expect(exec.execAsync).toHaveBeenCalledWith(
-        `npm publish "${dir}" ${optionsOnCMD}`
+        `npm publish "${dir}" ${optionsOnCMD}`,
+        expect.anything()
       );
     });
   });
