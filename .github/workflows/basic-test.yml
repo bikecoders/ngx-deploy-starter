@@ -84,7 +84,7 @@ jobs:
 
       - run: npx nx test --code-coverage
 
-      - if: matrix.node-version == 16 && inputs.reports == true
+      - if: matrix.node-version == 18 && inputs.reports == true
         name: Archive coverage report
         uses: actions/upload-artifact@v3
         with:
