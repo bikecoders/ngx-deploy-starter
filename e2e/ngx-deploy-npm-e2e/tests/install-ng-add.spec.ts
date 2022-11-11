@@ -1,22 +1,23 @@
 import { ProjectConfiguration, TargetConfiguration } from '@nrwl/devkit';
-import { readJson, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
+import { readJson } from '@nrwl/nx-plugin/testing';
 
 import { DeployExecutorOptions } from '../../../packages/ngx-deploy-npm/src/executors/deploy/schema';
 import { npmAccess } from '../../../packages/ngx-deploy-npm/src/core';
 import {
+  generateLib,
   initNgxDeployNPMProject,
   installDependencies,
   installNgxDeployNPMProject,
-} from './utils';
+} from '../utils';
 
-export const installTest = () => {
+describe('install/ng-add', () => {
   const publicLib = 'node-lib1';
   let projectWorkSpacepublicLib: ProjectConfiguration;
 
   const publicLib2 = 'node-lib2';
   let projectWorkSpacePublicLib2: ProjectConfiguration;
 
-  const resctrictedLib = 'node-resctricted';
+  const restrictedLib = 'node-resctricted';
   let projectWorkSpaceRestrictedLib: ProjectConfiguration;
 
   const libNOTset = 'node-lib-not-set';
@@ -26,32 +27,22 @@ export const installTest = () => {
   installDependencies('@nrwl/node');
 
   // Init libs and projects
-  beforeEach(async () => {
-    await runNxCommandAsync(
-      `generate @nrwl/node:lib --name ${publicLib} --publishable --importPath ${publicLib}`
-    );
-    await runNxCommandAsync(
-      `generate @nrwl/node:lib --name ${publicLib2} --publishable --importPath ${publicLib2}`
-    );
-    await runNxCommandAsync(
-      `generate @nrwl/node:lib --name ${resctrictedLib} --publishable --importPath ${resctrictedLib}`
-    );
-    await runNxCommandAsync(
-      `generate @nrwl/node:lib --name ${libNOTset} --publishable --importPath ${libNOTset}`
-    );
-  }, 360000);
+  generateLib('@nrwl/node', publicLib);
+  generateLib('@nrwl/node', publicLib2);
+  generateLib('@nrwl/node', restrictedLib);
+  generateLib('@nrwl/node', libNOTset);
 
   installNgxDeployNPMProject(`--projects ${publicLib},${publicLib2}`);
 
   installNgxDeployNPMProject(
-    `--projects ${resctrictedLib} --access ${npmAccess.restricted}`
+    `--projects ${restrictedLib} --access ${npmAccess.restricted}`
   );
 
   beforeEach(() => {
     projectWorkSpacepublicLib = readJson(`libs/${publicLib}/project.json`);
     projectWorkSpacePublicLib2 = readJson(`libs/${publicLib2}/project.json`);
     projectWorkSpaceRestrictedLib = readJson(
-      `libs/${resctrictedLib}/project.json`
+      `libs/${restrictedLib}/project.json`
     );
     projectWorkSpaceLibNOTSet = readJson(`libs/${libNOTset}/project.json`);
   });
@@ -82,4 +73,4 @@ export const installTest = () => {
     );
     expect(projectWorkSpaceLibNOTSet.targets?.deploy).toEqual(undefined);
   });
-};
+});

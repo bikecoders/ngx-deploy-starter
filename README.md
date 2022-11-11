@@ -13,6 +13,17 @@
 [![Publishment Status][publishment-image]][publishment-link]
 [![Tests @next version nrwl and angular][next-tests-image]][next-tests-link]
 
+## Supported Library Generators
+
+[![Angular][angular-image]][angular-link]
+[![NestJS][nest-js-image]][nest-js-link]
+[![Next JS][next-js-image]][next-js-link]
+[![Node][node-image]][node-link]
+[![JS][js-image]][js-link]
+[![Nx Plugin][nx-image]][nx-link]
+[![React][react-image]][react-link]
+[![React Native][react-native-image]][react-native-link]
+
 <!-- Images -->
 
 [sonar-reliability-image]: https://sonarcloud.io/api/project_badges/measure?project=bikecoders_ngx-deploy-npm&metric=reliability_rating
@@ -20,11 +31,22 @@
 [sonar-maintainability-image]: https://sonarcloud.io/api/project_badges/measure?project=bikecoders_ngx-deploy-npm&metric=sqale_rating
 [publishment-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/publishment.yml/badge.svg?branch=main
 [npm-image]: https://badge.fury.io/js/ngx-deploy-npm.svg
-[mit-licence-image]: https://img.shields.io/badge/license-MIT-orange.svg?color=blue&style=flat-square
+[mit-licence-image]: https://img.shields.io/badge/license-MIT-orange.svg?color=blue&style=flat
 [conventional-commits-image]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
 [downloads-image]: https://img.shields.io/npm/dm/ngx-deploy-npm
 [supported-node-versions]: https://img.shields.io/badge/node-v14%20v16%20v18-green
 [next-tests-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/next-test.yml/badge.svg
+
+<!-- Projects -->
+
+[angular-image]: https://img.shields.io/badge/angular-%23DD0031.svg?style=flat&logo=angular&logoColor=white
+[nest-js-image]: https://img.shields.io/badge/nestjs-%23E0234E.svg?style=flat&logo=nestjs&logoColor=white
+[next-js-image]: https://img.shields.io/badge/Next-black?style=flat&logo=next.js&logoColor=white
+[node-image]: https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white
+[js-image]: https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E
+[nx-image]: https://img.shields.io/badge/nx-143055?style=flat&logo=nx&logoColor=white
+[react-image]: https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB
+[react-native-image]: https://img.shields.io/badge/react_native-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB
 
 <!-- URLs -->
 
@@ -34,6 +56,17 @@
 [mit-licence-url]: http://opensource.org/licenses/MIT
 [conventional-commits-url]: https://conventionalcommits.org
 [next-tests-link]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/next-test.yml
+
+<!-- Projects -->
+
+[angular-link]: https://nx.dev/packages/angular
+[nest-js-link]: https://nx.dev/packages/nest
+[next-js-link]: https://nx.dev/packages/next
+[node-link]: https://nx.dev/packages/node
+[js-link]: https://nx.dev/packages/js
+[nx-link]: https://nx.dev/packages/nx-plugin
+[react-link]: https://nx.dev/packages/react
+[react-native-link]: https://nx.dev/packages/react-native
 
 ![Cover Image](docs/cover.png)
 
