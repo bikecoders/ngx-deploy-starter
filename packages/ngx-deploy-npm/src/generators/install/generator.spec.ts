@@ -52,17 +52,19 @@ describe('install/ng-add generator', () => {
 
     libPublisable = {
       key: 'libPublishable1',
-      projectConfig: getLibPublishable(),
+      projectConfig: getLibPublishable('libPublishable1'),
     };
 
     libPublisable2 = {
-      key: 'libPublishableWithNoEspecification',
-      projectConfig: getLibWithNoSpecification(),
+      key: 'libPublishableWithNoSpecification',
+      projectConfig: getLibWithNoSpecification(
+        'libPublishableWithNoSpecification'
+      ),
     };
 
     libPublisableWithProdMode = {
-      key: 'libPublisablWithProd',
-      projectConfig: getLibPublishableWithProdMode(),
+      key: 'libPublisableWithProd',
+      projectConfig: getLibPublishableWithProdMode('libPublisableWithProd'),
     };
 
     workspaceConfig.set(libPublisable.key, libPublisable.projectConfig);
@@ -90,9 +92,15 @@ describe('install/ng-add generator', () => {
         } as DeployExecutorOptions,
       };
 
-      workspaceConfig.set('project', getApplication());
-      workspaceConfig.set('non-publishable', getNonPublishableLib());
-      workspaceConfig.set('non-publishable2', getNonPublishableLib());
+      workspaceConfig.set('project', getApplication('project'));
+      workspaceConfig.set(
+        'non-publishable',
+        getNonPublishableLib('non-publishable')
+      );
+      workspaceConfig.set(
+        'non-publishable2',
+        getNonPublishableLib('non-publishable2')
+      );
     });
 
     // create workspace
