@@ -1,5 +1,5 @@
 {
-  "root": "packages/ngx-deploy-npm",
+  "name": "ngx-deploy-npm",
   "sourceRoot": "packages/ngx-deploy-npm/src",
   "projectType": "library",
   "targets": {
@@ -13,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/ngx-deploy-npm"],
+      "outputs": ["{workspaceRoot}/coverage/packages/ngx-deploy-npm"],
       "options": {
         "jestConfig": "packages/ngx-deploy-npm/jest.config.js",
         "passWithNoTests": true

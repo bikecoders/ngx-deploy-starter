@@ -1,5 +1,5 @@
 {
-  "root": "e2e/ngx-deploy-npm-e2e",
+  "name": "ngx-deploy-npm-e2e",
   "projectType": "application",
   "sourceRoot": "e2e/ngx-deploy-npm-e2e/src",
   "targets": {
