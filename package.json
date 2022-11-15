@@ -34,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "commitizen": "4.2.5",
+    "create-nx-workspace": "^15.0.13",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "8.5.0",

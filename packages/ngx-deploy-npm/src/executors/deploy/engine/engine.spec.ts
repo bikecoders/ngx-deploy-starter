@@ -1,15 +1,8 @@
-import { PromiseWithChild } from 'child_process';
-
 import { DeployExecutorOptions } from '../schema';
 import { npmAccess } from '../../../core';
 import * as engine from './engine';
-import * as exec from '../utils/execute-async';
+import * as spawn from '../utils/spawn-async';
 import * as setPackage from '../utils/set-package-version';
-
-type execAsyncReturnType = PromiseWithChild<{
-  stdout: string;
-  stderr: string;
-}>;
 
 describe('engine', () => {
   let dir: string;
@@ -21,18 +14,12 @@ describe('engine', () => {
 
   // Spies
   beforeEach(() => {
-    jest.spyOn(exec, 'execAsync').mockImplementation(
-      () =>
-        Promise.resolve({
-          stdout: 'package published',
-          stderr: undefined,
-        }) as unknown as execAsyncReturnType
-    );
+    jest.spyOn(spawn, 'spawnAsync').mockImplementation(() => Promise.resolve());
   });
 
   // Data
   beforeEach(() => {
-    dir = 'customDir';
+    dir = '/absolute/custom/path';
   });
 
   it('should call NPM Publish with the right options', async () => {
@@ -43,38 +30,47 @@ describe('engine', () => {
       buildTarget: 'production',
       dryRun: true,
     };
-    const optionsOnCMD = `--access ${options.access} --tag ${options.tag} --otp ${options.otp} --dry-run ${options.dryRun}`;
+    const optionsArray = [
+      '--access',
+      npmAccess.restricted,
+      '--tag',
+      'next',
+      '--otp',
+      'someValue',
+      '--dry-run',
+      'true',
+    ];
 
     await engine.run(dir, options);
 
-    expect(exec.execAsync).toHaveBeenCalledWith(
-      `npm publish "${dir}" ${optionsOnCMD}`,
-      expect.anything()
-    );
+    expect(spawn.spawnAsync).toHaveBeenCalledWith('npm', [
+      'publish',
+      dir,
+      ...optionsArray,
+    ]);
   });
 
   it('should indicate that an error occurred when there is an error publishing the package', async () => {
     const customErr = 'custom err';
-    jest.spyOn(exec, 'execAsync').mockImplementation(() => {
-      throw new Error(customErr);
-    });
+    jest
+      .spyOn(spawn, 'spawnAsync')
+      .mockImplementation(() => Promise.reject(new Error(customErr)));
 
-    await expect(async () => {
-      await engine.run(dir, options);
-    }).rejects.toThrow();
+    await expect(() => engine.run(dir, options)).rejects.toThrow();
   });
 
   describe('Options Management', () => {
     it('should set the default options', async () => {
       const options: DeployExecutorOptions = {};
-      const optionsOnCMD = `--access public`;
+      const optionsArray = ['--access', npmAccess.public];
 
       await engine.run(dir, options);
 
-      expect(exec.execAsync).toHaveBeenCalledWith(
-        `npm publish "${dir}" ${optionsOnCMD}`,
-        expect.anything()
-      );
+      expect(spawn.spawnAsync).toHaveBeenCalledWith('npm', [
+        'publish',
+        dir,
+        ...optionsArray,
+      ]);
     });
 
     it('should overwrite the default option dry-run', async () => {
@@ -83,14 +79,24 @@ describe('engine', () => {
         dryRun: true,
         tag: 'random-tag',
       };
-      const optionsOnCMD = `--access public --tag ${options.tag} --otp ${options.otp} --dry-run true`;
+      const optionsArray = [
+        '--access',
+        'public',
+        '--tag',
+        options.tag,
+        '--otp',
+        options.otp,
+        '--dry-run',
+        'true',
+      ];
 
       await engine.run(dir, options);
 
-      expect(exec.execAsync).toHaveBeenCalledWith(
-        `npm publish "${dir}" ${optionsOnCMD}`,
-        expect.anything()
-      );
+      expect(spawn.spawnAsync).toHaveBeenCalledWith('npm', [
+        'publish',
+        dir,
+        ...optionsArray,
+      ]);
     });
 
     it('should overwrite the default option access', async () => {
@@ -98,14 +104,20 @@ describe('engine', () => {
         tag: 'random-tag',
         access: npmAccess.restricted,
       };
-      const optionsOnCMD = `--access ${npmAccess.restricted} --tag ${options.tag}`;
+      const optionsArray = [
+        '--access',
+        npmAccess.restricted,
+        '--tag',
+        options.tag,
+      ];
 
       await engine.run(dir, options);
 
-      expect(exec.execAsync).toHaveBeenCalledWith(
-        `npm publish "${dir}" ${optionsOnCMD}`,
-        expect.anything()
-      );
+      expect(spawn.spawnAsync).toHaveBeenCalledWith('npm', [
+        'publish',
+        dir,
+        ...optionsArray,
+      ]);
     });
   });
 
