@@ -1,10 +1,10 @@
 import { logger } from '@nrwl/devkit';
 
 import {
-  execAsync,
   prepareOptions,
   setPackageVersion,
   NpmPublishOptions,
+  spawnAsync,
 } from '../utils';
 import { DeployExecutorOptions } from '../schema';
 
@@ -26,17 +26,12 @@ export async function run(dir: string, options: DeployExecutorOptions) {
     }
 
     const npmOptions = extractOnlyNPMOptions(options);
-    const commandToPublish = `npm publish "${dir}" ${getOptionsString(
-      npmOptions
-    )}`;
 
-    const maxBuffer = 100 * 1024 * 1024; // 100 times bigger than the default
-    const { stdout, stderr } = await execAsync(commandToPublish, {
-      maxBuffer, // Hot Fix for #401. A definitive solutions seems to replace exec in favor of spawn
-    });
-
-    logger.info(stdout);
-    logger.info(stderr);
+    await spawnAsync('npm', [
+      'publish',
+      dir,
+      ...getOptionsStringArr(npmOptions),
+    ]);
 
     if (options.dryRun) {
       logger.info('The options are:');
@@ -71,21 +66,21 @@ function extractOnlyNPMOptions({
   };
 }
 
-function getOptionsString(options: NpmPublishOptions) {
+function getOptionsStringArr(options: NpmPublishOptions): string[] {
   return (
     Object.keys(options)
       // Get only options with value
-      .filter(optKey => !!(options as Record<string, string>)[optKey])
+      .filter(optKey => !!(options as Record<string, unknown>)[optKey])
       // to CMD option
       .map(optKey => ({
         cmdOptions: `--${toKebabCase(optKey)}`,
-        value: (options as Record<string, string>)[optKey],
+        value: (options as Record<string, string | boolean | number>)[optKey],
       }))
-      // to string
-      .map(
-        cmdOptionValue => `${cmdOptionValue.cmdOptions} ${cmdOptionValue.value}`
-      )
-      .join(' ')
+      // push the command and the value to the array
+      .flatMap(cmdOptionValue => [
+        cmdOptionValue.cmdOptions,
+        cmdOptionValue.value.toString(),
+      ])
   );
 
   function toKebabCase(str: string) {
