@@ -1,4 +1,4 @@
-import path = require('path');
+import * as path from 'path';
 
 import { DeployExecutorOptions } from '../../../../schema';
 import { IBuildOptions } from '../../shared';

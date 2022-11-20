@@ -1,24 +1,35 @@
 import { logger } from '@nrwl/devkit';
 import { spawn } from 'child_process';
 
-export function spawnAsync(command: string, args?: string[]): Promise<void> {
+export function spawnAsync(
+  mainProgram: string,
+  programArgs?: string[]
+): Promise<void> {
   return new Promise((resolve, reject) => {
-    const process = spawn(command, args);
+    let command = mainProgram;
+    let args = programArgs || [];
 
-    process.stdout.on('data', data => {
+    if (process.platform === 'win32') {
+      command = process.env.comspec as string;
+      args = ['/c', mainProgram, ...args];
+    }
+
+    const childProcess = spawn(command, args);
+
+    childProcess.stdout.on('data', data => {
       logger.info(data.toString());
     });
-    process.stderr.on('data', data => {
+    childProcess.stderr.on('data', data => {
       logger.info(data.toString());
     });
 
-    process.on('close', code => {
+    childProcess.on('close', code => {
       if (code === 0) {
         resolve();
       } else {
         reject(code);
       }
     });
-    process.on('error', reject);
+    childProcess.on('error', reject);
   });
 }

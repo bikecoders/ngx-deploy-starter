@@ -1,18 +1,17 @@
+import * as path from 'path';
+
 import { UnapplicableStrategyError } from '../shared';
 import { customDistPathStrategy } from './dist-folder-path-option';
+import { mockProjectRoot } from '../../../../../../__mocks__/generators';
 
 describe('distFolderPathStrategy', () => {
-  let projectRoot: string;
-
-  beforeEach(() => {
-    projectRoot = 'some/fake/root/folder';
-  });
+  const projectRoot = mockProjectRoot;
+  const distFolderPath = path.join('my', 'custom-folder');
 
   it('should return the right dist path', () => {
-    const distFolderPath = 'my/custom-folder';
-    const expectedPath = `${projectRoot}/${distFolderPath}`;
+    const expectedPath = path.join(projectRoot, distFolderPath);
 
-    const path = customDistPathStrategy.executor(
+    const customPath = customDistPathStrategy.executor(
       projectRoot,
       {
         outputPath: 'some/path',
@@ -22,7 +21,7 @@ describe('distFolderPathStrategy', () => {
       }
     );
 
-    expect(path).toBe(expectedPath);
+    expect(customPath).toBe(expectedPath);
   });
 
   it('should throw an error if trying the execute the strategy when it is not applicable', () => {
@@ -39,8 +38,6 @@ describe('distFolderPathStrategy', () => {
 
   describe('isStrategyApplicable', () => {
     it('should indicate positively if the strategy is applicable', () => {
-      const distFolderPath = 'my/custom-folder';
-
       const isApplicable = customDistPathStrategy.isStrategyApplicable(
         {
           outputPath: 'some/path',
