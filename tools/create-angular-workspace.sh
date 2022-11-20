@@ -16,6 +16,9 @@ echo "Create Angular Workspace"
 npx ng new --name angular-workspace --interactive false
 cd angular-workspace
 
+# Set the workspace on the right path
+export NX_WORKSPACE_ROOT_PATH=`pwd`
+
 echo "Generate lib"
 npx ng generate library angular-lib
 
