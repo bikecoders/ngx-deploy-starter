@@ -7,6 +7,8 @@ jest.mock('child_process');
 const mockedChildProcess: SpawnMock = child_process as unknown as SpawnMock;
 
 describe('spawnAsync', () => {
+  setMockPlatform('linux');
+
   afterAll(() => {
     jest.clearAllMocks();
   });
@@ -68,4 +70,69 @@ describe('spawnAsync', () => {
 
     expect(logger.info).toHaveBeenCalledWith(buffer.toString());
   });
+
+  describe('Windows OS', () => {
+    setMockPlatform('win32', {
+      comspec: 'C:\\Windows\\system\\cmd.exe',
+    });
+
+    it('should complete the promise when the command finish', async () => {
+      const command = 'dir';
+
+      const promise = spawnAsync(command);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      mockedChildProcess.listOfChildProcess[process.env.comspec!].emit(
+        'close',
+        0
+      );
+      const returnedValue = await promise;
+
+      expect(returnedValue).toBeUndefined();
+    });
+
+    it('should have called original spawn with the right attributes', async () => {
+      const command = 'dir';
+      const commandParams = ['/w'];
+
+      const promise = spawnAsync(command, commandParams);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      mockedChildProcess.listOfChildProcess[process.env.comspec!].emit(
+        'close',
+        0
+      );
+      await promise;
+
+      expect(mockedChildProcess.spawn).toHaveBeenCalledWith(
+        process.env.comspec,
+        ['/c', command, ...commandParams]
+      );
+    });
+  });
 });
+
+function setMockPlatform(
+  mockPlatform: typeof process.platform,
+  environmentVar?: Record<string, string>
+) {
+  const originalEnv = process.env;
+  const originalPlatform = process.platform;
+
+  beforeEach(() => {
+    jest.resetModules();
+    process.env = {
+      ...originalEnv,
+      ...(environmentVar ? environmentVar : {}),
+    };
+
+    Object.defineProperty(process, 'platform', {
+      value: mockPlatform,
+    });
+  });
+
+  afterEach(() => {
+    process.env = originalEnv;
+    Object.defineProperty(process, 'platform', {
+      value: originalPlatform,
+    });
+  });
+}

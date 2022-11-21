@@ -1,5 +1,6 @@
 import * as path from 'path';
 
+import { mockProjectRoot } from '../../../../../../__mocks__/generators';
 import * as fileUtils from '../../../../utils/file-utils';
 import { IBuildOptions } from '../../shared';
 import { UnapplicableStrategyError } from '../shared';
@@ -10,7 +11,7 @@ import {
 } from './ng-package';
 
 describe('ngPackageStrategy', () => {
-  let projectRoot: string;
+  const projectRoot = mockProjectRoot;
   let buildOptions: IBuildOptions;
   let destValue: string;
 
@@ -18,8 +19,6 @@ describe('ngPackageStrategy', () => {
     buildOptions = {
       project: 'libs/angular-lib/ng-package.json',
     };
-
-    projectRoot = '/some/absolute/path/mock-project';
 
     destValue = '../../dist/my-project';
   });
@@ -37,7 +36,7 @@ describe('ngPackageStrategy', () => {
   });
 
   it('should return the right dist path', async () => {
-    const expectedPath = path.join(projectRoot, 'dist/my-project');
+    const expectedPath = path.join(projectRoot, 'dist', 'my-project');
 
     const distPath = await ngPackageStrategy.executor(
       projectRoot,
@@ -53,7 +52,7 @@ describe('ngPackageStrategy', () => {
 
     expect(fileUtils.readFileAsync).toBeCalledWith(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      `${projectRoot}/${buildOptions.project!}`,
+      path.join(projectRoot, buildOptions.project!),
       expect.anything()
     );
   });

@@ -29,7 +29,7 @@ function spawnMock(command: string) {
 
 const mockedChildProcessModule = {
   ...(jest.requireActual('child_process') as typeof OriginalChildProcessModule),
-  spawn: spawnMock,
+  spawn: jest.fn().mockImplementation(spawnMock),
   listOfChildProcess,
 };
 

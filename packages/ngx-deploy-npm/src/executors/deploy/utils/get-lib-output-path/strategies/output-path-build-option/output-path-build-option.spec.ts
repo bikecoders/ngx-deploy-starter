@@ -1,24 +1,23 @@
+import * as path from 'path';
+
 import { UnapplicableStrategyError } from '../shared';
 import { outputPathOptionStrategy } from './output-path-build-option';
+import { mockProjectRoot } from '../../../../../../__mocks__/generators';
 
 describe('outputPathOptionStrategy', () => {
-  let projectRoot: string;
-
-  beforeEach(() => {
-    projectRoot = 'some/fake/root/folder';
-  });
+  const projectRoot = mockProjectRoot;
 
   it('should return the right dist path', () => {
     const outputPath = 'my/custom-folder';
-    const expectedPath = `${projectRoot}/${outputPath}`;
+    const expectedPath = path.join(projectRoot, outputPath);
 
-    const path = outputPathOptionStrategy.executor(
+    const gottenPath = outputPathOptionStrategy.executor(
       projectRoot,
       { outputPath },
       {}
     );
 
-    expect(path).toBe(expectedPath);
+    expect(gottenPath).toBe(expectedPath);
   });
 
   it('should throw an error if trying the execute the strategy when it is not applicable', () => {

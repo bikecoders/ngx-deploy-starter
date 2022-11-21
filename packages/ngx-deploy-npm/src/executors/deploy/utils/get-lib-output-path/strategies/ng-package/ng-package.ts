@@ -1,5 +1,5 @@
 import { logger } from '@nrwl/devkit';
-import path = require('path');
+import * as path from 'path';
 
 import { DeployExecutorOptions } from '../../../../schema';
 import { readFileAsync } from '../../../file-utils';

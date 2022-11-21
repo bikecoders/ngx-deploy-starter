@@ -65,10 +65,11 @@ jobs:
           path: dist
 
   unit-test:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [14, 16, 18]
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
         with:

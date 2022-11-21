@@ -1,3 +1,4 @@
+import * as path from 'path';
 import { ProjectConfiguration } from '@nrwl/devkit';
 
 export const getLibPublishable = (libName: string): ProjectConfiguration => {
@@ -285,3 +286,5 @@ export const getLibWithNoSpecification = (
     tags: [],
   };
 };
+
+export const mockProjectRoot = path.join('some', 'fake', 'root', 'folder');
