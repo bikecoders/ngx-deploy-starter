@@ -49,7 +49,7 @@ function chooseStrategy(
 
 export class NotAbleToDetermineDistPathError extends Error {
   constructor() {
-    const errorMsg = `ngx-deploy-npm was not able to detected the dist path.\n
+    const errorMsg = `ngx-deploy-npm was not able to detect the dist path.\n
 Use the option --dist-folder-path to indicate where is the dist folder of your library\n
 Write us an issue to add support to your library -> https://github.com/bikecoders/ngx-deploy-npm/issues/new`;
     super(errorMsg);
