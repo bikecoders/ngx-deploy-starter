@@ -6,6 +6,23 @@ import { readFileAsync } from '../../../file-utils';
 import { IBuildOptions } from '../../shared';
 import { IStrategy, UnapplicableStrategyError } from '../shared';
 
+/**
+ * The strategy applied for Angular Libraries.
+ * Angular libraries have a file called `ng-package.json`.
+ * Inside that JSON file, there is a property called `dest`, which will indicate where
+ * the dist folder path is
+ *
+ * @example ```json
+ * // ng-package.json
+ * {
+ *   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+ *   "dest": "../../dist/angular-lib", // <---- dist folder path
+ *   "lib": {
+ *     "entryFile": "src/public-api.ts"
+ *   }
+ * }
+ * ```
+ */
 export const ngPackageStrategy: IStrategy = {
   name: 'ngPackage.json file',
   isStrategyApplicable: (buildOptions: IBuildOptions) =>
