@@ -2,6 +2,12 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [4.3.10](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.3.9...v4.3.10) (2022-12-06)
+
+### Bug Fixes
+
+- fix grammar on "not able to determine dist folder path" error message ([#447](https://github.com/bikecoders/ngx-deploy-npm/issues/447)) ([f4e3439](https://github.com/bikecoders/ngx-deploy-npm/commit/f4e34395db8a3e1fbf85dcca62e682504034cdbe))
+
 ## [4.3.9](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.3.8...v4.3.9) (2022-12-04)
 
 ## [4.3.8](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.3.7...v4.3.8) (2022-11-30)

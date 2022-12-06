@@ -1,6 +1,6 @@
 {
   "name": "ngx-deploy-npm",
-  "version": "4.3.9",
+  "version": "4.3.10",
   "description": "Publish your libraries to NPM with just one command",
   "main": "src/index.js",
   "generators": "./generators.json",
