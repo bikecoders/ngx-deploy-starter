@@ -1737,9 +1737,9 @@ at-least-node@^1.0.0:
   integrity sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
 
 axios@^1.0.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.2.1.tgz#44cf04a3c9f0c2252ebd85975361c026cb9f864a"
-  integrity sha512-I88cFiGu9ryt/tfVEi4kX2SITsvDddTajXTOFmt2uK1ZVA8LytjtdeyefdQWEf5PU8w+4SSJDoYnggflB5tW4A==
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.2.2.tgz#72681724c6e6a43a9fea860fc558127dbe32f9f1"
+  integrity sha512-bz/J4gS2S3I7mpN/YZfGFTqhXTYzRho8Ay38w2otuuDR322KzFIWm/4W2K6gIwvWaws5n+mnb7D1lN9uD+QH6Q==
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"
@@ -2454,9 +2454,9 @@ cosmiconfig@^7.0.0:
     yaml "^1.10.0"
 
 create-nx-workspace@^15.0.13:
-  version "15.4.1"
-  resolved "https://registry.yarnpkg.com/create-nx-workspace/-/create-nx-workspace-15.4.1.tgz#cb764eba67d2a684908745b851665b86184ae5bc"
-  integrity sha512-XQLRfAb2zby00jB+0Hzka02e3eT8g2hDL9v169UP+jttAnsL2l5wuIwLXFwtunnDNGZughK7kCxPeiGfjNA2Bg==
+  version "15.5.1"
+  resolved "https://registry.yarnpkg.com/create-nx-workspace/-/create-nx-workspace-15.5.1.tgz#a72ca43c519f34122f0bc80811ffc5f4143bd2da"
+  integrity sha512-FxJtCgCIAmyAjArZc0l6TC4QkEvk+MWMSKNIxJqofUfZNreI9eqkg/kPa5AlmijkKhL/tljQEuDoJighvVhJaQ==
   dependencies:
     axios "^1.0.0"
     chalk "4.1.0"
