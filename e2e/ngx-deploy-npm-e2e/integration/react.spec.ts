@@ -6,5 +6,8 @@ describe('React', () => {
   const libName = 'react-lib';
   const nxPlugin = '@nrwl/react';
 
-  basicSetTestForLibs(libName, nxPlugin);
+  basicSetTestForLibs(libName, nxPlugin, {
+    libGeneratorCommandOptions:
+      '--style css --bundler vite --unitTestRunner jest',
+  });
 });

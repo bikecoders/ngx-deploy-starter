@@ -34,6 +34,7 @@ describe('Deploy Angular apps', () => {
       target: {
         executor: 'ngx-deploy-npm',
       },
+      projectGraph: {},
     } as nxDevKit.ExecutorContext;
 
     outputPath = `${context.root}/dist/path/to/project/${PROJECT}`;
@@ -60,6 +61,18 @@ describe('Deploy Angular apps', () => {
           },
         } as AsyncIterableIterator<{ success: boolean }>)
       );
+
+    jest
+      .spyOn(nxDevKit, 'parseTargetString')
+      .mockImplementation(targetString => {
+        const targetArr = targetString.split(':');
+
+        return {
+          project: targetArr[0],
+          target: targetArr[1],
+          configuration: targetArr[2],
+        };
+      });
   });
 
   it('should invoke the builder', async () => {
@@ -123,6 +136,14 @@ describe('Deploy Angular apps', () => {
       await expect(() =>
         deploy(mockEngine, context, getMockBuildTarget(), {})
       ).rejects.toThrowError(NotAbleToGetDistFolderPathError);
+    });
+
+    it('should throw if context.projectGraph is undefined', async () => {
+      delete context.projectGraph;
+
+      await expect(() =>
+        deploy(mockEngine, context, getMockBuildTarget(), {})
+      ).rejects.toThrowError('context.projectGraph is undefined');
     });
   });
 });

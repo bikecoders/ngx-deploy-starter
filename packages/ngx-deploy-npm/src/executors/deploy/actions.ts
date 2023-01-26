@@ -18,7 +18,15 @@ export default async function deploy(
   buildTarget: BuildTarget,
   options: DeployExecutorOptions
 ) {
-  const targetDescription = parseTargetString(buildTarget.name);
+  // This should be removed on V17. context.projectGraph is going to be required
+  if (!context.projectGraph) {
+    throw new Error('context.projectGraph is undefined');
+  }
+
+  const targetDescription = parseTargetString(
+    buildTarget.name,
+    context.projectGraph
+  );
 
   if (options.noBuild) {
     logger.info(`📦 Skipping build`);
