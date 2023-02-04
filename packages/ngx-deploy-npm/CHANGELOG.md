@@ -2,6 +2,17 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [5.0.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.3.11...v5.0.0) (2023-02-04)
+
+### Features
+
+- widen peer dependency on @nrwl/devkit ([#473](https://github.com/bikecoders/ngx-deploy-npm/issues/473)) ([c210bfb](https://github.com/bikecoders/ngx-deploy-npm/commit/c210bfbbd08b07e4ecd90a0e029c166f729b3d70))
+
+### BREAKING CHANGES
+
+- Using peerDependencies with npm < 7 may result in unexpected results. Use
+  --legacy-peer-deps if needed.
+
 ## [4.3.11](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.3.10...v4.3.11) (2023-01-26)
 
 ## [4.3.10](https://github.com/bikecoders/ngx-deploy-npm/compare/v4.3.9...v4.3.10) (2022-12-06)
