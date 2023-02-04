@@ -10,8 +10,10 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {
-    "@nrwl/devkit": "15.6.2"
+  "peerDependencies": {
+    "@nrwl/devkit": "^15.0.0",
+    "@nrwl/workspace": "^15.0.0",
+    "nx": "^15.0.0"
   },
   "ng-add": {
     "save": "devDependencies"
