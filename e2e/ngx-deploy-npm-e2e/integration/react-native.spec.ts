@@ -4,6 +4,7 @@ import {
   installDependencies,
   generateLib,
   installNgxDeployNPMProject,
+  currentNrwlVersion,
 } from '../utils';
 
 describe('React Native', () => {
@@ -11,17 +12,18 @@ describe('React Native', () => {
 
   const libName = 'react-native-lib';
   const nxPlugin = '@nrwl/react-native';
+  const uniqLibName = uniq(libName);
 
   installDependencies(nxPlugin);
 
-  const uniqLibName = uniq(libName);
-
-  generateLib(nxPlugin, uniqLibName);
-
   beforeEach(() => {
     runNxCommand(`generate ${nxPlugin}:init`);
-    runCommand('yarn add -D @babel/preset-react @nrwl/web');
-  }, 120000);
+    runCommand(
+      `yarn add -D @babel/preset-react @nrwl/web@${currentNrwlVersion}`
+    );
+  });
+
+  generateLib(nxPlugin, uniqLibName);
 
   beforeEach(() => {
     runNxCommand(
