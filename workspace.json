@@ -1,7 +1,0 @@
-{
-  "version": 2,
-  "projects": {
-    "ngx-deploy-npm": "packages/ngx-deploy-npm",
-    "ngx-deploy-npm-e2e": "e2e/ngx-deploy-npm-e2e"
-  }
-}
