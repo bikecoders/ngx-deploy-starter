@@ -1,4 +1,4 @@
-import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
+import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import {
   Tree,
   addProjectConfiguration,
@@ -44,7 +44,7 @@ describe('install/ng-add generator', () => {
   beforeEach(() => {
     rawOptions = {};
 
-    appTree = createTreeWithEmptyV1Workspace();
+    appTree = createTreeWithEmptyWorkspace();
   });
 
   beforeEach(() => {
