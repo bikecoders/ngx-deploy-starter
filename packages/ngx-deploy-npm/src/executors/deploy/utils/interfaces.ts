@@ -2,7 +2,7 @@ import { DeployExecutorOptions } from '../schema';
 
 export type NpmPublishOptions = Pick<
   DeployExecutorOptions,
-  'access' | 'tag' | 'otp' | 'dryRun'
+  'access' | 'tag' | 'otp' | 'dryRun' | 'registry'
 >;
 
 export interface BuildTarget {

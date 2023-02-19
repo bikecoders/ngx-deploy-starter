@@ -57,12 +57,14 @@ function extractOnlyNPMOptions({
   tag,
   otp,
   dryRun,
+  registry,
 }: DeployExecutorOptions): NpmPublishOptions {
   return {
     access,
     tag,
     otp,
     dryRun,
+    registry,
   };
 }
 

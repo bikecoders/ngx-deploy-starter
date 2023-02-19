@@ -28,6 +28,10 @@ export interface DeployExecutorOptions {
    */
   otp?: string | number;
   /**
+   * Configure npm to use any compatible registry you like, and even run your own registry.
+   */
+  registry?: string;
+  /**
    * For testing: Run through without making any changes. Execute with --dry-run and nothing will happen.
    */
   dryRun?: boolean;
