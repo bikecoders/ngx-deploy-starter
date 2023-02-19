@@ -38,6 +38,10 @@
       "type": ["string", "number"],
       "description": "If you have two-factor authentication enabled in auth-and-writes mode then you can provide a code from your authenticator with this. If you don't include this and you're running from a TTY then you'll be prompted."
     },
+    "registry": {
+      "type": "string",
+      "description": "Configure npm to use any compatible registry you like, and even run your own registry."
+    },
     "dryRun": {
       "type": "boolean",
       "description": "For testing: Run through without making any changes. Execute with --dry-run and nothing will happen.",

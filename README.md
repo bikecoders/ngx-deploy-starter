@@ -276,6 +276,14 @@ Tells the registry whether to publish the package as public or restricted. It on
 
 If you have two-factor authentication enabled in auth-and-writes mode, you can provide a code from your authenticator.
 
+#### `--registry`
+
+- **optional**
+- Example:
+  - `nx deploy --registry http://localhost:4873`
+
+Configure npm to use any compatible registry you like, and even run your own registry.
+
 #### `--dry-run`
 
 - **optional**
@@ -302,7 +310,7 @@ configuration in the `workspace.json` file in the `options` attribute
 of your deploy project's executor.
 Just change the option to lower camel case.
 
-A list of all available options is also available [here](https://github.com/bikecoders/ngx-deploy-npm/blob/main/src/deploy/schema.json).
+A list of all available options is also available [here](https://github.com/bikecoders/ngx-deploy-npm/blob/main/packages/ngx-deploy-npm/src/executors/deploy/schema.json).
 
 Example:
 
