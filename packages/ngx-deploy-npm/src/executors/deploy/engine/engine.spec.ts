@@ -28,6 +28,7 @@ describe('engine', () => {
       tag: 'next',
       otp: 'someValue',
       buildTarget: 'production',
+      registry: 'http://localhost:4873',
       dryRun: true,
     };
     const optionsArray = [
@@ -39,6 +40,8 @@ describe('engine', () => {
       'someValue',
       '--dry-run',
       'true',
+      '--registry',
+      'http://localhost:4873',
     ];
 
     await engine.run(dir, options);
@@ -73,32 +76,6 @@ describe('engine', () => {
       ]);
     });
 
-    it('should overwrite the default option dry-run', async () => {
-      const options: DeployExecutorOptions = {
-        otp: 'random-text',
-        dryRun: true,
-        tag: 'random-tag',
-      };
-      const optionsArray = [
-        '--access',
-        'public',
-        '--tag',
-        options.tag,
-        '--otp',
-        options.otp,
-        '--dry-run',
-        'true',
-      ];
-
-      await engine.run(dir, options);
-
-      expect(spawn.spawnAsync).toHaveBeenCalledWith('npm', [
-        'publish',
-        dir,
-        ...optionsArray,
-      ]);
-    });
-
     it('should overwrite the default option access', async () => {
       const options = {
         tag: 'random-tag',
@@ -108,7 +85,7 @@ describe('engine', () => {
         '--access',
         npmAccess.restricted,
         '--tag',
-        options.tag,
+        'random-tag',
       ];
 
       await engine.run(dir, options);
