@@ -2,6 +2,12 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [5.2.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v5.1.0...v5.2.0) (2023-02-19)
+
+### Features
+
+- add "registry" option for the deploy executor ([#483](https://github.com/bikecoders/ngx-deploy-npm/issues/483)) ([de8bb70](https://github.com/bikecoders/ngx-deploy-npm/commit/de8bb709878a6beb0e7cdc7ab0f953ef577767b4))
+
 # [5.1.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v5.0.0...v5.1.0) (2023-02-18)
 
 ### Features
