@@ -19,7 +19,7 @@ describe('React Native', () => {
   beforeEach(() => {
     runNxCommand(`generate ${nxPlugin}:init`);
     runCommand(
-      `yarn add -D @babel/preset-react @nrwl/web@${currentNrwlVersion}`
+      `npm add -D @babel/preset-react @nrwl/web@${currentNrwlVersion}`
     );
   });
 

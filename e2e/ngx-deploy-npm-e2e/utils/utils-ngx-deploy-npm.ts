@@ -1,4 +1,8 @@
-import { ensureNxProject, runNxCommand } from '@nrwl/nx-plugin/testing';
+import {
+  ensureNxProject,
+  runNxCommand,
+  runPackageManagerInstall,
+} from '@nrwl/nx-plugin/testing';
 
 export function initNgxDeployNPMProject() {
   // Init project
@@ -12,5 +16,6 @@ export function initNgxDeployNPMProject() {
 export function installNgxDeployNPMProject(options: string = '') {
   beforeEach(() => {
     runNxCommand(`generate ngx-deploy-npm:install ${options}`);
+    runPackageManagerInstall();
   }, 5000);
 }

@@ -34,7 +34,7 @@ jobs:
 
       - if: inputs.reports == true
         name: Lint report
-        run: npx nx lint --format ./tools/sonarqube-linter-reporter.js
+        run: npx nx lint --format=./tools/sonarqube-linter-reporter.js
 
       - if: inputs.reports == true
         name: Archive lint report results

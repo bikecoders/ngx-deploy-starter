@@ -23,7 +23,7 @@ npm add -D @nrwl/node@$version
 npx nx generate @nrwl/node:lib --name nx-lib --publishable --importPath nx-lib
 
 echo "----- Link ngx-deploy-npm -----"
-npx yalc add ngx-deploy-npm
+npx --yes yalc add ngx-deploy-npm
 npm i
 
 echo "----- Add ngx-deploy-npm to the workspace -----"

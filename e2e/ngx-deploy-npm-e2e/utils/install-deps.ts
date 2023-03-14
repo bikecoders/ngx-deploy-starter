@@ -4,6 +4,7 @@ import { currentNrwlVersion } from './get-nrwl-current-version';
 export function installDependencies(nxPlugin: string) {
   beforeEach(() => {
     const packageToInstall = `${nxPlugin}@${currentNrwlVersion}`;
-    runCommand(`yarn add -D ${packageToInstall}`);
+    runCommand(`npm add -D ${packageToInstall}`);
+    runCommand(`npx nx g ${nxPlugin}:init`);
   }, 120000);
 }
