@@ -70,6 +70,21 @@
         "postTargets": ["ngx-deploy-npm:deploy"],
         "versionTagPrefix": "v"
       }
+    },
+    "yalc-it": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd dist/packages/ngx-deploy-npm && npx --yes yalc publish"
+      },
+      "dependsOn": ["build"]
+    },
+    "create-nx-workspace": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/tmp/nx-workspace"],
+      "options": {
+        "command": "./tools/create-nx-workspace.sh"
+      },
+      "dependsOn": ["yalc-it"]
     }
   },
   "tags": []
