@@ -1,0 +1,50 @@
+name: Test nx@next
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # daily at 00:00
+
+jobs:
+  lint-next:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup
+      - uses: ./.github/actions/migrate
+        with:
+          nx-version: 'next'
+      - name: Lint
+        run: npx nx lint
+
+  build-next:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup
+      - uses: ./.github/actions/migrate
+        with:
+          nx-version: 'next'
+      - name: Build
+        run: npx nx build
+
+  test-next:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup
+      - uses: ./.github/actions/migrate
+        with:
+          nx-version: 'next'
+      - name: Test
+        run: npx nx test
+
+  e2e-next:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup
+      - uses: ./.github/actions/migrate
+        with:
+          nx-version: 'next'
+      - name: E2E Test
+        run: npx nx e2e ngx-deploy-npm-e2e
