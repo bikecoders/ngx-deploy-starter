@@ -15,7 +15,7 @@
 ![Windows][windows-image]
 
 [![Publishment Status][publishment-image]][publishment-link]
-[![Tests @next version nrwl and angular][next-tests-image]][next-tests-link]
+[![Test nx@next][next-tests-image]][next-tests-link]
 
 ## Supported Library Generators
 
@@ -39,7 +39,7 @@
 [conventional-commits-image]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
 [downloads-image]: https://img.shields.io/npm/dm/ngx-deploy-npm
 [supported-node-versions]: https://img.shields.io/badge/node-v14%20v16%20v18-green
-[next-tests-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/next-test.yml/badge.svg
+[next-tests-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/test-nx-next.yml/badge.svg
 [linux-image]: https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black
 [macos-image]: https://img.shields.io/badge/mac%20os-000000?style=flat&logo=macos&logoColor=F0F0F0
 [windows-image]: https://img.shields.io/badge/Windows-0078D6?style=flat&logo=windows&logoColor=white
@@ -62,7 +62,7 @@
 [npm-url]: https://www.npmjs.com/package/ngx-deploy-npm
 [mit-licence-url]: http://opensource.org/licenses/MIT
 [conventional-commits-url]: https://conventionalcommits.org
-[next-tests-link]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/next-test.yml
+[next-tests-link]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/test-nx-next.yml
 
 <!-- Projects -->
 
