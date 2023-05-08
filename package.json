@@ -17,7 +17,7 @@
     "@angular/cli": "^15.0.0",
     "@commitlint/cli": "17.2.0",
     "@commitlint/config-conventional": "17.2.0",
-    "@jscutlery/semver": "2.29.3",
+    "@jscutlery/semver": "3.0.0",
     "@nrwl/cli": "15.8.9",
     "@nrwl/devkit": "16.1.2",
     "@nrwl/eslint-plugin-nx": "16.1.2",
