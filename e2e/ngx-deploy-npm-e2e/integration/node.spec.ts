@@ -4,7 +4,7 @@ describe('Node', () => {
   initNgxDeployNPMProject();
 
   const libName = 'node-lib';
-  const nxPlugin = '@nrwl/node';
+  const nxPlugin = '@nx/node';
 
   basicSetTestForLibs(libName, nxPlugin);
 });

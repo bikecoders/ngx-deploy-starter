@@ -1,4 +1,4 @@
-import { logger } from '@nrwl/devkit';
+import { logger } from '@nx/devkit';
 import { spawn } from 'child_process';
 
 export function spawnAsync(
@@ -7,7 +7,7 @@ export function spawnAsync(
 ): Promise<void> {
   return new Promise((resolve, reject) => {
     let command = mainProgram;
-    let args = programArgs || [];
+    let args = programArgs ?? [];
 
     if (process.platform === 'win32') {
       command = process.env.comspec as string;

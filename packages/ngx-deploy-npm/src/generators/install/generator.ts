@@ -3,8 +3,8 @@ import {
   formatFiles,
   updateProjectConfiguration,
   ProjectConfiguration,
-} from '@nrwl/devkit';
-import type { Tree } from '@nrwl/devkit';
+} from '@nx/devkit';
+import type { Tree } from '@nx/devkit';
 
 import type { InstallGeneratorOptions } from './schema';
 import { DeployExecutorOptions } from '../../executors/deploy/schema';

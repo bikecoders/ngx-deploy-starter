@@ -38,7 +38,7 @@
 [mit-licence-image]: https://img.shields.io/badge/license-MIT-orange.svg?color=blue&style=flat
 [conventional-commits-image]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
 [downloads-image]: https://img.shields.io/npm/dm/ngx-deploy-npm
-[supported-node-versions]: https://img.shields.io/badge/node-v14%20v16%20v18-green
+[supported-node-versions]: https://img.shields.io/badge/node-v16%20v18-green
 [next-tests-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/test-nx-next.yml/badge.svg
 [linux-image]: https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black
 [macos-image]: https://img.shields.io/badge/mac%20os-000000?style=flat&logo=macos&logoColor=F0F0F0

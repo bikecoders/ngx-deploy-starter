@@ -1,4 +1,4 @@
-import { runNxCommand } from '@nrwl/nx-plugin/testing';
+import { runNxCommand } from '@nx/plugin/testing';
 
 export function generateLib(
   nxPlugin: string,
@@ -11,7 +11,7 @@ export function generateLib(
     runNxCommand(
       `generate ${nxPlugin}:${generator} --name ${libName} ${
         setPublishableOption ? '--publishable' : ''
-      } --importPath ${libName} ${extraOptions || ''}`
+      } --importPath ${libName} ${extraOptions ?? ''}`
     );
   }, 120000);
 }

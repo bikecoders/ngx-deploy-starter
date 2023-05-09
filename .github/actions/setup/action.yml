@@ -4,7 +4,7 @@ inputs:
   node-version:
     description: Node.js version
     required: false
-    default: '18'
+    default: '16'
 runs:
   using: composite
   steps:

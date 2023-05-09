@@ -5,7 +5,7 @@ import {
   readTargetOptions,
   runExecutor,
   Target,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 import { DeployExecutorOptions } from './schema';
 import { BuildTarget, getLibOutPutPath } from './utils';

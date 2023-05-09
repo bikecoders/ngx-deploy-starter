@@ -4,7 +4,7 @@ describe('Nx JS', () => {
   initNgxDeployNPMProject();
 
   const libName = 'nx-js';
-  const nxPlugin = '@nrwl/js';
+  const nxPlugin = '@nx/js';
 
   basicSetTestForLibs(libName, nxPlugin);
 });

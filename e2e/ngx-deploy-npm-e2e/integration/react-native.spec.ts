@@ -1,17 +1,17 @@
-import { runCommand, runNxCommand, uniq } from '@nrwl/nx-plugin/testing';
+import { runCommand, runNxCommand, uniq } from '@nx/plugin/testing';
 import {
   initNgxDeployNPMProject,
   installDependencies,
   generateLib,
   installNgxDeployNPMProject,
-  currentNrwlVersion,
+  currentNxVersion,
 } from '../utils';
 
 describe('React Native', () => {
   initNgxDeployNPMProject();
 
   const libName = 'react-native-lib';
-  const nxPlugin = '@nrwl/react-native';
+  const nxPlugin = '@nx/react-native';
   const uniqLibName = uniq(libName);
 
   installDependencies(nxPlugin);
@@ -19,7 +19,8 @@ describe('React Native', () => {
   beforeEach(() => {
     runNxCommand(`generate ${nxPlugin}:init`);
     runCommand(
-      `npm add -D @babel/preset-react @nrwl/web@${currentNrwlVersion}`
+      `npm add -D @babel/preset-react @nx/web@${currentNxVersion}`,
+      {}
     );
   });
 

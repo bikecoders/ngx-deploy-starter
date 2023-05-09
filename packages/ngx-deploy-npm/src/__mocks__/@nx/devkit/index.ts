@@ -1,4 +1,4 @@
-import { logger as originalLogger } from '@nrwl/devkit';
+import { logger as originalLogger } from '@nx/devkit';
 
 const logger: Record<keyof typeof originalLogger, jest.Mock> = {
   warn: jest.fn(),
@@ -10,6 +10,6 @@ const logger: Record<keyof typeof originalLogger, jest.Mock> = {
 };
 
 module.exports = {
-  ...jest.requireActual('@nrwl/devkit'),
+  ...jest.requireActual('@nx/devkit'),
   logger,
 };

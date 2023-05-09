@@ -12,7 +12,7 @@ import { IStrategy, UnapplicableStrategyError } from '../shared';
  * // project.json
  * {
  *   "build": {
- *     "executor": "@nrwl/js:tsc",
+ *     "executor": "@nx/js:tsc",
  *     "outputs": ["{options.outputPath}"],
  *     "options": {
  *       "outputPath": "dist/packages/ngx-deploy-npm", // <------- outputPath Option

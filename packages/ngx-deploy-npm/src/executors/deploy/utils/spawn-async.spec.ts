@@ -1,4 +1,4 @@
-import { logger } from '@nrwl/devkit';
+import { logger } from '@nx/devkit';
 
 import { spawnAsync } from './spawn-async';
 import * as child_process from 'child_process';

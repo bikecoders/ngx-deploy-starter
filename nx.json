@@ -5,7 +5,7 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nx/workspace/tasks-runners/default",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"]
       }
@@ -24,7 +24,7 @@
     "libsDir": "packages"
   },
   "cli": {
-    "defaultCollection": "@nrwl/node"
+    "defaultCollection": "@nx/node"
   },
   "defaultProject": "ngx-deploy-npm",
   "namedInputs": {

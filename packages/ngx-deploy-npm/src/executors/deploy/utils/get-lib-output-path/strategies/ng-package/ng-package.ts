@@ -1,4 +1,4 @@
-import { logger } from '@nrwl/devkit';
+import { logger } from '@nx/devkit';
 import * as path from 'path';
 
 import { DeployExecutorOptions } from '../../../../schema';

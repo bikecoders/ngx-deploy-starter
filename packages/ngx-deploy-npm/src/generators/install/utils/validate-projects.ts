@@ -1,4 +1,4 @@
-import { getProjects } from '@nrwl/devkit';
+import { getProjects } from '@nx/devkit';
 
 export function allProjectsAreValid(
   projects: string[],
