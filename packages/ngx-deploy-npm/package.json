@@ -11,9 +11,9 @@
     "node": ">=14.0.0"
   },
   "peerDependencies": {
-    "@nrwl/devkit": "^14.0.0 || ^15.0.0",
-    "@nrwl/workspace": "^14.0.0 || ^15.0.0",
-    "nx": "^14.0.0 || ^15.0.0"
+    "@nrwl/devkit": "^16.0.0",
+    "@nrwl/workspace": "^16.0.0",
+    "nx": "^16.0.0"
   },
   "ng-add": {
     "save": "devDependencies"
