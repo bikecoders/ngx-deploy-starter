@@ -2,6 +2,21 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [6.0.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v5.2.0...v6.0.0) (2023-05-15)
+
+### Features
+
+- add support to nx 16 ([#503](https://github.com/bikecoders/ngx-deploy-npm/issues/503)) ([4795cac](https://github.com/bikecoders/ngx-deploy-npm/commit/4795cac137e9c1b9dcf1270a3f9f012a70fad6ee))
+
+### BREAKING CHANGES
+
+- Drop support for previous Nx versions:
+  Support for Nx versions 14 and 15 has been discontinued. To continue receiving updates on this project in the future, we recommend upgrading to Nx v16.
+- Drop support for Node 14
+  The project no longer supports Node.js 14.x. To ensure optimal performance and stability, upgrading to a newer version of Node.js is essential. We recommend using Node.js 16 as it offers adequate compatibility with the project.
+- Remove the Init generator
+  The generator "init" has been removed from our list of generators. This change has been implemented as the "init" generator was deemed unnecessary and did not provide any functional value. So, you should stop using it in your project from now on.
+
 # [5.2.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v5.1.0...v5.2.0) (2023-02-19)
 
 ### Features
