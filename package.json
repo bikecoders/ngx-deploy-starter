@@ -14,7 +14,7 @@
   },
   "private": true,
   "devDependencies": {
-    "@angular/cli": "^15.0.0",
+    "@angular/cli": "^16.0.0",
     "@commitlint/cli": "17.2.0",
     "@commitlint/config-conventional": "17.2.0",
     "@jscutlery/semver": "3.0.0",
