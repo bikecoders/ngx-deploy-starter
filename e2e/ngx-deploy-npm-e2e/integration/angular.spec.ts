@@ -4,7 +4,7 @@ describe('Angular', () => {
   initNgxDeployNPMProject();
 
   const libName = 'angular-lib';
-  const nxPlugin = '@nrwl/angular';
+  const nxPlugin = '@nx/angular';
 
   basicSetTestForLibs(libName, nxPlugin);
 });

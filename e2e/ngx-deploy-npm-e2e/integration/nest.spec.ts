@@ -4,7 +4,7 @@ describe('Nest', () => {
   initNgxDeployNPMProject();
 
   const libName = 'nest-lib';
-  const nxPlugin = '@nrwl/nest';
+  const nxPlugin = '@nx/nest';
 
   basicSetTestForLibs(libName, nxPlugin);
 });

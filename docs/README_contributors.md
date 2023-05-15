@@ -84,7 +84,7 @@ On VsCode, create a [_JavaScript Debug Terminal_](https://code.visualstudio.com/
 2. Now, run your command on debug mode using:
 
    ```bash
-   node --inspect-brk ./node_modules/@nrwl/cli/bin/nx
+   node --inspect-brk ./node_modules/@nx/cli/bin/nx
    ```
 
 3. Use your favorite Inspector Client to debug

@@ -1,5 +1,5 @@
-import { ProjectConfiguration, TargetConfiguration } from '@nrwl/devkit';
-import { readJson } from '@nrwl/nx-plugin/testing';
+import { ProjectConfiguration, TargetConfiguration } from '@nx/devkit';
+import { readJson } from '@nx/plugin/testing';
 
 import { DeployExecutorOptions } from '../../../packages/ngx-deploy-npm/src/executors/deploy/schema';
 import { npmAccess } from '../../../packages/ngx-deploy-npm/src/core';
@@ -24,13 +24,13 @@ describe('install/ng-add', () => {
   let projectWorkSpaceLibNOTSet: ProjectConfiguration;
 
   initNgxDeployNPMProject();
-  installDependencies('@nrwl/node');
+  installDependencies('@nx/node');
 
   // Init libs and projects
-  generateLib('@nrwl/node', publicLib);
-  generateLib('@nrwl/node', publicLib2);
-  generateLib('@nrwl/node', restrictedLib);
-  generateLib('@nrwl/node', libNOTset);
+  generateLib('@nx/node', publicLib);
+  generateLib('@nx/node', publicLib2);
+  generateLib('@nx/node', restrictedLib);
+  generateLib('@nx/node', libNOTset);
 
   installNgxDeployNPMProject(`--projects ${publicLib},${publicLib2}`);
 

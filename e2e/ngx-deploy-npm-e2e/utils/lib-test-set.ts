@@ -1,4 +1,4 @@
-import { runNxCommand, uniq } from '@nrwl/nx-plugin/testing';
+import { runNxCommand, uniq } from '@nx/plugin/testing';
 
 import { installNgxDeployNPMProject } from './utils-ngx-deploy-npm';
 import { installDependencies } from './install-deps';

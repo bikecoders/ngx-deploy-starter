@@ -6,6 +6,6 @@ export function normalizeOptions(
 ): InstallGeneratorOptions {
   return {
     ...rawOptions,
-    access: rawOptions.access || npmAccess.public,
+    access: rawOptions.access ?? npmAccess.public,
   };
 }

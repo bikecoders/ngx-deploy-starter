@@ -1,10 +1,11 @@
 {
   "name": "ngx-deploy-npm",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/ngx-deploy-npm/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["packages/ngx-deploy-npm/**/*.ts"],
@@ -12,7 +13,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/ngx-deploy-npm"],
       "options": {
         "jestConfig": "packages/ngx-deploy-npm/jest.config.js",
@@ -20,7 +21,7 @@
       }
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/ngx-deploy-npm",

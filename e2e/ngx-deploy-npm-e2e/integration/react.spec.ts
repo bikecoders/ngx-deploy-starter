@@ -4,7 +4,7 @@ describe('React', () => {
   initNgxDeployNPMProject();
 
   const libName = 'react-lib';
-  const nxPlugin = '@nrwl/react';
+  const nxPlugin = '@nx/react';
 
   basicSetTestForLibs(libName, nxPlugin, {
     libGeneratorCommandOptions:

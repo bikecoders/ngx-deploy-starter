@@ -1,4 +1,4 @@
-import { checkFilesExist, runNxCommand } from '@nrwl/nx-plugin/testing';
+import { checkFilesExist, runNxCommand } from '@nx/plugin/testing';
 import {
   generateLib,
   initNgxDeployNPMProject,
@@ -8,7 +8,7 @@ import {
 
 describe('build', () => {
   const publishableLib = 'basic-lib';
-  const nxPlugin = '@nrwl/node';
+  const nxPlugin = '@nx/node';
 
   initNgxDeployNPMProject();
   installDependencies(nxPlugin);

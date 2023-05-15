@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { ProjectConfiguration } from '@nrwl/devkit';
+import { ProjectConfiguration } from '@nx/devkit';
 
 export const getLibPublishable = (libName: string): ProjectConfiguration => {
   const uniqName = `react-lib-${libName}`;
@@ -11,7 +11,7 @@ export const getLibPublishable = (libName: string): ProjectConfiguration => {
     tags: [],
     targets: {
       build: {
-        executor: '@nrwl/web:rollup',
+        executor: '@nx/web:rollup',
         outputs: ['{options.outputPath}'],
         options: {
           outputPath: `dist/libs/${uniqName}`,
@@ -19,7 +19,7 @@ export const getLibPublishable = (libName: string): ProjectConfiguration => {
           project: `libs/${uniqName}/package.json`,
           entryFile: `libs/${uniqName}/src/index.ts`,
           external: ['react/jsx-runtime'],
-          rollupConfig: '@nrwl/react/plugins/bundle-rollup',
+          rollupConfig: '@nx/react/plugins/bundle-rollup',
           compiler: 'babel',
           assets: [
             {
@@ -31,14 +31,14 @@ export const getLibPublishable = (libName: string): ProjectConfiguration => {
         },
       },
       lint: {
-        executor: '@nrwl/linter:eslint',
+        executor: '@nx/linter:eslint',
         outputs: ['{options.outputFile}'],
         options: {
           lintFilePatterns: [`libs/${uniqName}/**/*.{ts,tsx,js,jsx}`],
         },
       },
       test: {
-        executor: '@nrwl/jest:jest',
+        executor: '@nx/jest:jest',
         outputs: [`coverage/libs/${uniqName}`],
         options: {
           jestConfig: `libs/${uniqName}/jest.config.js`,
@@ -61,7 +61,7 @@ export const getLibPublishableWithProdMode = (
     // prefix: 'proj',
     targets: {
       build: {
-        executor: '@nrwl/angular:package',
+        executor: '@nx/angular:package',
         outputs: [`dist/packages/${uniqLibName}`],
         options: {
           project: `packages/${uniqLibName}/ng-package.json`,
@@ -77,7 +77,7 @@ export const getLibPublishableWithProdMode = (
         defaultConfiguration: 'production',
       },
       test: {
-        executor: '@nrwl/jest:jest',
+        executor: '@nx/jest:jest',
         outputs: [`coverage/packages/${uniqLibName}`],
         options: {
           jestConfig: `packages/${uniqLibName}/jest.config.js`,
@@ -85,7 +85,7 @@ export const getLibPublishableWithProdMode = (
         },
       },
       lint: {
-        executor: '@nrwl/linter:eslint',
+        executor: '@nx/linter:eslint',
         options: {
           lintFilePatterns: [
             `packages/${uniqLibName}/src/**/*.ts`,
@@ -175,7 +175,7 @@ export const getApplication = (appName: string): ProjectConfiguration => {
         },
       },
       lint: {
-        executor: '@nrwl/linter:eslint',
+        executor: '@nx/linter:eslint',
         options: {
           lintFilePatterns: [
             `apps/${uniqAppName}/src/**/*.ts`,
@@ -184,7 +184,7 @@ export const getApplication = (appName: string): ProjectConfiguration => {
         },
       },
       test: {
-        executor: '@nrwl/jest:jest',
+        executor: '@nx/jest:jest',
         outputs: [`coverage/apps/${uniqAppName}`],
         options: {
           jestConfig: `apps/${uniqAppName}/jest.config.js`,
@@ -205,7 +205,7 @@ export const getNonPublishableLib = (libName: string): ProjectConfiguration => {
     // prefix: 'proj',
     targets: {
       test: {
-        executor: '@nrwl/jest:jest',
+        executor: '@nx/jest:jest',
         outputs: [`coverage/packages/${uniqAppName}`],
         options: {
           jestConfig: `packages/${uniqAppName}/jest.config.js`,
@@ -213,7 +213,7 @@ export const getNonPublishableLib = (libName: string): ProjectConfiguration => {
         },
       },
       lint: {
-        executor: '@nrwl/linter:eslint',
+        executor: '@nx/linter:eslint',
         options: {
           lintFilePatterns: [
             `packages/${uniqAppName}/src/**/*.ts`,
@@ -236,7 +236,7 @@ export const getLibWithNoSpecification = (
     sourceRoot: `packages/${uniqLibName}/src`,
     targets: {
       build: {
-        executor: '@nrwl/js:tsc',
+        executor: '@nx/js:tsc',
         outputs: ['{options.outputPath}'],
         options: {
           outputPath: `dist/packages/${uniqLibName}`,
@@ -268,14 +268,14 @@ export const getLibWithNoSpecification = (
         },
       },
       lint: {
-        executor: '@nrwl/linter:eslint',
+        executor: '@nx/linter:eslint',
         outputs: ['{options.outputFile}'],
         options: {
           lintFilePatterns: [`packages/${uniqLibName}/**/*.ts`],
         },
       },
       test: {
-        executor: '@nrwl/jest:jest',
+        executor: '@nx/jest:jest',
         outputs: [`coverage/packages/${uniqLibName}`],
         options: {
           jestConfig: `packages/${uniqLibName}/jest.config.js`,
