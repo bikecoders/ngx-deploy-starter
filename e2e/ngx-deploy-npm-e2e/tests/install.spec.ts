@@ -10,9 +10,10 @@ import {
   installNgxDeployNPMProject,
 } from '../utils';
 
+// TODO, migrate to SIFERS
 describe('install', () => {
   const publicLib = 'node-lib1';
-  let projectWorkSpacepublicLib: ProjectConfiguration;
+  let projectWorkSpacePublicLib: ProjectConfiguration;
 
   const publicLib2 = 'node-lib2';
   let projectWorkSpacePublicLib2: ProjectConfiguration;
@@ -23,6 +24,26 @@ describe('install', () => {
   const libNOTset = 'node-lib-not-set';
   let projectWorkSpaceLibNOTSet: ProjectConfiguration;
 
+  const expectedTarget = (
+    projectName: string,
+    isBuildable = true,
+    access: npmAccess = npmAccess.public
+  ): TargetConfiguration<DeployExecutorOptions> => {
+    const target: TargetConfiguration<DeployExecutorOptions> = {
+      executor: 'ngx-deploy-npm:deploy',
+      options: {
+        distFolderPath: `dist/libs/${projectName}`,
+        access: access,
+      },
+    };
+
+    if (isBuildable) {
+      target.dependsOn = ['build'];
+    }
+
+    return target;
+  };
+
   initNgxDeployNPMProject();
   installDependencies('@nx/node');
 
@@ -32,14 +53,28 @@ describe('install', () => {
   generateLib('@nx/node', restrictedLib, `--dir="libs"`);
   generateLib('@nx/node', libNOTset, `--dir="libs"`);
 
-  installNgxDeployNPMProject(`--projects ${publicLib},${publicLib2}`);
+  const buildMockDistPath = (projectName: string) => {
+    return `dist/libs/${projectName}`;
+  };
 
   installNgxDeployNPMProject(
-    `--projects ${restrictedLib} --access ${npmAccess.restricted}`
+    `--project ${publicLib} --dist-folder-path="${buildMockDistPath(
+      publicLib
+    )}"`
+  );
+  installNgxDeployNPMProject(
+    `--project ${publicLib2} --dist-folder-path="${buildMockDistPath(
+      publicLib2
+    )}"`
+  );
+  installNgxDeployNPMProject(
+    `--project=${restrictedLib} --dist-folder-path="${buildMockDistPath(
+      restrictedLib
+    )}" --access ${npmAccess.restricted}`
   );
 
   beforeEach(() => {
-    projectWorkSpacepublicLib = readJson(`libs/${publicLib}/project.json`);
+    projectWorkSpacePublicLib = readJson(`libs/${publicLib}/project.json`);
     projectWorkSpacePublicLib2 = readJson(`libs/${publicLib2}/project.json`);
     projectWorkSpaceRestrictedLib = readJson(
       `libs/${restrictedLib}/project.json`
@@ -48,28 +83,14 @@ describe('install', () => {
   });
 
   it('should modify the workspace for publishable libs', () => {
-    const expectedPublicTarget: TargetConfiguration = {
-      executor: 'ngx-deploy-npm:deploy',
-      options: {
-        access: npmAccess.public,
-      } as DeployExecutorOptions,
-    };
-
-    const expectedRestrictedTarget: TargetConfiguration = {
-      executor: 'ngx-deploy-npm:deploy',
-      options: {
-        access: npmAccess.restricted,
-      } as DeployExecutorOptions,
-    };
-
-    expect(projectWorkSpacepublicLib.targets?.deploy).toEqual(
-      expectedPublicTarget
+    expect(projectWorkSpacePublicLib.targets?.deploy).toEqual(
+      expectedTarget(publicLib)
     );
     expect(projectWorkSpacePublicLib2.targets?.deploy).toEqual(
-      expectedPublicTarget
+      expectedTarget(publicLib2)
     );
     expect(projectWorkSpaceRestrictedLib.targets?.deploy).toEqual(
-      expectedRestrictedTarget
+      expectedTarget(restrictedLib, true, npmAccess.restricted)
     );
     expect(projectWorkSpaceLibNOTSet.targets?.deploy).toEqual(undefined);
   });

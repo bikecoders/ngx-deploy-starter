@@ -6,5 +6,7 @@ describe('Nest', () => {
   const libName = 'nest-lib';
   const nxPlugin = '@nx/nest';
 
-  basicSetTestForLibs(libName, nxPlugin);
+  basicSetTestForLibs(libName, nxPlugin, {
+    libGeneratorCommandOptions: '--directory="libs"',
+  });
 });

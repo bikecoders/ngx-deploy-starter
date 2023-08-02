@@ -8,7 +8,7 @@ describe('Publish', () => {
     const nxPlugin = '@nx/angular';
 
     basicSetTestForLibs(libName, nxPlugin, {
-      libGeneratorCommandOptions: '--style css',
+      libGeneratorCommandOptions: '--style css --directory="libs"',
     });
   });
 

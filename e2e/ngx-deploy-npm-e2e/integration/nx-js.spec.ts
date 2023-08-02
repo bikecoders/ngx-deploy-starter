@@ -6,5 +6,7 @@ describe('Nx JS', () => {
   const libName = 'nx-js';
   const nxPlugin = '@nx/js';
 
-  basicSetTestForLibs(libName, nxPlugin);
+  basicSetTestForLibs(libName, nxPlugin, {
+    libGeneratorCommandOptions: '--directory="libs"',
+  });
 });

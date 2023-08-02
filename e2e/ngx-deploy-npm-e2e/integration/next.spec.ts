@@ -7,6 +7,6 @@ describe('Next', () => {
   const nxPlugin = '@nx/next';
 
   basicSetTestForLibs(libName, nxPlugin, {
-    libGeneratorCommandOptions: '--style css --bundler rollup',
+    libGeneratorCommandOptions: '--style css --bundler rollup --directory libs',
   });
 });

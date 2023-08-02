@@ -37,5 +37,8 @@
   "bugs": {
     "url": "https://github.com/bikecoders/ngx-deploy-npm/issues"
   },
-  "homepage": "https://github.com/bikecoders/ngx-deploy-npm/#readme"
+  "homepage": "https://github.com/bikecoders/ngx-deploy-npm/#readme",
+  "nx-migrations": {
+    "migrations": "./migrations.json"
+  }
 }

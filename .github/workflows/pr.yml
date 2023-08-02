@@ -36,6 +36,9 @@ jobs:
       - name: Check if Prettier was run
         run: npx pretty-quick --check
 
+  automated-manual-test:
+    uses: ./.github/workflows/integration-test.yml
+
   pr-analysis:
     name: SonarCloud Pr Analysis
     runs-on: ubuntu-latest

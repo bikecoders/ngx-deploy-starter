@@ -37,7 +37,9 @@ export function basicSetTestForLibs(
   );
 
   // Install the project
-  installNgxDeployNPMProject();
+  installNgxDeployNPMProject(
+    `--project="${uniqLibName}" --distFolderPath="dist/libs/${uniqLibName}"`
+  );
 
   it('should publish the lib', () => {
     expect(() => {
