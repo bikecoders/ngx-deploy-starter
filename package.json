@@ -25,7 +25,7 @@
     "@types/node": "18.14.2",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
-    "commitizen": "4.2.5",
+    "commitizen": "4.3.0",
     "create-nx-workspace": "16.6.0",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "^8.8.0",
