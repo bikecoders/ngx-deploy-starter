@@ -51,7 +51,6 @@ jobs:
   unit-test:
     strategy:
       matrix:
-        node-version: [16, 18]
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
@@ -59,13 +58,10 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
-        with:
-          node-version: ${{ matrix.node-version }}
 
       - run: npx nx test --code-coverage
 
-      - if: matrix.node-version == 18 && inputs.reports == true
-        name: Archive coverage report
+      - name: Archive coverage report
         uses: actions/upload-artifact@v3
         with:
           name: ngx-deploy-npm-coverage-report-${{ github.sha }}

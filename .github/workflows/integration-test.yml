@@ -5,16 +5,11 @@ on: workflow_call
 jobs:
   integration-test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16, 18]
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
-        with:
-          node-version: ${{ matrix.node-version }}
 
       - name: Integration Test
         run: npx nx e2e ngx-deploy-npm-e2e --jestConfig e2e/ngx-deploy-npm-e2e/jest.integration.config.js
