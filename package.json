@@ -17,7 +17,7 @@
     "@angular/cli": "^15.0.0",
     "@commitlint/cli": "17.6.7",
     "@commitlint/config-conventional": "17.6.7",
-    "@jscutlery/semver": "3.0.0",
+    "@jscutlery/semver": "3.1.0",
     "@swc-node/register": "^1.4.2",
     "@swc/cli": "0.1.62",
     "@swc/core": "^1.2.173",
