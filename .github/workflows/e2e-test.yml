@@ -6,7 +6,6 @@ jobs:
   e2e-test:
     strategy:
       matrix:
-        node-version: [16, 18]
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
@@ -14,7 +13,5 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
-        with:
-          node-version: ${{ matrix.node-version }}
 
       - run: npx nx e2e ngx-deploy-npm-e2e
