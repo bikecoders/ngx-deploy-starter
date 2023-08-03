@@ -1,6 +1,7 @@
 # ngx-deploy-npm 🚀 <!-- omit in toc -->
 
-![Node version][supported-node-versions]
+<!-- [![Nx supported versions][supported-nx-versions]][nx-url] -->
+
 [![NPM version][npm-image]][npm-url]
 [![NPM donwoads][downloads-image]][npm-url]
 [![The MIT License][mit-licence-image]][mit-licence-url]
@@ -24,7 +25,7 @@
 [![Next JS][next-js-image]][next-js-link]
 [![Node][node-image]][node-link]
 [![JS][js-image]][js-link]
-[![Nx Plugin][nx-image]][nx-link]
+[![Nx Plugin][nx-image]][nx-plugin-link]
 [![React][react-image]][react-link]
 [![React Native][react-native-image]][react-native-link]
 
@@ -38,7 +39,7 @@
 [mit-licence-image]: https://img.shields.io/badge/license-MIT-orange.svg?color=blue&style=flat
 [conventional-commits-image]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
 [downloads-image]: https://img.shields.io/npm/dm/ngx-deploy-npm
-[supported-node-versions]: https://img.shields.io/badge/node-v16%20v18-green
+[supported-nx-versions]: https://img.shields.io/badge/nx%20supported%20versions-v16-143055
 [next-tests-image]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/test-nx-next.yml/badge.svg
 [linux-image]: https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black
 [macos-image]: https://img.shields.io/badge/mac%20os-000000?style=flat&logo=macos&logoColor=F0F0F0
@@ -63,6 +64,7 @@
 [mit-licence-url]: http://opensource.org/licenses/MIT
 [conventional-commits-url]: https://conventionalcommits.org
 [next-tests-link]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/test-nx-next.yml
+[nx-url]: https://nx.dev/
 
 <!-- Projects -->
 
@@ -71,7 +73,7 @@
 [next-js-link]: https://nx.dev/packages/next
 [node-link]: https://nx.dev/packages/node
 [js-link]: https://nx.dev/packages/js
-[nx-link]: https://nx.dev/packages/nx-plugin
+[nx-plugin-link]: https://nx.dev/packages/nx-plugin
 [react-link]: https://nx.dev/packages/react
 [react-native-link]: https://nx.dev/packages/react-native
 

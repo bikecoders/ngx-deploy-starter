@@ -8,7 +8,7 @@
   "schematics": "./generators.json",
   "builders": "./executors.json",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   },
   "peerDependencies": {
     "@nx/devkit": "^16.0.0"
