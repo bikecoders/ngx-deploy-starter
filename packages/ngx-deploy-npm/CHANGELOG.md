@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [7.0.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v6.0.0...v7.0.0) (2023-08-07)
+
+### Build System
+
+- align node version with nx compatibility matrix ([#530](https://github.com/bikecoders/ngx-deploy-npm/issues/530)) ([2d6827f](https://github.com/bikecoders/ngx-deploy-npm/commit/2d6827f1ed25afa8d75ec2f69e4a573563a0c8d3))
+
+### BREAKING CHANGES
+
+- drop support to node V16
+
 # [6.0.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v5.2.0...v6.0.0) (2023-05-15)
 
 ### Features
