@@ -8,7 +8,10 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/ngx-deploy-npm/**/*.ts"],
+        "lintFilePatterns": [
+          "packages/ngx-deploy-npm/**/*.ts",
+          "packages/ngx-deploy-npm/package.json"
+        ],
         "outputFile": "reports/ngx-deploy-npm/lint-report"
       }
     },
@@ -56,8 +59,7 @@
             "glob": "executors.json",
             "output": "."
           }
-        ],
-        "updateBuildableProjectDepsInPackageJson": true
+        ]
       }
     },
     "deploy": {
