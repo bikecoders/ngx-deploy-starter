@@ -2,6 +2,12 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [7.0.1](https://github.com/bikecoders/ngx-deploy-npm/compare/v7.0.0...v7.0.1) (2023-08-12)
+
+### Bug Fixes
+
+- set the right peerDependency on ngx-deploy-npm's package.json ([#536](https://github.com/bikecoders/ngx-deploy-npm/issues/536)) ([6765f4c](https://github.com/bikecoders/ngx-deploy-npm/commit/6765f4ced01906b969e3c4fdad10a2dcdcc9f497))
+
 # [7.0.0](https://github.com/bikecoders/ngx-deploy-npm/compare/v6.0.0...v7.0.0) (2023-08-07)
 
 ### Build System
