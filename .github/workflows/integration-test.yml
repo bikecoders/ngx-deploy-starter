@@ -12,4 +12,4 @@ jobs:
       - uses: ./.github/actions/setup
 
       - name: Integration Test
-        run: npx nx e2e ngx-deploy-npm-e2e --jestConfig e2e/ngx-deploy-npm-e2e/jest.integration.config.js
+        run: npx nx integration ngx-deploy-npm-e2e

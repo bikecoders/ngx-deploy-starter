@@ -5,12 +5,20 @@
   "sourceRoot": "e2e/ngx-deploy-npm-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nx/plugin:e2e",
+      "executor": "@nx/jest:jest",
       "options": {
-        "target": "ngx-deploy-npm:build",
         "jestConfig": "e2e/ngx-deploy-npm-e2e/jest.config.js",
         "runInBand": true
-      }
+      },
+      "dependsOn": ["ngx-deploy-npm:build"]
+    },
+    "integration": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "e2e/ngx-deploy-npm-e2e/jest.integration.config.js",
+        "runInBand": true
+      },
+      "dependsOn": ["ngx-deploy-npm:build"]
     }
   },
   "tags": [],

@@ -13,7 +13,7 @@ describe('build', () => {
   initNgxDeployNPMProject();
   installDependencies(nxPlugin);
 
-  generateLib(nxPlugin, publishableLib);
+  generateLib(nxPlugin, publishableLib, `--dir="libs/${publishableLib}"`);
 
   // Install the project
   installNgxDeployNPMProject();
