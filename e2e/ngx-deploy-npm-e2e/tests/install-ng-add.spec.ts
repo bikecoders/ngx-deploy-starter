@@ -27,10 +27,10 @@ describe('install/ng-add', () => {
   installDependencies('@nx/node');
 
   // Init libs and projects
-  generateLib('@nx/node', publicLib);
-  generateLib('@nx/node', publicLib2);
-  generateLib('@nx/node', restrictedLib);
-  generateLib('@nx/node', libNOTset);
+  generateLib('@nx/node', publicLib, `--dir="libs/${publicLib}"`);
+  generateLib('@nx/node', publicLib2, `--dir="libs/${publicLib2}"`);
+  generateLib('@nx/node', restrictedLib, `--dir="libs/${restrictedLib}"`);
+  generateLib('@nx/node', libNOTset, `--dir="libs/${libNOTset}"`);
 
   installNgxDeployNPMProject(`--projects ${publicLib},${publicLib2}`);
 
