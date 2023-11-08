@@ -13,7 +13,7 @@ rm -Rif nx-workspace
 npx --yes create-nx-workspace@$version --version
 
 echo "----- Create Nx Workspace -----"
-npx create-nx-workspace@$version --name nx-workspace --preset empty --nxCloud false
+npx create-nx-workspace@$version --name nx-workspace --preset npm --nxCloud false
 cd nx-workspace
 
 echo "NX_WORKSPACE_ROOT_PATH=$(pwd)" >.env

@@ -101,6 +101,7 @@
     - [`--otp`](#--otp)
     - [`--dry-run`](#--dry-run)
     - [`--dist-folder-path`](#--dist-folder-path)
+- [Compatibility overview with Nx](#compatibility-overview-with-nx)
 - [📁 Configuration File](#configuration-file)
 - [🧐 Essential considerations](#essential-considerations)
   - [Version Generation](#version-generation)
@@ -304,6 +305,13 @@ For testing: Run through without making any changes. Execute with `--dry-run`, a
 Indicate a custom dist folder path.
 The path must relative to project's root.
 Especially useful when ngx-deploy-npm can not detect your library dist folder path automatically. [Write us an issue](https://github.com/bikecoders/ngx-deploy-npm/issues/new) if you think we should support the library you are trying to publish
+
+## Compatibility overview with Nx
+
+| Version | Nx Workspace Version   |
+| ------- | ---------------------- |
+| v7.1.0  | `^16.0.0 \|\| ^17.0.0` |
+| v7.0.1  | `^16.0.0`              |
 
 ## 📁 Configuration File <a name="configuration-file"></a>
 

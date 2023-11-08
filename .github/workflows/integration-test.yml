@@ -1,15 +1,19 @@
 name: Integration Test
 
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      nx-version:
+        type: string
+        description: The Nx Workspace version to run the integration test
+        required: true
 
 jobs:
   integration-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - uses: ./.github/actions/setup
 
       - name: Integration Test
-        run: npx nx integration ngx-deploy-npm-e2e
+        run: npx nx create-nx-workspace -- ${{ inputs.nx-version }}

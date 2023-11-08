@@ -14,8 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - uses: ./.github/actions/setup
 
       - name: Lint
@@ -36,8 +34,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - uses: ./.github/actions/setup
 
       - run: npx nx build
@@ -55,8 +51,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - uses: ./.github/actions/setup
 
       - run: npx nx test --code-coverage
