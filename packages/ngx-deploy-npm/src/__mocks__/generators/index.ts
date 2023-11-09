@@ -31,7 +31,7 @@ export const getLibPublishable = (libName: string): ProjectConfiguration => {
         },
       },
       lint: {
-        executor: '@nx/linter:eslint',
+        executor: '@nx/eslint:eslint',
         outputs: ['{options.outputFile}'],
         options: {
           lintFilePatterns: [`libs/${uniqName}/**/*.{ts,tsx,js,jsx}`],
@@ -85,7 +85,7 @@ export const getLibPublishableWithProdMode = (
         },
       },
       lint: {
-        executor: '@nx/linter:eslint',
+        executor: '@nx/eslint:eslint',
         options: {
           lintFilePatterns: [
             `packages/${uniqLibName}/src/**/*.ts`,
@@ -175,7 +175,7 @@ export const getApplication = (appName: string): ProjectConfiguration => {
         },
       },
       lint: {
-        executor: '@nx/linter:eslint',
+        executor: '@nx/eslint:eslint',
         options: {
           lintFilePatterns: [
             `apps/${uniqAppName}/src/**/*.ts`,
@@ -213,7 +213,7 @@ export const getNonPublishableLib = (libName: string): ProjectConfiguration => {
         },
       },
       lint: {
-        executor: '@nx/linter:eslint',
+        executor: '@nx/eslint:eslint',
         options: {
           lintFilePatterns: [
             `packages/${uniqAppName}/src/**/*.ts`,
@@ -268,7 +268,7 @@ export const getLibWithNoSpecification = (
         },
       },
       lint: {
-        executor: '@nx/linter:eslint',
+        executor: '@nx/eslint:eslint',
         outputs: ['{options.outputFile}'],
         options: {
           lintFilePatterns: [`packages/${uniqLibName}/**/*.ts`],

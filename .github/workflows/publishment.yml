@@ -15,7 +15,7 @@ jobs:
 
   integration-test:
     if: ${{ !contains(github.event.head_commit.message, 'chore(release)') }}
-    uses: ./.github/workflows/integration-test.yml
+    uses: ./.github/workflows/integration-test-plugins.yml
 
   angular-e2e-test:
     needs: test
