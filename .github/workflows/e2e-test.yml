@@ -12,4 +12,4 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
 
-      - run: npx nx e2e ngx-deploy-npm-e2e
+      - run: npx nx e2e ngx-deploy-npm-e2e --configuration="ci"
