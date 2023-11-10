@@ -19,8 +19,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/ngx-deploy-npm"],
       "options": {
-        "jestConfig": "packages/ngx-deploy-npm/jest.config.js",
-        "passWithNoTests": true
+        "jestConfig": "packages/ngx-deploy-npm/jest.config.js"
       }
     },
     "build": {
