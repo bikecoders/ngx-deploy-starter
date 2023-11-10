@@ -2,6 +2,12 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [7.1.0](https://github.com/bikecoders/ngx-deploy-npm/compare/ngx-deploy-npm-7.0.1...ngx-deploy-npm-7.1.0) (2023-11-10)
+
+### Features
+
+- add support to nx 17 ([#555](https://github.com/bikecoders/ngx-deploy-npm/issues/555)) ([367362b](https://github.com/bikecoders/ngx-deploy-npm/commit/367362b9f434addb21c7c2d013249ea05b073f09))
+
 ## [7.0.1](https://github.com/bikecoders/ngx-deploy-npm/compare/v7.0.0...v7.0.1) (2023-08-12)
 
 ### Bug Fixes
