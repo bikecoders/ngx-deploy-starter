@@ -5,8 +5,6 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
-  "schematics": "./generators.json",
-  "builders": "./executors.json",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -14,23 +12,17 @@
     "@nx/devkit": "^16.0.0 || ^17.0.0 || ^18.0.0",
     "tslib": "^2.3.0"
   },
-  "ng-add": {
-    "save": "devDependencies"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bikecoders/ngx-deploy-npm.git"
   },
   "keywords": [
     "npm",
-    "angular",
     "npm-package",
     "nx",
     "nx-plugin",
     "npm-publish",
-    "ng-deploy",
     "cli",
-    "angular-cli",
     "deploy",
     "publish"
   ],

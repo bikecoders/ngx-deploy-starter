@@ -20,7 +20,7 @@ import {
   getLibWithNoSpecification,
 } from '../../__mocks__/generators';
 
-describe('install/ng-add generator', () => {
+describe('install generator', () => {
   let appTree: Tree;
   let rawOptions: InstallGeneratorOptions;
 
