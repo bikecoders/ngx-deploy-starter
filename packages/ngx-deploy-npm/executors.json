@@ -6,12 +6,5 @@
       "schema": "./src/executors/deploy/schema.json",
       "description": "Publish your libraries to NPM with just one command"
     }
-  },
-  "builders": {
-    "deploy": {
-      "implementation": "./src/executors/deploy/compat",
-      "schema": "./src/executors/deploy/schema.json",
-      "description": "Publish your libraries to NPM with just one command"
-    }
   }
 }
