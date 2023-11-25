@@ -4,7 +4,7 @@ export interface DeployExecutorOptions {
    */
   distFolderPath?: string;
   /**
-   * A named build target, as specified in the `configurations` section of workspace/angular.json. Each named target is accompanied by a configuration of option defaults for that target. This is equivalent to calling the command `[nx|ng] build --configuration=XXX`.
+   * A named build target, as specified in the `configurations`. Each named target is accompanied by a configuration of option defaults for that target. This is equivalent to calling the command `nx build --configuration=XXX`.
    */
   buildTarget?: string;
   /**

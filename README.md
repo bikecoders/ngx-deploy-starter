@@ -79,9 +79,7 @@
 
 ![Cover Image](docs/cover.png)
 
-## Publish your libraries to NPM with one command on an Angular🅰️ or Nx🐬 workspace <!-- omit in toc -->
-
----
+## Publish your libraries to NPM with one command <!-- omit in toc -->
 
 **Table of contents:**
 
@@ -89,9 +87,9 @@
 - [🚀 Continuous Delivery](#continuous-delivery)
 - [❓What is done when executing `nx deploy`](#what-is-done-when-executing-nx-deploy)
 - [📦 Options](#options)
-  - [install/ng-add](#installng-add)
+  - [install](#install)
     - [`--projects`](#--projects)
-    - [`--access`](#--access-ng-add-install)
+    - [`--access`](#--access-install)
   - [deploy](#deploy)
     - [`--build-target`](#--build-target)
     - [`--no-build`](#--no-build)
@@ -111,27 +109,14 @@
 
 ---
 
-> **Note:** all the examples are focused on Nx; if you don't see an
-> explicit command for an Angular workspace change `nx` for `ng`.
->
-> Also, when you find references to `workspace.json`, you can find your file under the name `angular.json`.
-
 ## 🚀 Quick Start (local development) <a name="quick-start-local-development"></a>
 
 1. Add `ngx-deploy-npm` to your project. It will configure all your publishable libraries present in the project:
 
-   - Nx🐬
-
-     ```bash
-     npm install --save-dev ngx-deploy-npm
-     nx generate ngx-deploy-npm:install
-     ```
-
-   - Angular🅰️
-
-     ```bash
-     ng add ngx-deploy-npm
-     ```
+   ```bash
+   npm install --save-dev ngx-deploy-npm
+   nx generate ngx-deploy-npm:install
+   ```
 
 2. Deploy your library to NPM with all default settings.
 
@@ -164,9 +149,9 @@ Independently of the CI/CD you are using, you need an NPM token. To do so, you h
 
    - Create a step with:
 
-   | Nx🐬                                        | Angular🅰️                                   |
-   | :------------------------------------------ | :------------------------------------------ |
-   | <pre lang="sh">nx deploy your-library</pre> | <pre lang="sh">ng deploy your-library</pre> |
+     ```sh
+     nx deploy your-library
+     ```
 
 5. Enjoy your just-released package 🎉📦
 
@@ -200,7 +185,7 @@ The following is the activity diagram.
 
 ## 📦 Options <a name="options"></a>
 
-### install/ng-add
+### install
 
 #### `--projects`
 
@@ -211,7 +196,7 @@ The following is the activity diagram.
 Specify which libraries should be configured. Useful when you have a workspace with several libraries and don't want to overwrite existing configuration
 Should be `,` separated, without spaces.
 
-### `--access` <a name="--access-ng-add-install"></a>
+#### `--access` <a name="--access-install"></a>
 
 - **optional**
 - Default: `public`
