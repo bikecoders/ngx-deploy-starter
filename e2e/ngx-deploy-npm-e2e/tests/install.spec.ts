@@ -10,7 +10,7 @@ import {
   installNgxDeployNPMProject,
 } from '../utils';
 
-describe('install/ng-add', () => {
+describe('install', () => {
   const publicLib = 'node-lib1';
   let projectWorkSpacepublicLib: ProjectConfiguration;
 
