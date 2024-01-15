@@ -7,8 +7,12 @@
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
+      "options": {}
+    },
+    "lint-report": {
+      "executor": "nx:run-commands",
       "options": {
-        "outputFile": "reports/ngx-deploy-npm/lint-report"
+        "command": "npx nx lint ngx-deploy-npm --outputFile reports/ngx-deploy-npm/lint-report --format=./tools/sonarqube-linter-reporter.js || true"
       }
     },
     "test": {
@@ -53,6 +57,11 @@
             "input": "./packages/ngx-deploy-npm",
             "glob": "executors.json",
             "output": "."
+          },
+          {
+            "input": "./packages/ngx-deploy-npm",
+            "glob": "migrations.json",
+            "output": "."
           }
         ]
       }
@@ -60,8 +69,10 @@
     "deploy": {
       "executor": "./dist/packages/ngx-deploy-npm:deploy",
       "options": {
+        "distFolderPath": "dist/packages/ngx-deploy-npm",
         "access": "public"
-      }
+      },
+      "dependsOn": ["build"]
     },
     "version": {
       "executor": "@jscutlery/semver:version",
@@ -74,6 +85,20 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "cd dist/packages/ngx-deploy-npm && npx --yes yalc publish"
+      },
+      "dependsOn": ["build"]
+    },
+    "yarn-link-it": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd dist/packages/ngx-deploy-npm && npx --yes yarn link"
+      },
+      "dependsOn": ["build"]
+    },
+    "yarn-unlink-it": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd dist/packages/ngx-deploy-npm && npx --yes yarn unlink"
       },
       "dependsOn": ["build"]
     },

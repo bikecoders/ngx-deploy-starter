@@ -3,9 +3,12 @@ import { npmAccess } from '../../../core';
 import * as engine from './engine';
 import * as spawn from '../utils/spawn-async';
 import * as setPackage from '../utils/set-package-version';
+import { mockProjectDist, mockProjectRoot } from '../../../__mocks__/mocks';
 
+// TODO Migrate to SIFERS approach
 describe('engine', () => {
   let dir: string;
+  let distFolderPath: string;
   let options: DeployExecutorOptions;
 
   afterEach(() => {
@@ -19,15 +22,16 @@ describe('engine', () => {
 
   // Data
   beforeEach(() => {
-    dir = '/absolute/custom/path';
+    dir = mockProjectRoot;
+    distFolderPath = mockProjectDist();
   });
 
   it('should call NPM Publish with the right options', async () => {
     options = {
+      distFolderPath,
       access: npmAccess.restricted,
       tag: 'next',
       otp: 'someValue',
-      buildTarget: 'production',
       registry: 'http://localhost:4873',
       dryRun: true,
     };
@@ -64,7 +68,10 @@ describe('engine', () => {
 
   describe('Options Management', () => {
     it('should set the default options', async () => {
-      const options: DeployExecutorOptions = {};
+      const options: DeployExecutorOptions = {
+        distFolderPath,
+        access: npmAccess.public,
+      };
       const optionsArray = ['--access', npmAccess.public];
 
       await engine.run(dir, options);
@@ -78,6 +85,7 @@ describe('engine', () => {
 
     it('should overwrite the default option access', async () => {
       const options = {
+        distFolderPath: 'dist/libs/project',
         tag: 'random-tag',
         access: npmAccess.restricted,
       };
@@ -114,7 +122,9 @@ describe('engine', () => {
       version = '1.0.1-next0';
 
       options = {
+        distFolderPath,
         packageVersion: version,
+        access: 'public',
       };
     });
 
