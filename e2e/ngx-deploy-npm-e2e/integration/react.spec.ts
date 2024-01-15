@@ -8,6 +8,6 @@ describe('React', () => {
 
   basicSetTestForLibs(libName, nxPlugin, {
     libGeneratorCommandOptions:
-      '--style css --bundler vite --unitTestRunner jest',
+      '--style css --bundler vite --unitTestRunner jest --directory="libs"',
   });
 });

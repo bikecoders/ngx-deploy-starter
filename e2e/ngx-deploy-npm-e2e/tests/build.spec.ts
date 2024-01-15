@@ -16,9 +16,11 @@ describe('build', () => {
   generateLib(nxPlugin, publishableLib, `--dir="libs"`);
 
   // Install the project
-  installNgxDeployNPMProject();
+  installNgxDeployNPMProject(
+    `--project="${publishableLib}" --distFolderPath="dist/libs/${publishableLib}"`
+  );
 
-  it('should build the lib', () => {
+  it('should build the lib due to the `dependsOn` option created on the target', () => {
     runNxCommand(`deploy ${publishableLib} --dry-run`);
 
     expect(() =>

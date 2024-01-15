@@ -1,6 +1,6 @@
 import { initNgxDeployNPMProject, basicSetTestForLibs } from '../utils';
 
-describe('Nx JS', () => {
+describe('Nx Plugin', () => {
   initNgxDeployNPMProject();
 
   const libName = 'nx-plugin';
@@ -9,5 +9,6 @@ describe('Nx JS', () => {
   basicSetTestForLibs(libName, nxPlugin, {
     generator: 'plugin',
     setPublishableOption: false,
+    libGeneratorCommandOptions: '--directory="libs"',
   });
 });

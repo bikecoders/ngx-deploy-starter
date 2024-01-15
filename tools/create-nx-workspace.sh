@@ -20,14 +20,15 @@ echo "NX_WORKSPACE_ROOT_PATH=$(pwd)" >.env
 
 echo "----- Generate lib -----"
 npm add -D @nx/node@$version
-npx nx generate @nx/node:lib --name nx-lib --publishable --importPath nx-lib
+npx nx generate @nx/node:init
+npx nx generate @nx/node:library nx-lib --directory libs --publishable --importPath nx-lib
 
 echo "----- Link ngx-deploy-npm -----"
 npx --yes yalc add ngx-deploy-npm
 npm i
 
 echo "----- Add ngx-deploy-npm to the workspace -----"
-npx nx generate ngx-deploy-npm:install
+npx nx generate ngx-deploy-npm:install --project nx-lib --distFolderPath dist/libs/nx-lib
 
 echo "----- Test the build -----"
 npx nx deploy nx-lib --dry-run

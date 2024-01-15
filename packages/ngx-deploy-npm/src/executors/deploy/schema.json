@@ -8,16 +8,7 @@
   "properties": {
     "distFolderPath": {
       "type": "string",
-      "description": "Indicate the dist folder path. This is useful when ngx-deploy-npm can not detect your library dist folder automatically. The path should be relative to the project's root"
-    },
-    "buildTarget": {
-      "type": "string",
-      "description": "A named build target, as specified in the `configurations`. Each named target is accompanied by a configuration of option defaults for that target. This is equivalent to calling the command `nx build --configuration=XXX`"
-    },
-    "noBuild": {
-      "type": "boolean",
-      "default": false,
-      "description": "Skip build process during deployment."
+      "description": "The dist folder path. The path should be relative to the project's root"
     },
     "packageVersion": {
       "type": "string",
@@ -47,5 +38,5 @@
       "default": false
     }
   },
-  "required": []
+  "required": ["distFolderPath"]
 }

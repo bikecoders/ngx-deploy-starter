@@ -6,5 +6,7 @@ describe('Node', () => {
   const libName = 'node-lib';
   const nxPlugin = '@nx/node';
 
-  basicSetTestForLibs(libName, nxPlugin);
+  basicSetTestForLibs(libName, nxPlugin, {
+    libGeneratorCommandOptions: '--directory="libs"',
+  });
 });

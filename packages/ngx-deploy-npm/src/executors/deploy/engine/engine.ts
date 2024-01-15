@@ -8,7 +8,10 @@ import {
 } from '../utils';
 import { DeployExecutorOptions } from '../schema';
 
-export async function run(dir: string, options: DeployExecutorOptions) {
+export async function run(
+  distFolderPath: string,
+  options: DeployExecutorOptions
+) {
   try {
     options = prepareOptions(options);
 
@@ -22,14 +25,14 @@ export async function run(dir: string, options: DeployExecutorOptions) {
     when the option is removed
     */
     if (options.packageVersion && !options.dryRun) {
-      await setPackageVersion(dir, options.packageVersion);
+      await setPackageVersion(distFolderPath, options.packageVersion);
     }
 
     const npmOptions = extractOnlyNPMOptions(options);
 
     await spawnAsync('npm', [
       'publish',
-      dir,
+      distFolderPath,
       ...getOptionsStringArr(npmOptions),
     ]);
 

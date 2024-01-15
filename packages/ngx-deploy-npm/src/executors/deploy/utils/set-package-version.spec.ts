@@ -1,5 +1,12 @@
-import * as fs from '../utils/file-utils';
+import * as fileUtils from '../../../utils';
 import { setPackageVersion } from './set-package-version';
+
+jest.mock('../../../utils', () => {
+  return {
+    __esModule: true, //    <----- this __esModule: true is important
+    ...jest.requireActual('../../../utils'),
+  };
+});
 
 describe('setPackageVersion', () => {
   let myPackageJSON: Record<string, unknown>;
@@ -7,15 +14,15 @@ describe('setPackageVersion', () => {
   let version: string;
   let dir: string;
 
-  let valueWriten: Parameters<typeof fs.writeFileAsync>[1];
+  let valueWriten: Parameters<typeof fileUtils.writeFileAsync>[1];
 
   // Spies
   beforeEach(() => {
     jest
-      .spyOn(fs, 'readFileAsync')
+      .spyOn(fileUtils, 'readFileAsync')
       .mockImplementation(() => Promise.resolve(JSON.stringify(myPackageJSON)));
 
-    jest.spyOn(fs, 'writeFileAsync').mockImplementation((_, data) => {
+    jest.spyOn(fileUtils, 'writeFileAsync').mockImplementation((_, data) => {
       valueWriten = data;
       return Promise.resolve();
     });
