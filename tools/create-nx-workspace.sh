@@ -24,9 +24,8 @@ npx nx generate @nx/node:init
 npx nx generate @nx/node:library nx-lib --directory libs --publishable --importPath nx-lib
 
 echo "----- Link ngx-deploy-npm -----"
-# npx --yes yalc add ngx-deploy-npm
-npm install -D ngx-deploy-npm
-# npm i
+npx --yes yalc add ngx-deploy-npm
+npm i
 
 echo "----- Add ngx-deploy-npm to the workspace -----"
 npx nx generate ngx-deploy-npm:install --project nx-lib --distFolderPath dist/libs/nx-lib
