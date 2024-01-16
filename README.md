@@ -1,7 +1,5 @@
 # ngx-deploy-npm 🚀 <!-- omit in toc -->
 
-<!-- [![Nx supported versions][supported-nx-versions]][nx-url] -->
-
 [![NPM version][npm-image]][npm-url]
 [![NPM donwoads][downloads-image]][npm-url]
 [![The MIT License][mit-licence-image]][mit-licence-url]
@@ -17,17 +15,6 @@
 
 [![Publishment Status][publishment-image]][publishment-link]
 [![Test nx@next][next-tests-image]][next-tests-link]
-
-## Supported Library Generators
-
-[![Angular][angular-image]][angular-link]
-[![NestJS][nest-js-image]][nest-js-link]
-[![Next JS][next-js-image]][next-js-link]
-[![Node][node-image]][node-link]
-[![JS][js-image]][js-link]
-[![Nx Plugin][nx-image]][nx-plugin-link]
-[![React][react-image]][react-link]
-[![React Native][react-native-image]][react-native-link]
 
 <!-- Images -->
 
@@ -45,17 +32,6 @@
 [macos-image]: https://img.shields.io/badge/mac%20os-000000?style=flat&logo=macos&logoColor=F0F0F0
 [windows-image]: https://img.shields.io/badge/Windows-0078D6?style=flat&logo=windows&logoColor=white
 
-<!-- Projects -->
-
-[angular-image]: https://img.shields.io/badge/angular-%23DD0031.svg?style=flat&logo=angular&logoColor=white
-[nest-js-image]: https://img.shields.io/badge/nestjs-%23E0234E.svg?style=flat&logo=nestjs&logoColor=white
-[next-js-image]: https://img.shields.io/badge/Next-black?style=flat&logo=next.js&logoColor=white
-[node-image]: https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white
-[js-image]: https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E
-[nx-image]: https://img.shields.io/badge/nx-143055?style=flat&logo=nx&logoColor=white
-[react-image]: https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB
-[react-native-image]: https://img.shields.io/badge/react_native-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB
-
 <!-- URLs -->
 
 [sonar-link]: https://sonarcloud.io/summary/new_code?id=bikecoders_ngx-deploy-npm
@@ -64,18 +40,6 @@
 [mit-licence-url]: http://opensource.org/licenses/MIT
 [conventional-commits-url]: https://conventionalcommits.org
 [next-tests-link]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/test-nx-next.yml
-[nx-url]: https://nx.dev/
-
-<!-- Projects -->
-
-[angular-link]: https://nx.dev/packages/angular
-[nest-js-link]: https://nx.dev/packages/nest
-[next-js-link]: https://nx.dev/packages/next
-[node-link]: https://nx.dev/packages/node
-[js-link]: https://nx.dev/packages/js
-[nx-plugin-link]: https://nx.dev/packages/nx-plugin
-[react-link]: https://nx.dev/packages/react
-[react-native-link]: https://nx.dev/packages/react-native
 
 ![Cover Image](docs/cover.png)
 
@@ -315,7 +279,7 @@ We use `@jscutlery/semver` here on `ngx-deploy-npm` to generate the package's ne
 
 ### Only publishable libraries are being configured <!-- omit in toc -->
 
-For an Nx workspace, only publishable libraries are going to be configured.
+Only publishable libraries are going to be configured.
 
 ## 🎉 Do you Want to Contribute? <a name="do-you-want-to-contribute"></a>
 
