@@ -77,7 +77,7 @@
     "version": {
       "executor": "@jscutlery/semver:version",
       "options": {
-        "postTargets": ["ngx-deploy-npm:deploy"],
+        "postTargets": ["ngx-deploy-npm:build", "ngx-deploy-npm:deploy"],
         "versionTagPrefix": "v"
       }
     },
