@@ -50,7 +50,7 @@ export async function run(dir: string, options: DeployExecutorOptions) {
 /**
  * Extract only the options that the `npm publish` command can process
  *
- * @param param0 All the options sent to ng deploy
+ * @param param0 All the options sent to deploy
  */
 function extractOnlyNPMOptions({
   access,

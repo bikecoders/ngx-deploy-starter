@@ -4,7 +4,6 @@ Please check if your PR fulfills the following requirements:
 
 - [ ] Tests for the changes have been added (for bug fixes/features)
 - [ ] Docs have been added/updated (for bug fixes/features)
-- [ ] Both workspaces were tested Angular and Nx (for bug fixes/features)
 
 ## What is the current behavior?
 

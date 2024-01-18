@@ -57,7 +57,3 @@ jobs:
         with:
           args: >
             -Dsonar.pullrequest.key=${{ github.env.PR_NUMBER }}
-
-  angular-e2e-test:
-    needs: pr-test
-    uses: ./.github/workflows/angular-e2e-test.yml
