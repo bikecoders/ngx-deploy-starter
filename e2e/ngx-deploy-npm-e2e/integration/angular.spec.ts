@@ -6,5 +6,7 @@ describe('Angular', () => {
   const libName = 'angular-lib';
   const nxPlugin = '@nx/angular';
 
-  basicSetTestForLibs(libName, nxPlugin);
+  basicSetTestForLibs(libName, nxPlugin, {
+    libGeneratorCommandOptions: '--style css --directory libs',
+  });
 });

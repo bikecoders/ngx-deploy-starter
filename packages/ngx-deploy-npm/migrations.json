@@ -1,0 +1,14 @@
+{
+  "generators": {
+    "write-dist-folder-path-on-deploy-target-options": {
+      "version": "8.0.0",
+      "description": "Sets the distFolderPath option on the deploy target. distFolderPath is now required.",
+      "implementation": "./src/migrations/8.0.0/write-dist-folder-path-on-deploy-target-options"
+    },
+    "replace-buildtarget-for-depends-on": {
+      "version": "8.0.0",
+      "description": "Remove the option `buildTarget` and `noBuild` from the deploy target. If the option `buildTarget` was set, the migration will create a new target to build the library with the desired configuration and create a `dependsOn` on the deploy target to build the library using the just-created target.",
+      "implementation": "./src/migrations/8.0.0/replace-buildtarget-for-depends-on"
+    }
+  }
+}

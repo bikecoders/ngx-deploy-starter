@@ -66,7 +66,7 @@ There are two ways of debugging:
 
 #### Option A), the easy one
 
-> ⚡ **Pre Step:** follow the steps of [yarn link](###angular-workspace) as pre step
+> ⚡ **Pre Step:** follow the steps of [yarn link](#angular-workspace) as pre step
 >
 > ⚠️ Only works on VsCode!
 
@@ -77,7 +77,7 @@ On VsCode, create a [_JavaScript Debug Terminal_](https://code.visualstudio.com/
 
 #### Option B), the traditional one
 
-> ⚡ **Pre Step:** follow the steps of [yarn link](###angular-workspace) as pre step
+> ⚡ **Pre Step:** follow the steps of [yarn link](#angular-workspace) as pre step
 
 1. Use your favorite [Inspector Client](https://nodejs.org/de/docs/guides/debugging-getting-started/#inspector-clients) to debug
 

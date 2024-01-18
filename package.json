@@ -3,10 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
-    "build": "nx build",
-    "test": "nx test",
-    "release": "nx version",
+    "build": "nx build ngx-deploy-npm",
+    "test": "nx test ngx-deploy-npm",
+    "release": "nx version ngx-deploy-npm",
     "commit": "cz",
     "prepare": "husky install",
     "sonar:init-server": "docker-compose up",
@@ -45,7 +44,8 @@
     "pretty-quick": "^3.1.3",
     "ts-jest": "29.1.0",
     "ts-node": "10.9.1",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "verdaccio": "^5.0.4"
   },
   "dependencies": {
     "@swc/helpers": "0.5.3",
@@ -60,5 +60,8 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "nx": {
+    "includedScripts": []
   }
 }

@@ -1,7 +1,5 @@
 # ngx-deploy-npm 🚀 <!-- omit in toc -->
 
-<!-- [![Nx supported versions][supported-nx-versions]][nx-url] -->
-
 [![NPM version][npm-image]][npm-url]
 [![NPM donwoads][downloads-image]][npm-url]
 [![The MIT License][mit-licence-image]][mit-licence-url]
@@ -17,17 +15,6 @@
 
 [![Publishment Status][publishment-image]][publishment-link]
 [![Test nx@next][next-tests-image]][next-tests-link]
-
-## Supported Library Generators
-
-[![Angular][angular-image]][angular-link]
-[![NestJS][nest-js-image]][nest-js-link]
-[![Next JS][next-js-image]][next-js-link]
-[![Node][node-image]][node-link]
-[![JS][js-image]][js-link]
-[![Nx Plugin][nx-image]][nx-plugin-link]
-[![React][react-image]][react-link]
-[![React Native][react-native-image]][react-native-link]
 
 <!-- Images -->
 
@@ -45,17 +32,6 @@
 [macos-image]: https://img.shields.io/badge/mac%20os-000000?style=flat&logo=macos&logoColor=F0F0F0
 [windows-image]: https://img.shields.io/badge/Windows-0078D6?style=flat&logo=windows&logoColor=white
 
-<!-- Projects -->
-
-[angular-image]: https://img.shields.io/badge/angular-%23DD0031.svg?style=flat&logo=angular&logoColor=white
-[nest-js-image]: https://img.shields.io/badge/nestjs-%23E0234E.svg?style=flat&logo=nestjs&logoColor=white
-[next-js-image]: https://img.shields.io/badge/Next-black?style=flat&logo=next.js&logoColor=white
-[node-image]: https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white
-[js-image]: https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E
-[nx-image]: https://img.shields.io/badge/nx-143055?style=flat&logo=nx&logoColor=white
-[react-image]: https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB
-[react-native-image]: https://img.shields.io/badge/react_native-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB
-
 <!-- URLs -->
 
 [sonar-link]: https://sonarcloud.io/summary/new_code?id=bikecoders_ngx-deploy-npm
@@ -64,18 +40,6 @@
 [mit-licence-url]: http://opensource.org/licenses/MIT
 [conventional-commits-url]: https://conventionalcommits.org
 [next-tests-link]: https://github.com/bikecoders/ngx-deploy-npm/actions/workflows/test-nx-next.yml
-[nx-url]: https://nx.dev/
-
-<!-- Projects -->
-
-[angular-link]: https://nx.dev/packages/angular
-[nest-js-link]: https://nx.dev/packages/nest
-[next-js-link]: https://nx.dev/packages/next
-[node-link]: https://nx.dev/packages/node
-[js-link]: https://nx.dev/packages/js
-[nx-plugin-link]: https://nx.dev/packages/nx-plugin
-[react-link]: https://nx.dev/packages/react
-[react-native-link]: https://nx.dev/packages/react-native
 
 ![Cover Image](docs/cover.png)
 
@@ -85,14 +49,12 @@
 
 - [🚀 Quick Start (local development)](#quick-start-local-development)
 - [🚀 Continuous Delivery](#continuous-delivery)
-- [❓What is done when executing `nx deploy`](#what-is-done-when-executing-nx-deploy)
 - [📦 Options](#options)
   - [install](#install)
-    - [`--projects`](#--projects)
+    - [`--dist-folder-path`](#--dist-folder-path-install)
+    - [`--project`](#--project)
     - [`--access`](#--access-install)
   - [deploy](#deploy)
-    - [`--build-target`](#--build-target)
-    - [`--no-build`](#--no-build)
     - [`--package-version`](#--package-version)
     - [`--tag`](#--tag)
     - [`--access`](#--access)
@@ -173,63 +135,45 @@ jobs:
 
 > You can check the steps suggested in the [CircleCI's guide](https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/)
 
-## ❓What is done when executing `nx deploy` <a name="what-is-done-when-executing-nx-deploy"></a>
-
-1. Will build the application using the target `build`
-   - This will be omitted if the parameter `--no-build` is set
-2. Execute `npm publish`
-
-The following is the activity diagram.
-
-![Execution activity diagram](docs/UML/principal-activity-diagram.jpg)
-
 ## 📦 Options <a name="options"></a>
 
 ### install
 
-#### `--projects`
+#### `--dist-folder-path` <a name="--dist-folder-path-install"></a>
 
-- **optional**
+- **required**
 - Example:
-  - `nx generate ngx-deploy-npm:install --projects=lib-1,lib-2` – Only `lib-1` and `lib-2` are going to configure
+  - `nx generate ngx-deploy-npm:install --project=lib-1 --dist-folder-path="dist/libs/lib-1"`
 
-Specify which libraries should be configured. Useful when you have a workspace with several libraries and don't want to overwrite existing configuration
-Should be `,` separated, without spaces.
+Indicates the dist folder path. The path where is located the bundle of your library. The path should be relative to the project's root.
+
+#### `--project`
+
+- **required**
+- Example:
+  - `nx generate ngx-deploy-npm:install --project=lib-1 --dist-folder-path="dist/libs/lib-1"` – `lib-1` will be configured. It will create the target deploy with the default options on the project `lib-1`.
+
+Specify which library should be configured.
 
 #### `--access` <a name="--access-install"></a>
 
 - **optional**
 - Default: `public`
 - Example:
-  - `nx generate ngx-deploy-npm:install --access=restricted`
+  - `nx generate ngx-deploy-npm:install --access=restricted --project=lib-1 --dist-folder-path="dist/libs/lib-1"`
 
 Tells the registry whether to publish the package as public or restricted. It only applies to scoped packages, which default to restricted. If you don't have a paid account, you must publish with --access public to publish scoped packages.
 
 ### deploy
 
-#### `--build-target`
+#### `--dist-folder-path`
 
-- **optional**
+- **required**
 - Example:
-  - `nx deploy --build-target=production` – The configuration `production` is being used to build your package
+  - `nx deploy --dist-folder-path='dist/libs/my-project'`
 
-The `buildTarget` points to an existing target configuration on your project,
-as specified in the `configurations` section of `workspace.json`.
-
-This option is equivalent to calling the command `nx build --configuration=XXX`.
-This command has no effect if the option `--no-build` option is active.
-
-#### `--no-build`
-
-- **optional**
-- Default: `false` (string)
-- Example:
-  - `nx deploy` – The library is built in production mode before the deployment
-  - `nx deploy --no-build` – The library is NOT built, but the deployment process is being made
-
-Skip build process during deployment.
-This option is useful when the building process is handled by something else.
-This command causes the `--build-target` setting to have no effect.
+Indicate the dist folder path.
+The path must relative to project's root.
 
 #### `--package-version`
 
@@ -281,20 +225,11 @@ Configure npm to use any compatible registry you like, and even run your own reg
 
 For testing: Run through without making any changes. Execute with `--dry-run`, and nothing will happen. It will show a list of the options used on the console.
 
-#### `--dist-folder-path`
-
-- **optional**
-- Example:
-  - `nx deploy --dist-folder-path 'dist/my-unsupported-project'`
-
-Indicate a custom dist folder path.
-The path must relative to project's root.
-Especially useful when ngx-deploy-npm can not detect your library dist folder path automatically. [Write us an issue](https://github.com/bikecoders/ngx-deploy-npm/issues/new) if you think we should support the library you are trying to publish
-
 ## Compatibility overview with Nx
 
 | Version | Nx Workspace Version   |
 | ------- | ---------------------- |
+| v8.0.0  | `^16.0.0 \|\| ^17.0.0` |
 | v7.1.0  | `^16.0.0 \|\| ^17.0.0` |
 | v7.0.1  | `^16.0.0`              |
 
@@ -344,7 +279,7 @@ We use `@jscutlery/semver` here on `ngx-deploy-npm` to generate the package's ne
 
 ### Only publishable libraries are being configured <!-- omit in toc -->
 
-For an Nx workspace, only publishable libraries are going to be configured.
+Only publishable libraries are going to be configured.
 
 ## 🎉 Do you Want to Contribute? <a name="do-you-want-to-contribute"></a>
 

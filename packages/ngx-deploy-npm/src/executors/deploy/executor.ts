@@ -8,13 +8,8 @@ export default async function runExecutor(
   options: DeployExecutorOptions,
   context: ExecutorContext
 ) {
-  const configuration = options.buildTarget ? `:${options.buildTarget}` : '';
-  const buildTarget = {
-    name: `${context.projectName}:build${configuration}`,
-  };
-
   try {
-    await deploy(engine, context, buildTarget, options);
+    await deploy(engine, context, options);
   } catch (e) {
     logger.error(e);
     logger.error('Error when trying to publish the library');

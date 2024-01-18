@@ -1,6 +1,5 @@
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import {
-  Tree,
   addProjectConfiguration,
   ProjectConfiguration,
   getProjects,
@@ -11,245 +10,273 @@ import generator from './generator';
 import { InstallGeneratorOptions } from './schema';
 import { DeployExecutorOptions } from '../../executors/deploy/schema';
 import { npmAccess } from '../../core';
-import { buildInvalidProjectsErrorMessage } from './utils';
-import {
-  getApplication,
-  getLibPublishable,
-  getLibPublishableWithProdMode,
-  getNonPublishableLib,
-  getLibWithNoSpecification,
-} from '../../__mocks__/generators';
+import * as mocks from '../../__mocks__/mocks';
+import * as utils from '../../utils';
+
+jest.mock('../../utils', () => {
+  return {
+    __esModule: true, //    <----- this __esModule: true is important
+    ...jest.requireActual('../../utils'),
+  };
+});
 
 describe('install generator', () => {
-  let appTree: Tree;
-  let rawOptions: InstallGeneratorOptions;
+  enum PUBLISHABLE_LIBS {
+    lib1 = 'lib1',
+    lib2 = 'lib2',
+    withoutBuildLib = 'withoutBuildLib',
+  }
+  enum NON_PUBLISHABLE_LIBS {
+    app = 'app',
+    nonPublishable = 'nonPublishable',
+    nonPublishable2 = 'nonPublishable2',
+  }
 
-  type publishableLibConfig = {
-    key: string;
-    projectConfig: ProjectConfiguration;
+  const allKindsOfProjects: Record<
+    PUBLISHABLE_LIBS | NON_PUBLISHABLE_LIBS,
+    ProjectConfiguration
+  > = {
+    lib1: mocks.getLib('lib1'),
+    lib2: mocks.getLib('lib2'),
+    withoutBuildLib: mocks.getLibWithoutBuildTarget('withoutBuildLib'),
+    app: mocks.getApplication('app'),
+    nonPublishable: mocks.getLibWithoutBuildTarget('nonPublishable'),
+    nonPublishable2: mocks.getLibWithoutBuildTarget('nonPublishable2'),
   };
 
-  let workspaceConfig: Map<string, ProjectConfiguration>;
-  let libPublisable: publishableLibConfig;
-  let libPublisable2: publishableLibConfig;
-  let libPublisableWithProdMode: publishableLibConfig;
-  let expectedSimpleTarget: TargetConfiguration;
-  let expectedTargetWithProductionMode: TargetConfiguration;
+  const setup = ({
+    workspaceProjects = allKindsOfProjects,
+    workspacePublishableLibs = Object.keys(PUBLISHABLE_LIBS)
+      .filter(v => isNaN(Number(v)))
+      .reduce((acc, key) => {
+        acc[key] = true;
 
-  const createWorkspace = () =>
+        return acc;
+      }, {} as Record<string, true>),
+  }: {
+    workspaceProjects?: Record<string, ProjectConfiguration>;
+    workspacePublishableLibs?: Record<string, true>;
+  }) => {
+    const workspaceConfig = new Map();
+    const appTree = createTreeWithEmptyWorkspace();
+
+    Object.entries(workspaceProjects).forEach(([key, project]) => {
+      workspaceConfig.set(key, project);
+    });
+
+    jest
+      .spyOn(utils, 'isProjectAPublishableLib')
+      .mockImplementation(project => {
+        const isAPublishableLib = project.name
+          ? !!workspacePublishableLibs[project.name]
+          : false;
+
+        return Promise.resolve(isAPublishableLib);
+      });
+
+    // Create workspace
     Array.from(workspaceConfig.entries()).forEach(([key, projectConfig]) =>
       addProjectConfiguration(appTree, key, projectConfig)
     );
 
-  beforeEach(() => {
-    rawOptions = {};
+    return { appTree };
+  };
 
-    appTree = createTreeWithEmptyWorkspace();
-  });
+  const buildMockDistPath = (projectName: string) => {
+    return `dist/libs/${projectName}`;
+  };
 
-  beforeEach(() => {
-    workspaceConfig = new Map();
-
-    libPublisable = {
-      key: 'libPublishable1',
-      projectConfig: getLibPublishable('libPublishable1'),
+  const buildExpectedDeployTarget = (
+    projectName: string,
+    isBuildable = true
+  ): TargetConfiguration<DeployExecutorOptions> => {
+    const options: TargetConfiguration<DeployExecutorOptions> = {
+      executor: 'ngx-deploy-npm:deploy',
+      options: {
+        access: npmAccess.public,
+        distFolderPath: buildMockDistPath(projectName),
+      },
     };
 
-    libPublisable2 = {
-      key: 'libPublishableWithNoSpecification',
-      projectConfig: getLibWithNoSpecification(
-        'libPublishableWithNoSpecification'
-      ),
-    };
+    if (isBuildable) {
+      options.dependsOn = ['build'];
+    }
 
-    libPublisableWithProdMode = {
-      key: 'libPublisableWithProd',
-      projectConfig: getLibPublishableWithProdMode('libPublisableWithProd'),
-    };
+    return options;
+  };
 
-    workspaceConfig.set(libPublisable.key, libPublisable.projectConfig);
-    workspaceConfig.set(libPublisable2.key, libPublisable2.projectConfig);
-    workspaceConfig.set(
-      libPublisableWithProdMode.key,
-      libPublisableWithProdMode.projectConfig
+  afterEach(jest.restoreAllMocks);
+  it('should create the target with the right structure for a buildable lib', async () => {
+    const projectName = 'buildableLib';
+    const { appTree } = setup({
+      workspaceProjects: {
+        [projectName]: mocks.getLib(projectName),
+      },
+      workspacePublishableLibs: {
+        [projectName]: true,
+      },
+    });
+
+    await generator(appTree, {
+      project: projectName,
+      distFolderPath: buildMockDistPath(projectName),
+      access: npmAccess.public,
+    });
+
+    const allProjects = getProjects(appTree);
+    const config = allProjects.get(projectName);
+    const targetDeploy = config?.targets?.deploy;
+
+    expect(targetDeploy).toStrictEqual(
+      buildExpectedDeployTarget(projectName, true)
     );
   });
 
-  describe('generating files', () => {
-    beforeEach(() => {
-      expectedSimpleTarget = {
-        executor: 'ngx-deploy-npm:deploy',
-        options: {
-          access: npmAccess.public,
-        } as DeployExecutorOptions,
-      };
-
-      expectedTargetWithProductionMode = {
-        executor: 'ngx-deploy-npm:deploy',
-        options: {
-          buildTarget: 'production',
-          access: npmAccess.public,
-        } as DeployExecutorOptions,
-      };
-
-      workspaceConfig.set('project', getApplication('project'));
-      workspaceConfig.set(
-        'non-publishable',
-        getNonPublishableLib('non-publishable')
-      );
-      workspaceConfig.set(
-        'non-publishable2',
-        getNonPublishableLib('non-publishable2')
-      );
+  it('should create the target with the right structure for a non-buildable lib', async () => {
+    const projectName = 'nonBuildableLib';
+    const { appTree } = setup({
+      workspaceProjects: {
+        [projectName]: mocks.getLibWithoutBuildTarget(projectName),
+      },
+      workspacePublishableLibs: {
+        [projectName]: true,
+      },
     });
 
-    // create workspace
-    beforeEach(createWorkspace);
+    await generator(appTree, {
+      project: projectName,
+      distFolderPath: buildMockDistPath(projectName),
+      access: npmAccess.public,
+    });
 
-    describe('default Options', () => {
+    const allProjects = getProjects(appTree);
+    const config = allProjects.get(projectName);
+    const targetDeploy = config?.targets?.deploy;
+
+    expect(targetDeploy).toStrictEqual(
+      buildExpectedDeployTarget(projectName, false)
+    );
+  });
+
+  it('should add the target only to the specified project', async () => {
+    const { appTree } = setup({});
+
+    await generator(appTree, {
+      project: PUBLISHABLE_LIBS.lib1,
+      distFolderPath: buildMockDistPath(PUBLISHABLE_LIBS.lib1),
+      access: npmAccess.public,
+    });
+
+    const allProjects = getProjects(appTree);
+    const config = allProjects.get(PUBLISHABLE_LIBS.lib2);
+    const targetDeploy = config?.targets?.deploy;
+
+    expect(targetDeploy).toStrictEqual(undefined);
+  });
+
+  it('should create the target with the right structure for a lib without targets', async () => {
+    const projectName = 'targetLess';
+    const { appTree } = setup({
+      workspaceProjects: {
+        [projectName]: mocks.getTargetlessLib(projectName),
+      },
+      workspacePublishableLibs: { [projectName]: true },
+    });
+
+    await generator(appTree, {
+      project: projectName,
+      distFolderPath: buildMockDistPath(projectName),
+      access: npmAccess.public,
+    });
+
+    const allProjects = getProjects(appTree);
+    const project = allProjects.get(projectName);
+    const setOptions: InstallGeneratorOptions =
+      project?.targets?.deploy.options;
+
+    expect(setOptions.access).toEqual(npmAccess.public);
+  });
+
+  describe('--access', () => {
+    const setupAccess = (access: npmAccess) => {
+      const projectName = 'lib1';
+      const rawOptions: InstallGeneratorOptions = {
+        project: projectName,
+        distFolderPath: buildMockDistPath(projectName),
+        access,
+      };
+
+      const { appTree } = setup({
+        workspaceProjects: {
+          [projectName]: mocks.getLib(projectName),
+        },
+        workspacePublishableLibs: { [projectName]: true },
+      });
+
+      return { appTree, rawOptions, projectName };
+    };
+
+    it('should set the `access` option as `public` when is set to `public` on rawoption', async () => {
+      const { appTree, rawOptions, projectName } = setupAccess(
+        npmAccess.public
+      );
+
       // install
-      beforeEach(async () => {
-        await generator(appTree, rawOptions);
-      });
+      await generator(appTree, rawOptions);
 
-      it('should set the deployer only on publishable libraries', async () => {
-        const allProjects = getProjects(appTree);
+      const allProjects = getProjects(appTree);
+      const project = allProjects.get(projectName);
+      const targetOptions: InstallGeneratorOptions =
+        project?.targets?.deploy.options;
 
-        const projectsAffected = Array.from(allProjects.entries())
-          .filter(([, config]) => !!config.targets?.deploy)
-          .map(([key]) => key);
-
-        expect(projectsAffected.sort()).toEqual(
-          [
-            libPublisable.key,
-            libPublisable2.key,
-            libPublisableWithProdMode.key,
-          ].sort()
-        );
-      });
-
-      it('should create the target with the right structure for simple libs', () => {
-        const allProjects = getProjects(appTree);
-        const config = allProjects.get(libPublisable.key);
-
-        const targetDeploy = config?.targets?.deploy;
-
-        expect(targetDeploy).toEqual(expectedSimpleTarget);
-      });
-
-      it('should create the target with the right configuration for libs with prod configuration', () => {
-        const allProjects = getProjects(appTree);
-        const config = allProjects.get(libPublisableWithProdMode.key);
-
-        const targetDeploy = config?.targets?.deploy;
-
-        expect(targetDeploy).toEqual(expectedTargetWithProductionMode);
-      });
-
-      it('should set the `access` option as `public` by default', async () => {
-        const allProjects = getProjects(appTree);
-        const project = allProjects.get(libPublisable.key);
-
-        const setOptions: InstallGeneratorOptions =
-          project?.targets?.deploy.options;
-
-        expect(setOptions.access).toEqual(npmAccess.public);
-      });
+      expect(targetOptions.access).toEqual(npmAccess.public);
     });
 
-    describe('--projects', () => {
-      it('should add config only to specified projects', async () => {
-        rawOptions = {
-          projects: [libPublisable.key, libPublisable2.key],
-        };
-        // install
-        await generator(appTree, rawOptions);
-        const allProjects = getProjects(appTree);
+    it('should set the `access` option as `restricted` when is set to `restricted` on rawoption', async () => {
+      const { appTree, rawOptions, projectName } = setupAccess(
+        npmAccess.restricted
+      );
 
-        const projectsAffected = Array.from(allProjects.entries())
-          .filter(([, config]) => !!config.targets?.deploy)
-          .map(([key]) => key);
+      // install
+      await generator(appTree, rawOptions);
 
-        expect(projectsAffected.sort()).toEqual(
-          [libPublisable.key, libPublisable2.key].sort()
-        );
-      });
+      const allProjects = getProjects(appTree);
+      const project = allProjects.get(projectName);
+      const targetOptions: InstallGeneratorOptions =
+        project?.targets?.deploy.options;
 
-      it('should add config to all projects if --projects option is empty', async () => {
-        rawOptions = {
-          projects: [],
-        };
-        // install
-        await generator(appTree, rawOptions);
-        const allProjects = getProjects(appTree);
-
-        const projectsAffected = Array.from(allProjects.entries())
-          .filter(([, config]) => !!config.targets?.deploy)
-          .map(([key]) => key);
-
-        expect(projectsAffected.sort()).toEqual(
-          [
-            libPublisable.key,
-            libPublisable2.key,
-            libPublisableWithProdMode.key,
-          ].sort()
-        );
-      });
-    });
-
-    describe('--access', () => {
-      it('should set the `access` option as `public` when is set to `public` on rawoption', async () => {
-        rawOptions = {
-          projects: [libPublisable.key],
-          access: npmAccess.public,
-        };
-        // install
-        await generator(appTree, rawOptions);
-
-        const allProjects = getProjects(appTree);
-        const project = allProjects.get(libPublisable.key);
-
-        const setOptions: InstallGeneratorOptions =
-          project?.targets?.deploy.options;
-
-        expect(setOptions.access).toEqual(npmAccess.public);
-      });
-
-      it('should set the `access` option as `public` when is set to `restricted` on rawoption', async () => {
-        rawOptions = {
-          projects: [libPublisable.key],
-          access: npmAccess.restricted,
-        };
-        // install
-        await generator(appTree, rawOptions);
-
-        const allProjects = getProjects(appTree);
-        const project = allProjects.get(libPublisable.key);
-
-        const setOptions: InstallGeneratorOptions =
-          project?.targets?.deploy.options;
-
-        expect(setOptions.access).toEqual(npmAccess.restricted);
-      });
+      expect(targetOptions.access).toEqual(npmAccess.restricted);
     });
   });
 
   describe('error handling', () => {
-    it('should throw an error if there is no publishable library', () => {
-      expect(generator(appTree, rawOptions)).rejects.toEqual(
-        new Error('There is no publishable libraries in this workspace')
+    it('should throw an error if the project is not a publishable library', async () => {
+      const project = NON_PUBLISHABLE_LIBS.app;
+      const rawOptions: InstallGeneratorOptions = {
+        project,
+        distFolderPath: buildMockDistPath(project),
+        access: npmAccess.public,
+      };
+      const { appTree } = setup({});
+
+      await expect(generator(appTree, rawOptions)).rejects.toThrow(
+        new Error(`The project ${project} is not a publishable library`)
       );
     });
 
-    it('should throw an error if invalid projects are pass on --projects', () => {
-      const invalidProjects = ['i', 'dont', 'exists'];
-      rawOptions = {
-        projects: [libPublisable.key, ...invalidProjects],
+    it('should throw an error if invalid project is pass on --project', async () => {
+      const invalidProjects = 'i-dont-exists';
+      const rawOptions: InstallGeneratorOptions = {
+        project: invalidProjects,
+        distFolderPath: buildMockDistPath(invalidProjects),
+        access: npmAccess.public,
       };
-      createWorkspace();
+      const { appTree } = setup({});
 
-      expect(generator(appTree, rawOptions)).rejects.toEqual(
-        new Error(buildInvalidProjectsErrorMessage(invalidProjects))
+      await expect(generator(appTree, rawOptions)).rejects.toThrow(
+        new Error(
+          `The project ${invalidProjects} doesn't exist on your workspace`
+        )
       );
     });
   });

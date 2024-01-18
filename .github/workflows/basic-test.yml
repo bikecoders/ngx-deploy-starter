@@ -1,13 +1,6 @@
 name: Essential Test
 
-on:
-  workflow_call:
-    inputs:
-      # Enable reports on workflow (lint and coverage)
-      reports:
-        type: boolean
-        default: true
-        required: false
+on: workflow_call
 
 jobs:
   lint:
@@ -17,14 +10,12 @@ jobs:
       - uses: ./.github/actions/setup
 
       - name: Lint
-        run: npx nx lint --outputFile=""
+        run: npx nx lint ngx-deploy-npm
 
-      - if: inputs.reports == true
-        name: Lint report
-        run: npx nx lint --format=./tools/sonarqube-linter-reporter.js
+      - name: Lint report
+        run: npx nx lint-report ngx-deploy-npm
 
-      - if: inputs.reports == true
-        name: Archive lint report results
+      - name: Archive lint report results
         uses: actions/upload-artifact@v3
         with:
           name: lint-report-${{ github.sha }}
@@ -36,7 +27,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
 
-      - run: npx nx build
+      - run: npx nx build ngx-deploy-npm
 
       - name: Archive build result
         uses: actions/upload-artifact@v3
@@ -53,9 +44,10 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
 
-      - run: npx nx test --configuration="ci"
+      - run: npx nx test ngx-deploy-npm --configuration="ci"
 
-      - name: Archive coverage report
+      - if: ${{ matrix.os == 'ubuntu-latest' }}
+        name: Archive coverage report
         uses: actions/upload-artifact@v3
         with:
           name: ngx-deploy-npm-coverage-report-${{ github.sha }}

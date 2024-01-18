@@ -20,7 +20,6 @@
     "appsDir": "e2e",
     "libsDir": "packages"
   },
-  "defaultProject": "ngx-deploy-npm",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": [],
