@@ -2,6 +2,28 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [8.0.0](https://github.com/bikecoders/ngx-deploy-npm/compare/ngx-deploy-npm-7.1.0...ngx-deploy-npm-8.0.0) (2024-01-19)
+
+### Features
+
+- drop support for Angular workspaces ([#570](https://github.com/bikecoders/ngx-deploy-npm/issues/570)) ([af95f44](https://github.com/bikecoders/ngx-deploy-npm/commit/af95f44f739f485914dcbb5e93f095c2e2225fc1))
+- remove internal build process ([#571](https://github.com/bikecoders/ngx-deploy-npm/issues/571)) ([afa228c](https://github.com/bikecoders/ngx-deploy-npm/commit/afa228ceae467c3ffa0247a6a2b20e98d2e637bb))
+
+### BREAKING CHANGES
+
+- - `ngx-deploy-npm:install`: Added `--dist-folder-path` option as
+    required.
+
+* `ngx-deploy-npm:install`: Drop the option `--projects`, now, each project needs to be specified
+  independently using `--project`.
+* `ngx-deploy-npm:deploy`: `distFolderPath` option is now required.
+* `ngx-deploy-npm:deploy`: Remove options `noBuild` and `buildTarget`.
+
+- As an alternative, maintainers suggest migrating your Angular Workspaces to Nx
+  Workspaces if you want to use this plugin. A stand-alone approach to Nx workspaces is an option that
+  you should consider. We apologize for any inconvenience this may cause and appreciate your
+  understanding.
+
 # [7.1.0](https://github.com/bikecoders/ngx-deploy-npm/compare/ngx-deploy-npm-7.0.1...ngx-deploy-npm-7.1.0) (2023-11-10)
 
 ### Features
