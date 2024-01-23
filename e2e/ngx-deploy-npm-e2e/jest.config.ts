@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'ngx-deploy-npm-e2e',
   preset: '../../jest.preset.js',
   transform: {

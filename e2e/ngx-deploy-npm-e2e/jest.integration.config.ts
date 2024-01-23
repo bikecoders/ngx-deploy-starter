@@ -1,6 +1,6 @@
-const originalJestConfig = require('./jest.config');
+import originalJestConfig from './jest.config';
 
-module.exports = {
+export default {
   ...originalJestConfig,
   testPathIgnorePatterns: ['/node_modules/', 'tests/.*'],
 };
