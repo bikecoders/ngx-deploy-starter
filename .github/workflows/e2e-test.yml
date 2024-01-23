@@ -9,7 +9,7 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
 
       - run: npx nx e2e ngx-deploy-npm-e2e --configuration="ci"
