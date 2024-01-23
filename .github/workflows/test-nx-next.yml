@@ -8,18 +8,18 @@ jobs:
   lint-next:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - uses: ./.github/actions/migrate
         with:
           nx-version: 'next'
       - name: Lint
-        run: npx nx lint ngx-deploy-npm
+        run: npx nx lint ngx-deploy-npm --fix
 
   build-next:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - uses: ./.github/actions/migrate
         with:
@@ -30,7 +30,7 @@ jobs:
   test-next:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - uses: ./.github/actions/migrate
         with:
@@ -41,7 +41,7 @@ jobs:
   e2e-next:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - uses: ./.github/actions/migrate
         with:
