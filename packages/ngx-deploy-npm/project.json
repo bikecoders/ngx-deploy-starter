@@ -19,7 +19,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/ngx-deploy-npm"],
       "options": {
-        "jestConfig": "packages/ngx-deploy-npm/jest.config.js"
+        "jestConfig": "packages/ngx-deploy-npm/jest.config.ts"
       }
     },
     "build": {

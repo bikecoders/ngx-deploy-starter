@@ -7,7 +7,7 @@
     "e2e": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "e2e/ngx-deploy-npm-e2e/jest.config.js",
+        "jestConfig": "e2e/ngx-deploy-npm-e2e/jest.config.ts",
         "runInBand": true
       },
       "dependsOn": ["ngx-deploy-npm:build"]
@@ -15,7 +15,7 @@
     "integration": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "e2e/ngx-deploy-npm-e2e/jest.integration.config.js",
+        "jestConfig": "e2e/ngx-deploy-npm-e2e/jest.integration.config.ts",
         "runInBand": true
       },
       "dependsOn": ["ngx-deploy-npm:build"]
