@@ -74,10 +74,17 @@
       },
       "dependsOn": ["build"]
     },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "{tag}",
+        "notes": "{notes}"
+      }
+    },
     "version": {
       "executor": "@jscutlery/semver:version",
       "options": {
-        "postTargets": ["ngx-deploy-npm:build", "ngx-deploy-npm:deploy"],
+        "postTargets": ["build", "deploy", "github"],
         "versionTagPrefix": "v"
       }
     },
