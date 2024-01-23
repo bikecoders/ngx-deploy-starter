@@ -14,7 +14,7 @@ jobs:
         with:
           nx-version: 'next'
       - name: Lint
-        run: npx nx lint ngx-deploy-npm
+        run: npx nx lint ngx-deploy-npm --fix
 
   build-next:
     runs-on: ubuntu-latest
