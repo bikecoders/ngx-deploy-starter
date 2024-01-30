@@ -80,7 +80,7 @@ jobs:
       - name: Push to protected branch
         uses: CasperWA/push-protected@v2.15.0
         with:
-          token: ${{ secrets.MANAGE_REPO_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.ref }}
           tags: true
           unprotect_reviews: true

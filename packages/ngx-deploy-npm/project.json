@@ -82,6 +82,8 @@
     "version": {
       "executor": "@jscutlery/semver:version",
       "options": {
+        "push": true,
+        "noVerify": true,
         "postTargets": ["build", "deploy", "github"],
         "versionTagPrefix": "v"
       }

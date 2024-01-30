@@ -35,6 +35,7 @@ jobs:
             echo "Using provided value for nx-version parameter: ${{ inputs.nx-version }}"
             echo "NX_VERSION=${{ inputs.nx-version }}" >> $GITHUB_ENV
           fi
+          echo $NX_VERSION
 
       - name: Integration Test
         run: npx nx create-nx-workspace ngx-deploy-npm -- $NX_VERSION
