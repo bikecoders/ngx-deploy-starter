@@ -9,7 +9,6 @@
   - [Option B), the traditional one](#option-b-the-traditional-one)
 - [Making a Contribution](#making-a-contribution)
 - [E2E test](#e2e-test)
-- [Integration test](#integration-test)
 - [Continuous Inspection (SonarQube)](#continuous-inspection-sonarqube)
 - [When are my changes going to be public?](#when-are-my-changes-going-to-be-public)
 
@@ -108,11 +107,7 @@ On VsCode, create a [_JavaScript Debug Terminal_](https://code.visualstudio.com/
 
 ## E2E test
 
-We at this project have E2E tests. They are handy to test production-like scenarios and to have confidence in your changes. We run e2e test for both supported workspaces, Nx and Angular.
-
-## Integration test
-
-We have integration test. They are going to test your changes with a wide options of library generators to ensure your changes are not affecting a particular generator.
+We at this project have E2E tests. They are handy to test production-like scenarios and to have confidence in your changes.
 
 ## Continuous Inspection (SonarQube)
 
