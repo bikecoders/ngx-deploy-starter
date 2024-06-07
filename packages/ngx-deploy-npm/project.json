@@ -113,7 +113,7 @@
       "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/tmp/nx-workspace"],
       "options": {
-        "command": "./tools/create-nx-workspace.sh"
+        "command": "node ./tools/create-nx-workspace.js"
       },
       "dependsOn": ["yalc-it"]
     }

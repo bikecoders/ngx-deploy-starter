@@ -1,0 +1,40 @@
+# This can be seen as a automated simple manual test
+# It test the plugin with a real Nx workspace using a specific workspace version
+#
+# This integration test does:
+# 1. Creates a Nx workspace with the provided version
+# 2. Creates a node lib
+# 3. Adds ngx-deploy-npm plugin, test `install` generator
+# 4. Publish the lib suing --dry-run, test `deploy` executor
+name: Integration Test (Nx Workspace)
+
+on:
+  workflow_call:
+    inputs:
+      nx-version:
+        type: string
+        description: The Nx Workspace version to run the integration test
+        required: false
+
+jobs:
+  integration-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+
+      - name: Read package.json Nx and set default parameter
+        id: set-default-param
+        run: |
+
+          if [ -z "${{ inputs.nx-version }}" ]; then
+            version=$(jq -r '.devDependencies.nx' package.json)
+            echo "Setting default value for nx-version parameter: $version"
+            echo "NX_VERSION=$version" >> $GITHUB_ENV
+          else
+            echo "Using provided value for nx-version parameter: ${{ inputs.nx-version }}"
+            echo "NX_VERSION=${{ inputs.nx-version }}" >> $GITHUB_ENV
+          fi
+
+      - name: Integration Test
+        run: npx nx create-nx-workspace ngx-deploy-npm -- $NX_VERSION

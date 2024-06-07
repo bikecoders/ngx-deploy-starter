@@ -36,8 +36,8 @@ jobs:
       - name: Check if Prettier was run
         run: npx pretty-quick --check
 
-  automated-manual-test:
-    uses: ./.github/workflows/integration-test.yml
+  backwards-compatibility-test:
+    uses: ./.github/workflows/backwards-compatibility-test.yml
 
   pr-analysis:
     name: SonarCloud Pr Analysis

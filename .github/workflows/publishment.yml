@@ -17,8 +17,8 @@ jobs:
     if: ${{ !contains(github.event.head_commit.message, 'chore(release)') }}
     uses: ./.github/workflows/integration-test-plugins.yml
 
-  automated-manual-test:
-    uses: ./.github/workflows/integration-test.yml
+  backwards-compatibility-test:
+    uses: ./.github/workflows/backwards-compatibility-test.yml
 
   analysis:
     name: SonarCloud Main Analysis
@@ -51,7 +51,7 @@ jobs:
   release:
     environment: production
     runs-on: ubuntu-latest
-    needs: [release-preliminar, e2e-test, test, automated-manual-test]
+    needs: [release-preliminar, e2e-test, test, backwards-compatibility-test]
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
