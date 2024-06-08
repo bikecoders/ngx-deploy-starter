@@ -1,12 +1,14 @@
-name: Backwards Compatibility Test
-
-on: workflow_call
+name: Incoming Versions Compatibility Test
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # daily at 00:00
 
 jobs:
   backwards-compatibility-test:
     strategy:
       matrix:
-        nx-version: ['', '16.10.0'] # '' means current workspace version
+        nx-version: [latest]
     uses: ./.github/workflows/integration-test-nx-workspace.yml
     with:
       nx-version: ${{matrix.nx-version}}
