@@ -6,7 +6,7 @@ jobs:
   backwards-compatibility-test:
     strategy:
       matrix:
-        nx-version: ['', '16.10.0'] # '' means current workspace version
+        nx-version: ['', '17.3.2', '16.10.0'] # '' means current workspace version
     uses: ./.github/workflows/integration-test-nx-workspace.yml
     with:
       nx-version: ${{matrix.nx-version}}

@@ -1,7 +1,4 @@
 {
-  "affected": {
-    "defaultBase": "main"
-  },
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nx/workspace/tasks-runners/default",
@@ -54,5 +51,7 @@
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
       "cache": true
     }
-  }
+  },
+  "useInferencePlugins": false,
+  "defaultBase": "main"
 }

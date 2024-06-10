@@ -227,11 +227,12 @@ For testing: Run through without making any changes. Execute with `--dry-run`, a
 
 ## Compatibility overview with Nx
 
-| Version | Nx Workspace Version   |
-| ------- | ---------------------- |
-| v8.0.0  | `^16.0.0 \|\| ^17.0.0` |
-| v7.1.0  | `^16.0.0 \|\| ^17.0.0` |
-| v7.0.1  | `^16.0.0`              |
+| Version | Nx Workspace Version                |
+| ------- | ----------------------------------- |
+| v8.1.0  | `^16.0.0 \|\| ^17.0.0 \|\| ^18.0.0` |
+| v8.0.0  | `^16.0.0 \|\| ^17.0.0`              |
+| v7.1.0  | `^16.0.0 \|\| ^17.0.0`              |
+| v7.0.1  | `^16.0.0`                           |
 
 ## 📁 Configuration File <a name="configuration-file"></a>
 

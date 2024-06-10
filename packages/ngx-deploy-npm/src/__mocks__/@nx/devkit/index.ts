@@ -7,6 +7,7 @@ const logger: Record<keyof typeof originalLogger, jest.Mock> = {
   log: jest.fn(),
   debug: jest.fn(),
   fatal: jest.fn(),
+  verbose: jest.fn(),
 };
 
 module.exports = {
