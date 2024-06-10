@@ -72,7 +72,6 @@ jobs:
         run: npx nx version ngx-deploy-npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Tag last-release
         run: git tag --force last-release
