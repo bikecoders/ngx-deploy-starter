@@ -2,6 +2,12 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [8.1.0](https://github.com/bikecoders/ngx-deploy-npm/compare/ngx-deploy-npm-8.0.1...ngx-deploy-npm-8.1.0) (2024-06-10)
+
+### Features
+
+- add support to Nx v18 ([#602](https://github.com/bikecoders/ngx-deploy-npm/issues/602)) ([e1fbf93](https://github.com/bikecoders/ngx-deploy-npm/commit/e1fbf93648e3dd7ba50cf82fc8c893b3730e6505))
+
 # [8.0.0](https://github.com/bikecoders/ngx-deploy-npm/compare/ngx-deploy-npm-7.1.0...ngx-deploy-npm-8.0.0) (2024-01-19)
 
 ### Features
