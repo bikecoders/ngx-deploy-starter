@@ -5,9 +5,7 @@
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {}
+      "executor": "@nx/eslint:lint"
     },
     "lint-report": {
       "executor": "nx:run-commands",
