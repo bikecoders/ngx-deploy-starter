@@ -84,7 +84,7 @@
       "options": {
         "push": true,
         "noVerify": true,
-        "postTargets": ["build", "deploy", "github"],
+        "postTargets": ["build", "deploy"],
         "versionTagPrefix": "v"
       }
     },
