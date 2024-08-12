@@ -1,11 +1,6 @@
 import { logger } from '@nx/devkit';
 
-import {
-  prepareOptions,
-  setPackageVersion,
-  NpmPublishOptions,
-  spawnAsync,
-} from '../utils';
+import { setPackageVersion, NpmPublishOptions, spawnAsync } from '../utils';
 import { DeployExecutorOptions } from '../schema';
 
 export async function run(
@@ -13,8 +8,6 @@ export async function run(
   options: DeployExecutorOptions
 ) {
   try {
-    options = prepareOptions(options);
-
     if (options.dryRun) {
       logger.info('Dry-run: The package is not going to be published');
     }
