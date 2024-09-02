@@ -77,7 +77,7 @@ jobs:
         run: git tag --force last-release
 
       - name: Push to protected branch
-        uses: CasperWA/push-protected@v2.15.0
+        uses: CasperWA/push-protected@v2.16.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.ref }}
