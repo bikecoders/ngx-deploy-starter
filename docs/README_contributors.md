@@ -10,6 +10,7 @@
 - [Making a Contribution](#making-a-contribution)
 - [E2E test](#e2e-test)
 - [Continuous Inspection (SonarQube)](#continuous-inspection-sonarqube)
+- [Test different node versions](#test-different-node-versions)
 - [When are my changes going to be public?](#when-are-my-changes-going-to-be-public)
 
 ## How to start
@@ -122,6 +123,14 @@ To init the server
 - `npm run sonar:analysis`
 
 To inspect the analysis, go to http://localhost:9000. The credentials are `admin` and password `12345`
+
+## Test different node versions
+
+Here, we run the unit, e2e, and regression tests against different node versions in our CI. We use the [Nx NodeJs Compatibility Matrix](https://nx.dev/nx-api/workspace/documents/nx-nodejs-typescript-version-matrix) to determine which versions should be tested.
+
+The retro compatibility tests are a bit different since we match the Nx Workspace Version with the supported Node versions.
+
+For local development, stick to the one defined in the `.npmrc` file.
 
 ## When are my changes going to be public?
 
