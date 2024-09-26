@@ -15,7 +15,7 @@
   "devDependencies": {
     "@commitlint/cli": "18.5.0",
     "@commitlint/config-conventional": "18.5.0",
-    "@jscutlery/semver": "5.2.2",
+    "@jscutlery/semver": "5.3.1",
     "@nx/devkit": "19.8.2",
     "@nx/eslint": "19.8.2",
     "@nx/eslint-plugin": "19.8.2",
@@ -59,10 +59,5 @@
   },
   "nx": {
     "includedScripts": []
-  },
-  "overrides": {
-    "@jscutlery/semver": {
-      "@nx/devkit": "^19.0.0"
-    }
   }
 }
