@@ -15,18 +15,38 @@ on:
         type: string
         description: The Nx Workspace version to run the integration test
         required: false
+      node-version:
+        type: string
+        description: The Node version to run the integration test
+        required: false
 
 jobs:
   integration-test:
     runs-on: ubuntu-latest
     steps:
+      - name: Indicate versions
+        run: |
+          if [ -n "${{ inputs.node-version }}" ]; then
+            echo "Using Node version: ${{ inputs.node-version }}"
+          else
+            echo "Using default Node version from .npmrc file"
+          fi
+
+
+          if [ -n "${{ inputs.nx-version }}" ]; then
+            echo "Using Nx version: ${{ inputs.nx-version }}"
+          else
+            echo "Using default Nx version from package.json file"
+          fi
+
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
+        with:
+          node-version: ${{ inputs.node-version }}
 
       - name: Read package.json Nx and set default parameter
         id: set-default-param
         run: |
-
           if [ -z "${{ inputs.nx-version }}" ]; then
             version=$(jq -r '.devDependencies.nx' package.json)
             echo "Setting default value for nx-version parameter: $version"

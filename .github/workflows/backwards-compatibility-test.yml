@@ -6,7 +6,34 @@ jobs:
   backwards-compatibility-test:
     strategy:
       matrix:
-        nx-version: ['', '18.3.5', '17.3.2', '16.10.0'] # '' means current workspace version
+        include:
+          # '' means current workspace version
+          - nx-version: ''
+            node-version: 22
+          - nx-version: ''
+            node-version: 20
+          - nx-version: ''
+            node-version: 18
+
+          - nx-version: '18.3.5'
+            node-version: 20
+          - nx-version: '18.3.5'
+            node-version: 18
+
+          - nx-version: '17.3.2'
+            node-version: 20
+          - nx-version: '17.3.2'
+            node-version: 18
+
+          - nx-version: '16.10.0'
+            node-version: 20
+          - nx-version: '16.10.0'
+            node-version: 18
+          - nx-version: '16.10.0'
+            node-version: 16 # This node's version is deprecated
+
+    name: Backwards Compatibility Test
     uses: ./.github/workflows/integration-test-nx-workspace.yml
     with:
       nx-version: ${{matrix.nx-version}}
+      node-version: ${{matrix.node-version}}

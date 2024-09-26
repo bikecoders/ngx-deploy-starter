@@ -1,5 +1,9 @@
 name: Setup
 description: Setup Node.js, cache and install dependencies
+inputs:
+  node-version:
+    description: 'The Node.js version to use. The default one is going to be the defined on the .nvmrc file.'
+    required: false
 runs:
   using: composite
   steps:
@@ -7,10 +11,23 @@ runs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
+
+    - name: Set Node.js version based on .nvmrc or Action Input
+      shell: bash
+      run: |
+        if [ -z "${{ inputs.node-version }}" ]; then
+          version=$(cat .nvmrc)
+          echo "Setting default value for node-version parameter: $version"
+          echo "NODE_VERSION=$version" >> $GITHUB_ENV
+        else
+           echo "Using provided value for node-version parameter: ${{ inputs.node-version }}"
+           echo "NODE_VERSION=${{ inputs.node-version }}" >> $GITHUB_ENV
+        fi
+
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
-        node-version-file: '.nvmrc'
+        node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
         # This doesn't just set the registry url, but also sets
         # the right configuration in .npmrc that reads NPM token
