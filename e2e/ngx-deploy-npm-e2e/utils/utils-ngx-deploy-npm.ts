@@ -6,15 +6,10 @@ import {
 
 export function initNgxDeployNPMProject() {
   // Init project
-  beforeAll(() => {
-    ensureNxProject('ngx-deploy-npm', 'dist/packages/ngx-deploy-npm');
-
-    runPackageManagerInstall();
-  }, 120000);
+  ensureNxProject('ngx-deploy-npm', 'dist/packages/ngx-deploy-npm');
+  runPackageManagerInstall();
 }
 
 export function installNgxDeployNPMProject(options: string = '') {
-  beforeEach(() => {
-    runNxCommand(`generate ngx-deploy-npm:install ${options}`);
-  }, 5000);
+  runNxCommand(`generate ngx-deploy-npm:install ${options}`);
 }

@@ -1,17 +1,24 @@
 import { runNxCommand } from '@nx/plugin/testing';
 
-export function generateLib(
-  nxPlugin: string,
-  libName: string,
-  extraOptions?: string,
+type Options = {
+  nxPlugin: string;
+  libName: string;
+  extraOptions?: string;
+  generator?: string;
+  setPublishableOption?: boolean;
+};
+
+export function generateLib({
+  nxPlugin,
+  libName,
+  extraOptions,
   generator = 'lib',
-  setPublishableOption = true
-) {
-  beforeEach(() => {
-    runNxCommand(
-      `generate ${nxPlugin}:${generator} --name ${libName} ${
-        setPublishableOption ? '--publishable' : ''
-      } --importPath ${libName} ${extraOptions ?? ''}`
-    );
-  }, 120000);
+  setPublishableOption = true,
+}: Options) {
+  const publishableOption = setPublishableOption ? '--publishable' : '';
+  const extraOptionsNormalized = extraOptions ? extraOptions : '';
+
+  runNxCommand(
+    `generate ${nxPlugin}:${generator} --name ${libName} ${publishableOption} --importPath ${libName} ${extraOptionsNormalized}`
+  );
 }
