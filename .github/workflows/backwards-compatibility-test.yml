@@ -12,7 +12,12 @@ jobs:
             node-version: 22
           - nx-version: ''
             node-version: 20
-          - nx-version: ''
+
+          - nx-version: 'previous'
+            node-version: 22
+          - nx-version: 'previous'
+            node-version: 20
+          - nx-version: 'previous'
             node-version: 18
 
           - nx-version: '18.3.5'

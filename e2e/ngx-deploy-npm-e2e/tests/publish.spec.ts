@@ -1,21 +1,31 @@
-import { initNgxDeployNPMProject, basicSetTestForLibs } from '../utils';
+import { runNxCommand, uniq } from '@nx/plugin/testing';
+import { setup } from '../utils';
 
 describe('Publish', () => {
-  initNgxDeployNPMProject();
+  it('should publish an Angular Lib', async () => {
+    const [angularLib] = await setup([
+      {
+        name: uniq('angular-lib'),
+        generator: '@nx/angular',
+        extraOptions: '--style css',
+      },
+    ]);
 
-  describe('Basic deploy test for Angular Libs', () => {
-    const libName = 'angular-lib';
-    const nxPlugin = '@nx/angular';
+    expect(() => {
+      runNxCommand(`deploy ${angularLib.name} --dry-run`);
+    }).not.toThrow();
+  }, 120000);
 
-    basicSetTestForLibs(libName, nxPlugin, {
-      libGeneratorCommandOptions: '--style css --directory="libs"',
-    });
-  });
+  it('should publish an Node Lib', async () => {
+    const [angularLib] = await setup([
+      {
+        name: uniq('node-lib'),
+        generator: '@nx/node',
+      },
+    ]);
 
-  describe('Basic deploy test for Node Libs', () => {
-    const libName = 'node-lib';
-    const nxPlugin = '@nx/node';
-
-    basicSetTestForLibs(libName, nxPlugin);
-  });
+    expect(() => {
+      runNxCommand(`deploy ${angularLib.name} --dry-run`);
+    }).not.toThrow();
+  }, 120000);
 });

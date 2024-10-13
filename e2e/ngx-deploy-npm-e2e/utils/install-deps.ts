@@ -2,10 +2,8 @@ import { runCommand } from '@nx/plugin/testing';
 import { currentNxVersion } from './get-nx-current-version';
 
 export function installDependencies(nxPlugin: string) {
-  beforeEach(() => {
-    const packageToInstall = `${nxPlugin}@${currentNxVersion}`;
+  const packageToInstall = `${nxPlugin}@${currentNxVersion}`;
 
-    runCommand(`npm add -D ${packageToInstall}`, {});
-    runCommand(`npx nx g ${nxPlugin}:init`, {});
-  }, 120000);
+  runCommand(`npm add -D ${packageToInstall}`, {});
+  runCommand(`npx nx g ${nxPlugin}:init`, {});
 }
