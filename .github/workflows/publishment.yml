@@ -47,6 +47,8 @@ jobs:
   release:
     environment: production
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     needs: [release-preliminar, e2e-test, test, backwards-compatibility-test]
     steps:
       - uses: actions/checkout@v4
@@ -76,11 +78,10 @@ jobs:
       - name: Tag last-release
         run: git tag --force last-release
 
-      - name: Push to protected branch
-        uses: CasperWA/push-protected@v2.16.0
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ github.ref }}
-          tags: true
-          unprotect_reviews: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
           force: true
+          tags: true
