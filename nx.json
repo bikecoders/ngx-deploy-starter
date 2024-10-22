@@ -1,10 +1,4 @@
 {
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nx/workspace/tasks-runners/default",
-      "options": {}
-    }
-  },
   "targetDependencies": {
     "build": [{ "target": "build", "projects": "dependencies" }]
   },
