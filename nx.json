@@ -26,6 +26,27 @@
     "@nx/eslint:lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
       "cache": true
+    },
+    "@jscutlery/semver:version": {
+      "cache": false
+    },
+    "yalc-it": {
+      "cache": false
+    },
+    "yarn-link-it": {
+      "cache": false
+    },
+    "yarn-unlink-it": {
+      "cache": false
+    },
+    "create-nx-workspace": {
+      "cache": false
+    },
+    "@jscutlery/semver:github": {
+      "cache": false
+    },
+    "./dist/packages/ngx-deploy-npm:deploy": {
+      "cache": false
     }
   },
   "useInferencePlugins": false,
