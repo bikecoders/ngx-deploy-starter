@@ -1,9 +1,9 @@
 import { TargetConfiguration } from '@nx/devkit';
 import { uniq } from '@nx/plugin/testing';
 
-import { DeployExecutorOptions } from '../../../packages/ngx-deploy-npm/src/executors/deploy/schema';
-import { npmAccess } from '../../../packages/ngx-deploy-npm/src/core';
-import { setup } from '../utils';
+import { DeployExecutorOptions } from 'bikecoders/ngx-deploy-npm';
+import { npmAccess } from 'bikecoders/ngx-deploy-npm';
+import { setup } from './utils';
 
 describe('install', () => {
   const expectedTarget = ({
@@ -20,7 +20,7 @@ describe('install', () => {
     const target: TargetConfiguration<DeployExecutorOptions> = {
       executor: 'ngx-deploy-npm:deploy',
       options: {
-        distFolderPath: customDistFolderPath || `dist/libs/${projectName}`,
+        distFolderPath: customDistFolderPath || `dist/packages/${projectName}`,
         access,
       },
     };
@@ -33,22 +33,25 @@ describe('install', () => {
   };
 
   it('should modify the workspace only for the indicated libs', async () => {
-    const [publicLib, publicLib2, restrictedLib, libNOTSet, smallLib] =
-      await setup([
-        { name: uniq('node-lib1'), generator: '@nx/node' },
-        { name: uniq('node-lib2'), generator: '@nx/node' },
-        {
-          name: uniq('node-resctricted'),
+    const { processedLibs, tearDown } = await setup([
+      { name: uniq('node-lib1'), generator: '@nx/node' },
+      { name: uniq('node-lib2'), generator: '@nx/node' },
+      {
+        name: uniq('node-resctricted'),
+        installOptions: {
           access: npmAccess.restricted,
-          generator: '@nx/node',
         },
-        {
-          name: uniq('node-lib-not-set'),
-          skipInstall: true,
-          generator: '@nx/node',
-        },
-        { name: uniq('small-lib'), generator: 'minimal' },
-      ]);
+        generator: '@nx/node',
+      },
+      {
+        name: uniq('node-lib-not-set'),
+        skipInstall: true,
+        generator: '@nx/node',
+      },
+      { name: uniq('small-lib'), generator: 'minimal' },
+    ]);
+    const [publicLib, publicLib2, restrictedLib, libNOTSet, smallLib] =
+      processedLibs;
 
     expect(publicLib.workspace.targets?.deploy).toEqual(
       expectedTarget({ projectName: publicLib.name })
@@ -71,5 +74,7 @@ describe('install', () => {
         isBuildable: false,
       })
     );
-  }, 120000);
+
+    return tearDown();
+  }, 180000);
 });

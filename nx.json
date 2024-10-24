@@ -2,10 +2,6 @@
   "targetDependencies": {
     "build": [{ "target": "build", "projects": "dependencies" }]
   },
-  "workspaceLayout": {
-    "appsDir": "e2e",
-    "libsDir": "packages"
-  },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": [],

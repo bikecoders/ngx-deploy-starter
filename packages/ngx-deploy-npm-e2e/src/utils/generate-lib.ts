@@ -1,8 +1,7 @@
-import { runNxCommand } from '@nx/plugin/testing';
-
 type Options = {
   nxPlugin: string;
   libName: string;
+  executeCommand: (command: string) => void;
   extraOptions?: string;
   generator?: string;
   setPublishableOption?: boolean;
@@ -11,6 +10,7 @@ type Options = {
 export function generateLib({
   nxPlugin,
   libName,
+  executeCommand,
   extraOptions,
   generator = 'lib',
   setPublishableOption = true,
@@ -18,7 +18,7 @@ export function generateLib({
   const publishableOption = setPublishableOption ? '--publishable' : '';
   const extraOptionsNormalized = extraOptions ? extraOptions : '';
 
-  runNxCommand(
-    `generate ${nxPlugin}:${generator} --name ${libName} ${publishableOption} --importPath ${libName} ${extraOptionsNormalized}`
+  executeCommand(
+    `npx nx generate ${nxPlugin}:${generator} --name ${libName} ${publishableOption} --importPath ${libName} ${extraOptionsNormalized}`
   );
 }

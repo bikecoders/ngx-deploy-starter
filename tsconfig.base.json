@@ -17,7 +17,8 @@
     "paths": {
       "bikecoders/ngx-deploy-npm": ["packages/ngx-deploy-npm/src/index.ts"]
     },
-    "strict": true
+    "strict": true,
+    "verbatimModuleSyntax": false
   },
   "exclude": ["node_modules", "tmp"]
 }
