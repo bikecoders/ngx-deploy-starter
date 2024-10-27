@@ -5,7 +5,7 @@ import { execSync } from 'child_process';
 import { ProjectConfiguration } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
 
-import { currentNxVersion } from './get-nx-current-version';
+import { getNxWorkspaceVersion } from './get-nx-workspace-version';
 import { InstallGeneratorOptions } from 'bikecoders/ngx-deploy-npm';
 import {
   generateLib,
@@ -125,10 +125,12 @@ export const setup = async (
     processedLibs,
     projectDirectory,
     tearDown: async () => {
-      await fs.promises.rm(projectDirectory, {
-        recursive: true,
-        force: true,
-      });
+      if (process.env.NGX_DEPLOY_NPM_E2E__NO_TEAR_DOWN !== 'true') {
+        await fs.promises.rm(projectDirectory, {
+          recursive: true,
+          force: true,
+        });
+      }
 
       return Promise.resolve();
     },
@@ -199,7 +201,8 @@ async function createMinimalLib(projectDirectory: string, libName: string) {
  * @returns The directory where the test project was created
  */
 async function createTestProject() {
-  const projectName = 'test-project';
+  const projectName =
+    process.env.NGX_DEPLOY_NPM_E2E__PROJECT_NAME || 'test-project';
   const projectDirectory = join(process.cwd(), 'tmp', projectName);
 
   // Ensure projectDirectory is empty
@@ -211,7 +214,7 @@ async function createTestProject() {
     recursive: true,
   });
 
-  const command = `npx --yes create-nx-workspace@${currentNxVersion} ${projectName} --preset npm --nxCloud=skip --no-interactive`;
+  const command = `npx --yes create-nx-workspace@${getNxWorkspaceVersion()} ${projectName} --preset npm --nxCloud=skip --no-interactive`;
   executeCommandFactory(dirname(projectDirectory))(command);
 
   return projectDirectory;

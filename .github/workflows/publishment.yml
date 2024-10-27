@@ -12,6 +12,7 @@ jobs:
     uses: ./.github/workflows/e2e-test.yml
 
   backwards-compatibility-test:
+    needs: [test]
     uses: ./.github/workflows/backwards-compatibility-test.yml
 
   analysis:

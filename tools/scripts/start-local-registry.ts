@@ -18,6 +18,6 @@ export default async () => {
   });
 
   execSync(
-    'npx nx deploy ngx-deploy-npm --registry=http://localhost:4873 --packageVersion=0.0.0 --tag e2e'
+    'npx nx deploy:without-build ngx-deploy-npm --registry=http://localhost:4873 --packageVersion=0.0.0 --tag e2e'
   );
 };

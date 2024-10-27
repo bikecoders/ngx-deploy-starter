@@ -34,6 +34,7 @@ jobs:
         run: npx pretty-quick --check
 
   backwards-compatibility-test:
+    needs: [pr-test]
     uses: ./.github/workflows/backwards-compatibility-test.yml
 
   pr-analysis:

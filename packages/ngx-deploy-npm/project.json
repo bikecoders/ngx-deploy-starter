@@ -73,6 +73,13 @@
       },
       "dependsOn": ["build"]
     },
+    "deploy:without-build": {
+      "executor": "./dist/packages/ngx-deploy-npm:deploy",
+      "options": {
+        "distFolderPath": "dist/packages/ngx-deploy-npm",
+        "access": "public"
+      }
+    },
     "github": {
       "executor": "@jscutlery/semver:github",
       "options": {
@@ -86,35 +93,6 @@
         "postTargets": ["build", "deploy"],
         "versionTagPrefix": "v"
       }
-    },
-    "yalc-it": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "cd dist/packages/ngx-deploy-npm && npx --yes yalc publish"
-      },
-      "dependsOn": ["build"]
-    },
-    "yarn-link-it": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "cd dist/packages/ngx-deploy-npm && npx --yes yarn link"
-      },
-      "dependsOn": ["build"]
-    },
-    "yarn-unlink-it": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "cd dist/packages/ngx-deploy-npm && npx --yes yarn unlink"
-      },
-      "dependsOn": ["build"]
-    },
-    "create-nx-workspace": {
-      "executor": "nx:run-commands",
-      "outputs": ["{workspaceRoot}/tmp/nx-workspace"],
-      "options": {
-        "command": "node ./tools/create-nx-workspace.js"
-      },
-      "dependsOn": ["yalc-it"]
     }
   }
 }
