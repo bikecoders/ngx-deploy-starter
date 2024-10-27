@@ -20,6 +20,7 @@ jobs:
           path: dist
 
   backwards-compatibility-test:
+    needs: build
     strategy:
       matrix:
         nx-version: [latest]
