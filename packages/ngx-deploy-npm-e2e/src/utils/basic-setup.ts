@@ -4,9 +4,10 @@ import { execSync } from 'child_process';
 
 import { ProjectConfiguration } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
+import { logger } from '@nx/devkit';
 
-import { getNxWorkspaceVersion } from './get-nx-workspace-version';
 import { InstallGeneratorOptions } from 'bikecoders/ngx-deploy-npm';
+import { getNxWorkspaceVersion } from './get-nx-workspace-version';
 import {
   generateLib,
   initNgxDeployNPMProject,
@@ -20,6 +21,8 @@ export const buildPackageProjectRoot = (libName: string) =>
 const executeCommandFactory =
   (projectDirectory: string) => (command: string) => {
     let output: string;
+
+    logger.verbose(`Executing command: ${command}`);
 
     try {
       output = execSync(command, {

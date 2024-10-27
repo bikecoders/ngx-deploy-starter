@@ -42,3 +42,4 @@ jobs:
     with:
       nx-version: ${{matrix.nx-version}}
       node-version: ${{matrix.node-version}}
+      verbose: true
