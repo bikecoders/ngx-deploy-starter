@@ -9,6 +9,7 @@
   - [Option B), the traditional one](#option-b-the-traditional-one)
 - [Making a Contribution](#making-a-contribution)
 - [E2E test](#e2e-test)
+- [Smoke test](#smoke-test)
 - [Continuous Inspection (SonarQube)](#continuous-inspection-sonarqube)
 - [Test different node versions](#test-different-node-versions)
 - [When are my changes going to be public?](#when-are-my-changes-going-to-be-public)
@@ -109,6 +110,18 @@ On VsCode, create a [_JavaScript Debug Terminal_](https://code.visualstudio.com/
 ## E2E test
 
 We at this project have E2E tests. They are handy to test production-like scenarios and to have confidence in your changes.
+
+## Smoke test
+
+We conduct a series of small and pragmatic e2e tests called the **smoke test**. This test is essential for testing the package's core functionality.
+
+Using the smoke tests, we composed a series of more elaborate tests. Such as:
+
+- **Compatibility Observability Test**: Scheduled test to verify daily if our package is working with the `latest` version of nx
+- **Backwards Compatibility Test**: To verify if the current changes work correctly with the supported versions of nx that we are committed to maintaining (see [Compatibility overview with Nx
+  ](https://github.com/bikecoders/ngx-deploy-npm?tab=readme-ov-file#compatibility-overview-with-nx)).
+
+It's essential to handle the libraries' build before running these tests. These tests will use whatever is in the dist folder. This is done using the build closest to the actual build on the NPM registry.
 
 ## Continuous Inspection (SonarQube)
 

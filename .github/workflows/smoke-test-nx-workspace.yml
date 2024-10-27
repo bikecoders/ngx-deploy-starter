@@ -1,27 +1,21 @@
 # This can be seen as a automated simple manual test
 # It test the plugin with a real Nx workspace using a specific workspace version
-#
-# This integration test does:
-# 1. Creates a Nx workspace with the provided version
-# 2. Creates a node lib
-# 3. Adds ngx-deploy-npm plugin, test `install` generator
-# 4. Publish the lib suing --dry-run, test `deploy` executor
-name: Integration Test (Nx Workspace)
+name: Smoketest Nx Workspace
 
 on:
   workflow_call:
     inputs:
       nx-version:
         type: string
-        description: The Nx Workspace version to run the integration test
+        description: The Nx Workspace version to run the smoke test
         required: false
       node-version:
         type: string
-        description: The Node version to run the integration test
+        description: The Node version to run the smoke test
         required: false
 
 jobs:
-  integration-test:
+  smoke-test:
     runs-on: ubuntu-latest
     steps:
       - name: Indicate versions
@@ -44,18 +38,19 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
 
+      - uses: ./.github/actions/download-build
+
       - name: Read package.json Nx and set default parameter
         id: set-default-param
         run: |
           if [ -z "${{ inputs.nx-version }}" ]; then
             version=$(jq -r '.devDependencies.nx' package.json)
             echo "Setting default value for nx-version parameter: $version"
-            echo "NX_VERSION=$version" >> $GITHUB_ENV
+            echo "NGX_DEPLOY_NPM_E2E__NX_VERSION=$version" >> $GITHUB_ENV
           else
             echo "Using provided value for nx-version parameter: ${{ inputs.nx-version }}"
-            echo "NX_VERSION=${{ inputs.nx-version }}" >> $GITHUB_ENV
+            echo "NGX_DEPLOY_NPM_E2E__NX_VERSION=${{ inputs.nx-version }}" >> $GITHUB_ENV
           fi
-          echo $NX_VERSION
 
-      - name: Integration Test
-        run: npx nx create-nx-workspace ngx-deploy-npm -- $NX_VERSION
+      - name: Smoke Test
+        run: npx nx smoke ngx-deploy-npm-e2e
