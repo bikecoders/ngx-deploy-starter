@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/ngx-deploy-npm/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint"
@@ -115,6 +116,5 @@
       },
       "dependsOn": ["yalc-it"]
     }
-  },
-  "tags": []
+  }
 }
