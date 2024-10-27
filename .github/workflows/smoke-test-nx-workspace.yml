@@ -13,6 +13,11 @@ on:
         type: string
         description: The Node version to run the smoke test
         required: false
+      verbose:
+        type: boolean
+        description: Enable verbose mode
+        required: false
+        default: false
 
 jobs:
   smoke-test:
@@ -53,4 +58,4 @@ jobs:
           fi
 
       - name: Smoke Test
-        run: npx nx smoke ngx-deploy-npm-e2e
+        run: npx nx smoke ngx-deploy-npm-e2e --verbose=${{ inputs.verbose }}
