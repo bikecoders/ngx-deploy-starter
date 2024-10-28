@@ -28,9 +28,14 @@ jobs:
 
       - name: Get commit messages
         run: |
-          git log --pretty=format:'%s' --abbrev-commit ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} > commits.txt
-          echo "Commit Messages:"
-          cat commits.txt
+          BODY=$(git log \
+            --abbrev-commit ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} \
+            --pretty=format:'* %s%n%n%b')
+          TITLE='${{ github.event.pull_request.title }}'
+
+          echo "${TITLE}\n${BODY}" > commit-message.txt
+          cat commit-message.txt
+          cat commit-message.txt | npx commitlint
 
   check-file-format:
     name: Check files changes follow guidelines
