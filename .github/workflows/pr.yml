@@ -33,9 +33,18 @@ jobs:
             --pretty=format:'* %s%n%n%b')
           TITLE='${{ github.event.pull_request.title }}'
 
+          echo $TITLE
+          echo '---------'
+          echo $BODY
+          echo '---------'
+          echo "${TITLE}\n${BODY}"
+          echo '---------'
+
           echo "${TITLE}\n${BODY}" > commit-message.txt
           cat commit-message.txt
-          cat commit-message.txt | npx commitlint
+
+      - name: Check commit message
+        run: cat commit-message.txt | npx commitlint
 
   check-file-format:
     name: Check files changes follow guidelines
