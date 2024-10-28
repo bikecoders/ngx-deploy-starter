@@ -26,12 +26,6 @@ jobs:
       - name: Get PR Title
         run: "echo 'PR Title: ${{ github.event.pull_request.title }}'"
 
-      - name: Get PR Body
-        run: 'echo "PR Body: ${{ github.event.pull_request.body }}"'
-
-      - name: Fetch commits
-        run: git fetch origin ${{ github.event.pull_request.head.ref }}
-
       - name: Get commit messages
         run: |
           git log --pretty=format:'%s' --abbrev-commit ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} > commits.txt
