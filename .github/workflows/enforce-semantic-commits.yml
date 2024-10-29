@@ -1,3 +1,4 @@
+#? should we comment in the PR?
 name: Enforce Semantic Commits
 
 on:
@@ -10,41 +11,64 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup
-
-      - name: Fetch all commits for the PR
-        run: git fetch origin +refs/pull/${{ github.event.pull_request.number }}/merge
+      - name: git clone
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
 
       - name: Check commit messages
-        run: |
-          COMMIT_MESSAGES="$(git log --pretty=format:'%s' --abbrev-commit ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }})"
-          echo "$COMMIT_MESSAGES" | npx commitlint
+        run: npx commitlint --from=origin/${{ github.base_ref }}
 
-  # 'Check if the PR title is a valid semantic commit message'
-  check-pr-title:
-    name: Check PR Title
+  # Based on PR name
+  generate-commit-message:
+    name: Generate Commit Message
+    runs-on: ubuntu-latest
+    outputs:
+      commit_message: ${{ steps.generate-message.outputs.commit_message }}
+    steps:
+      - name: git clone
+        uses: actions/checkout@v4
+
+      - name: Generate Title
+        id: generate-message
+        run: |
+          COMMIT_MESSAGE='${{ github.event.pull_request.title }}'
+          echo "Commit Message": '$COMMIT_MESSAGE'
+          echo "commit_message=$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
+          echo "$COMMIT_MESSAGE"
+
+  validate-commit-message:
+    needs: [generate-commit-message]
+    name: Validate Commit Message
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup
+      - name: git clone
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          full-checkout: false
 
-      - name: Check PR Title
-        run: |
-          PR_TITLE='${{ github.event.pull_request.title }}'
-          echo "PR TITLE": '$PR_TITLE'
-          echo "$PR_TITLE" | npx commitlint
+      - name: Validate Title
+        run: echo "${{needs.generate-commit-message.outputs.commit_message}}" | npx commitlint
 
   generate-changelog:
-    name: Generate Changelog #? should we comment in the PR?
+    needs: [generate-commit-message, validate-commit-message]
+    name: Generate Changelog
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: ./.github/actions/setup
+      - name: git clone
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
 
-      - name: Generate Changelog
+      - name: Generate tmp branch
+        run: git checkout -b changelog
+
+      - name: Squash commits
         run: |
-          git checkout -b changelog
-          npx nx version ngx-deploy-npm --dry-run
+          git reset --soft $(git merge-base origin/${{ github.base_ref }} HEAD)
+          git commit -m "$COMMIT_MESSAGE"
+          git log -n 3
+        env:
+          COMMIT_MESSAGE: ${{needs.generate-commit-message.outputs.commit_message}}
