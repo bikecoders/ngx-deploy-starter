@@ -34,3 +34,17 @@ jobs:
           PR_TITLE='${{ github.event.pull_request.title }}'
           echo "PR TITLE": '$PR_TITLE'
           echo "$PR_TITLE" | npx commitlint
+
+  generate-changelog:
+    name: Generate Changelog #? should we comment in the PR?
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+
+      - name: Generate Changelog
+        run: |
+          git checkout -b changelog
+          npx nx version ngx-deploy-npm --dry-run
