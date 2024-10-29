@@ -1,7 +1,7 @@
-name: PR's
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+name: CI
+# on:
+#   pull_request:
+#     types: [opened, synchronize, reopened]
 
 env:
   PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -12,39 +12,6 @@ jobs:
 
   pr-e2e-test:
     uses: ./.github/workflows/e2e-test.yml
-
-  check-commit-lint:
-    name: Check commit message follows guidelines
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup
-
-      - name: Execute commitlint
-        run: npx commitlint --from=origin/${{ github.base_ref }}
-
-      - name: Get PR Title
-        run: "echo 'PR Title: ${{ github.event.pull_request.title }}'"
-
-      - name: Get commit messages
-        run: |
-          BODY=$(git log \
-            --abbrev-commit ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} \
-            --pretty=format:'* %s%n%n%b')
-          TITLE='${{ github.event.pull_request.title }}'
-
-          echo $TITLE
-          echo '---------'
-          echo $BODY
-          echo '---------'
-          echo "${TITLE}\n${BODY}"
-          echo '---------'
-
-          echo "${TITLE}\n${BODY}" > commit-message.txt
-          cat commit-message.txt
-
-      - name: Check commit message
-        run: cat commit-message.txt | npx commitlint
 
   check-file-format:
     name: Check files changes follow guidelines

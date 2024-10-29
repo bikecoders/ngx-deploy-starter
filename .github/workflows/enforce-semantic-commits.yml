@@ -1,0 +1,36 @@
+name: Enforce Semantic Commits
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize] #? reopened
+
+jobs:
+  check-semantic-commits:
+    name: Check Semantic Commits
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+
+      - name: Fetch all commits for the PR
+        run: git fetch origin +refs/pull/${{ github.event.pull_request.number }}/merge
+
+      - name: Check commit messages
+        run: |
+          COMMIT_MESSAGES="$(git log --pretty=format:'%s' --abbrev-commit ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }})"
+          echo "$COMMIT_MESSAGES" | npx commitlint
+
+  # 'Check if the PR title is a valid semantic commit message'
+  check-pr-title:
+    name: Check PR Title
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+
+      - name: Check PR Title
+        run: |
+          PR_TITLE='${{ github.event.pull_request.title }}'
+          echo "PR TITLE": '$PR_TITLE'
+          echo "$PR_TITLE" | npx commitlint
