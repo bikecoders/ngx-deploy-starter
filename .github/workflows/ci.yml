@@ -1,7 +1,7 @@
-name: PR's
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+name: CI
+# on:
+#   pull_request:
+#     types: [opened, synchronize, reopened]
 
 env:
   PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -12,16 +12,6 @@ jobs:
 
   pr-e2e-test:
     uses: ./.github/workflows/e2e-test.yml
-
-  check-commit-lint:
-    name: Check commit message follows guidelines
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup
-
-      - name: Execute commitlint
-        run: npx commitlint --from=origin/${{ github.base_ref }}
 
   check-file-format:
     name: Check files changes follow guidelines

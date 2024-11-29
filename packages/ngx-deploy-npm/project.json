@@ -65,7 +65,7 @@
         ]
       }
     },
-    "deploy": {
+    "publish": {
       "executor": "./dist/packages/ngx-deploy-npm:deploy",
       "options": {
         "distFolderPath": "dist/packages/ngx-deploy-npm",
@@ -73,7 +73,7 @@
       },
       "dependsOn": ["build"]
     },
-    "deploy:without-build": {
+    "publish:without-build": {
       "executor": "./dist/packages/ngx-deploy-npm:deploy",
       "options": {
         "distFolderPath": "dist/packages/ngx-deploy-npm",
@@ -90,7 +90,6 @@
     "version": {
       "executor": "@jscutlery/semver:version",
       "options": {
-        "postTargets": ["build", "deploy"],
         "versionTagPrefix": "v"
       }
     }
