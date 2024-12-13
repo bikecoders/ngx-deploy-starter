@@ -70,9 +70,12 @@ export async function run(
 
       if (exists) {
         if (options.checkExisting === 'error') {
-          throw new Error(
-            `Package ${packageInfo.name}@${packageInfo.version} already exists in registry.`
-          );
+          const message = `Package ${packageInfo.name}@${
+            packageInfo.version
+          } already exists in registry ${
+            options.registry ? options.registry : ''
+          }.`;
+          throw new Error(message);
         } else {
           logger.warn(
             `Package ${packageInfo.name}@${packageInfo.version} already exists in registry. Skipping  publish.`

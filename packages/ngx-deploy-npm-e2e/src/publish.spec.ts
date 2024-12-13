@@ -33,4 +33,23 @@ describe('Publish', () => {
     },
     120000 * 2
   );
+
+  it('should NOT publish because it already exists', async () => {
+    const { processedLibs, tearDown, executeCommand } = await setup([
+      { name: uniq('minimal-lib'), generator: 'minimal' },
+    ]);
+    const [uniqLibName] = processedLibs;
+
+    executeCommand(
+      `npx nx deploy ${uniqLibName.name} --tag="e2e" --registry=http://localhost:4873 --packageVersion=0.0.0 --checkExisting="error"`
+    );
+
+    expect(() => {
+      executeCommand(
+        `npx nx deploy ${uniqLibName.name} --tag="e2e" --registry=http://localhost:4873 --packageVersion=0.0.0 --checkExisting="error"`
+      );
+    }).toThrow();
+
+    return tearDown();
+  }, 120000);
 });
