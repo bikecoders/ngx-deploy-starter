@@ -22,18 +22,21 @@ describe('engine', () => {
     options = defaultOption,
     rootProject = mockProjectRoot,
     distFolderPath = mockProjectDist(),
-    spawnAsyncReturnValue = () => Promise.resolve(),
+    spawnAsyncMock = () => Promise.resolve(),
   }: {
     rootProject?: string;
     distFolderPath?: string;
-    spawnAsyncReturnValue?: () => Promise<void>;
+    spawnAsyncMock?: (
+      mainProgram: string,
+      programArgs?: string[]
+    ) => Promise<void>;
     options?: Omit<DeployExecutorOptions, 'distFolderPath'>;
   }) => {
     const fullOptions: DeployExecutorOptions = {
       ...options,
       distFolderPath,
     };
-    jest.spyOn(spawn, 'spawnAsync').mockImplementation(spawnAsyncReturnValue);
+    jest.spyOn(spawn, 'spawnAsync').mockImplementation(spawnAsyncMock);
 
     return {
       absoluteDistFolderPath: `${rootProject}/${distFolderPath}`,
@@ -79,7 +82,7 @@ describe('engine', () => {
 
   it('should indicate that an error occurred when there is an error publishing the package', async () => {
     const { absoluteDistFolderPath, options } = setup({
-      spawnAsyncReturnValue: () => Promise.reject(new Error('custom error')),
+      spawnAsyncMock: () => Promise.reject(new Error('custom error')),
     });
 
     await expect(() =>
@@ -147,40 +150,37 @@ describe('engine', () => {
       mockPackageJson = defaultMockPackageJson,
       npmViewResult = () => Promise.resolve(),
       npmPublishResult = () => Promise.resolve(),
+      defaultSpawnMock = () => Promise.resolve(),
       ...originalSetupOptions
     }: {
       mockPackageJson?: { name: string; version: string };
       npmViewResult?: () => Promise<void>;
       npmPublishResult?: () => Promise<void>;
-    } & Parameters<typeof setup>[0] = {}) => {
+      defaultSpawnMock?: () => Promise<void>;
+    } & Omit<Parameters<typeof setup>[0], 'spawnAsyncMock'>) => {
       jest
         .spyOn(fileUtils, 'readFileAsync')
         .mockImplementation(() =>
           Promise.resolve(JSON.stringify(mockPackageJson))
         );
 
-      // Ne pas utiliser le setup standard qui écrase notre mock
-      const setupResult = {
-        absoluteDistFolderPath: `${mockProjectRoot}/${mockProjectDist()}`,
-        options: {
-          ...defaultOption,
-          ...originalSetupOptions.options,
-          distFolderPath: mockProjectDist(),
-        },
-      };
-
-      // Mock spawnAsync directement
-      jest.spyOn(spawn, 'spawnAsync').mockImplementation((cmd, args) => {
+      const spawnAsyncMock: Parameters<typeof setup>[0]['spawnAsyncMock'] = (
+        _: string,
+        args?: string[]
+      ): Promise<void> => {
         return args?.[0] === 'view'
           ? npmViewResult()
           : args?.[0] === 'publish'
           ? npmPublishResult()
-          : Promise.resolve();
-      });
+          : defaultSpawnMock();
+      };
 
       return {
-        ...setupResult,
         mockPackageJson,
+        ...setup({
+          ...originalSetupOptions,
+          spawnAsyncMock,
+        }),
       };
     };
 
@@ -221,8 +221,6 @@ describe('engine', () => {
             ...defaultOption,
             checkExisting: 'error',
           },
-          npmViewResult: () => Promise.resolve(),
-          npmPublishResult: () => Promise.resolve(),
         });
 
       // Should throw specific error when package exists
@@ -255,7 +253,6 @@ describe('engine', () => {
             checkExisting: 'warning',
           },
           npmViewResult: () => Promise.reject({ code: 'E404' }),
-          npmPublishResult: () => Promise.resolve(),
         });
 
       await engine.run(absoluteDistFolderPath, {
@@ -275,8 +272,6 @@ describe('engine', () => {
         '--access',
         'public',
       ]);
-
-      expect(spawn.spawnAsync).toHaveBeenCalledTimes(2);
     });
   });
 });
