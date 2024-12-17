@@ -72,8 +72,8 @@ export async function run(
         if (options.checkExisting === 'error') {
           const message = `Package ${packageInfo.name}@${
             packageInfo.version
-          } already exists in registry ${
-            options.registry ? options.registry : ''
+          } already exists in registry${
+            options.registry ? ` ${options.registry}` : ''
           }.`;
           throw new Error(message);
         } else {
