@@ -1,4 +1,4 @@
-name: PR's
+name: PRs
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -21,7 +21,9 @@ jobs:
       - uses: ./.github/actions/setup
 
       - name: Execute commitlint
-        run: npx commitlint --from=origin/${{ github.base_ref }}
+        run: npx commitlint --from="origin/$BASE_REF"
+    env:
+      BASE_REF: ${{ github.base_ref }}
 
   check-file-format:
     name: Check files changes follow guidelines
@@ -36,25 +38,3 @@ jobs:
   backwards-compatibility-test:
     needs: [pr-test]
     uses: ./.github/workflows/backwards-compatibility-test.yml
-
-  pr-analysis:
-    name: SonarCloud Pr Analysis
-    runs-on: ubuntu-latest
-    needs: pr-test
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
-
-      # Download reports
-      - uses: ./.github/actions/download-coverage-report
-      - uses: ./.github/actions/download-lint-report
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONARQUBE_SCANNER }}
-        with:
-          args: >
-            -Dsonar.pullrequest.key=${{ github.env.PR_NUMBER }}
