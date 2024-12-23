@@ -6,5 +6,5 @@ runs:
     - name: Download coverage report
       uses: actions/download-artifact@v4
       with:
-        name: ngx-deploy-npm-coverage-report-${{ github.sha }}
+        name: ngx-deploy-npm-coverage-report-${{ github.event.workflow_run.head_sha || github.sha }}
         path: coverage/packages/ngx-deploy-npm
