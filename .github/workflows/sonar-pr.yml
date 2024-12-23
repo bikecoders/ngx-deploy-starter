@@ -2,7 +2,7 @@ name: Sonar for PRs
 on:
   workflow_run:
     workflows: ['PRs']
-    types: [requested]
+    types: [completed]
 jobs:
   sonar:
     name: Sonar
