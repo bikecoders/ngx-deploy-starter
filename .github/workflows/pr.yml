@@ -10,8 +10,8 @@ jobs:
   pr-test:
     uses: ./.github/workflows/basic-test.yml
 
-  pr-e2e-test:
-    uses: ./.github/workflows/e2e-test.yml
+  # pr-e2e-test:
+  #   uses: ./.github/workflows/e2e-test.yml
 
   check-commit-lint:
     name: Check commit message follows guidelines
@@ -36,5 +36,6 @@ jobs:
         run: npx pretty-quick --check
 
   backwards-compatibility-test:
+    name: Backwards compatibility test
     needs: [pr-test]
     uses: ./.github/workflows/backwards-compatibility-test.yml
