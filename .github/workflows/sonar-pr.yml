@@ -18,7 +18,11 @@ jobs:
 
       # Download reports
       - uses: ./.github/actions/download-coverage-report
+        with:
+          sha: ${{ github.event.workflow_run.head_sha }}
       - uses: ./.github/actions/download-lint-report
+        with:
+          sha: ${{ github.event.workflow_run.head_sha }}
 
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master

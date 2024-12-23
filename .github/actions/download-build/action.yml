@@ -1,10 +1,17 @@
 name: Download Builds
 description: Downloading the github artifact created with the build (dist folder)
+
+inputs:
+  sha:
+    description: 'SHA to use for the artifact name'
+    required: false
+    default: ${{ github.sha }}
+
 runs:
   using: composite
   steps:
     - name: Download dist folder
       uses: actions/download-artifact@v4
       with:
-        name: library-dist-${{ github.event.workflow_run.head_sha || github.sha }}
+        name: library-dist-${{ inputs.sha }}
         path: dist

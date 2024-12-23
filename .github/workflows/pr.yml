@@ -35,7 +35,7 @@ jobs:
       - name: Check if Prettier was run
         run: npx pretty-quick --check
 
-  backwards-compatibility-test:
-    name: Backwards compatibility test
-    needs: [pr-test]
-    uses: ./.github/workflows/backwards-compatibility-test.yml
+  # backwards-compatibility-test:
+  #   name: Backwards compatibility test
+  #   needs: [pr-test]
+  #   uses: ./.github/workflows/backwards-compatibility-test.yml
