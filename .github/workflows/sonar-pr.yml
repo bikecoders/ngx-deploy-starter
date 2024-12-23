@@ -16,6 +16,24 @@ jobs:
           ref: ${{ github.event.workflow_run.head_branch }}
           fetch-depth: 0
 
+      - name: Debug Workflow Info
+        run: |
+          echo "Workflow Run ID: ${{ github.event.workflow_run.id }}"
+          echo "Workflow Head SHA: ${{ github.event.workflow_run.head_sha }}"
+          echo "Current SHA: ${{ github.sha }}"
+          echo "Head Branch: ${{ github.event.workflow_run.head_branch }}"
+          echo "Repository: ${{ github.event.workflow_run.head_repository.full_name }}"
+
+          # Output raw context for additional details
+          echo "=== Raw Context ==="
+          echo "Workflow Head SHA: ${{ github.event.workflow_run }}"
+
+      - name: 'Raw Context'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            JSON.stringify(${{ github.event.workflow_run }}, null, 2)
+
       # Download reports
       - uses: ./.github/actions/download-coverage-report
         with:
