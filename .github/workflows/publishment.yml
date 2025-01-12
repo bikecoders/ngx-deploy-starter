@@ -29,7 +29,7 @@ jobs:
       - uses: ./.github/actions/download-lint-report
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarcloud-github-action@latest
         env:
           SONAR_TOKEN: ${{ secrets.SONARQUBE_SCANNER }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
