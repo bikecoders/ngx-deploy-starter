@@ -75,19 +75,19 @@ jobs:
 
             // Download both artifacts
             await Promise.all([
-              downloadArtifact(`ngx-deploy-npm-coverage-report-${sha}`),
-              downloadArtifact(`lint-report-${sha}`)
+              downloadArtifact('ngx-deploy-npm-coverage-report'),
+              downloadArtifact('lint-report')
             ]);
 
       - name: 'Extract reports'
         run: |
           # Extract coverage report
           mkdir -p coverage/packages/ngx-deploy-npm
-          unzip ngx-deploy-npm-coverage-report-*.zip -d coverage/packages/ngx-deploy-npm
+          unzip ngx-deploy-npm-coverage-report.zip -d coverage/packages/ngx-deploy-npm
 
           # Extract lint report
           mkdir -p reports
-          unzip lint-report-*.zip -d reports
+          unzip lint-report.zip -d reports
 
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master

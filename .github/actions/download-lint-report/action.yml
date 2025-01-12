@@ -1,17 +1,11 @@
 name: Download Lint Reports
 description: Download the github artifact with the lint report
 
-inputs:
-  sha:
-    description: 'SHA to use for the artifact name'
-    required: false
-    default: ${{ github.sha }}
-
 runs:
   using: composite
   steps:
     - name: Download lint report
       uses: actions/download-artifact@v4
       with:
-        name: lint-report-${{ inputs.sha }}
+        name: lint-report
         path: reports

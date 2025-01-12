@@ -2,9 +2,6 @@ name: Essential Test
 
 on: workflow_call
 
-env:
-  COMMIT_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
-
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -21,7 +18,7 @@ jobs:
       - name: Archive lint report results
         uses: actions/upload-artifact@v4
         with:
-          name: lint-report-${{ env.COMMIT_SHA }}
+          name: lint-report
           path: reports
 
   build:
@@ -35,7 +32,7 @@ jobs:
       - name: Archive build result
         uses: actions/upload-artifact@v4
         with:
-          name: library-dist-${{ env.COMMIT_SHA }}
+          name: library-dist
           path: dist
 
   unit-test:
@@ -65,5 +62,5 @@ jobs:
         name: Archive coverage report
         uses: actions/upload-artifact@v4
         with:
-          name: ngx-deploy-npm-coverage-report-${{ env.COMMIT_SHA }}
+          name: ngx-deploy-npm-coverage-report
           path: coverage/packages/ngx-deploy-npm/lcov.info
