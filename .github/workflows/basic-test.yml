@@ -18,7 +18,7 @@ jobs:
       - name: Archive lint report results
         uses: actions/upload-artifact@v4
         with:
-          name: lint-report
+          name: lint-report.info
           path: reports
 
   build:
